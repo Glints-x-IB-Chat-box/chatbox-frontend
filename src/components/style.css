@@ -2,6 +2,24 @@
   width: 2.5rem;
   height: 2.5rem;
 }
+.contact-icon {
+  color: rgb(214, 214, 214);
+  align-self: center;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+}
+.contact-icon:hover {
+  color: white;
+}
+.contact-icon2 {
+  color: rgb(214, 214, 214);
+  align-self: center;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+}
+.contact-icon2:hover {
+  color: white;
+}
 .dot {
   height: 15px;
   width: 15px;
