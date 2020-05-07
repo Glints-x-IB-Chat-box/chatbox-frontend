@@ -11,6 +11,10 @@
   /* making element vertically center */
   align-self: center;
 }
+.list-group-item {
+  background-color: #1f2d3c !important;
+  color: white !important;
+}
 .main-chat-2 {
   background-color: #2c3e50;
 }

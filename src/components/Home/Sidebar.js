@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/ozy.png";
+import "../style.css";
 
 export default function Sidebar() {
   const logOut = () => {
@@ -9,7 +10,7 @@ export default function Sidebar() {
   };
   return (
     <div style={{ width: "150px" }}>
-      <div class="list-group">
+      <div className="list-group">
         <Link to="/profile" class="list-group-item list-group-item-action">
           <img src={logo} alt="..." className="w-100" />
         </Link>
