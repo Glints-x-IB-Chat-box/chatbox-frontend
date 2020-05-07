@@ -10,6 +10,11 @@ export default function Login() {
           Login
         </button>
       </Link>
+      <Link to="/register">
+        <button type="button" className="btn-primary">
+          Register
+        </button>
+      </Link>
     </div>
   );
 }
