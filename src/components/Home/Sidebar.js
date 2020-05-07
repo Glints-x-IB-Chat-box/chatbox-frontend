@@ -26,7 +26,7 @@ export default function Sidebar() {
           About
         </Link>
         <a
-          href="#"
+          href="/"
           onClick={logOut}
           class="mb-auto list-group-item list-group-item-action"
         >
