@@ -3,63 +3,24 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <div style={{ width: "200px" }}>
-      <ol>
-        <li>link</li>
-        <li>link</li>
-      </ol>
-    </div>
-  );
-  return (
-    <div className="row">
-      <div className="col-md-2">
-        <h1>This is Sidebar</h1>
-        <div class="d-flex flex-column bd-highlight mb-3">
-          <div class="p-2 bd-highlight">
-            <Link to="/home">
-              <button type="button" className="btn-primary">
-                Home Page
-              </button>
-            </Link>
-          </div>
-
-          <div class="p-2 bd-highlight">
-            <Link to="/profile">
-              <button type="button" className="btn-primary">
-                Profile Page
-              </button>
-            </Link>
-          </div>
-
-          <div class="p-2 bd-highlight">
-            <Link to="/listContact">
-              <button type="button" className="btn-primary">
-                ListContact Page
-              </button>
-            </Link>
-          </div>
-
-          <div class="p-2 bd-highlight">
-            <Link to="/about">
-              <button type="button" className="btn-primary">
-                About Page
-              </button>
-            </Link>
-          </div>
-
-          <div class="p-2 bd-highlight mt-auto">
-            <Link to="/about">
-              <button type="button" className="btn-primary">
-                About Page
-              </button>
-            </Link>
-          </div>
-        </div>
+    <div style={{ width: "150px" }}>
+      <div class="list-group">
+        <Link to="/home" class="list-group-item list-group-item-action active">
+          Sidebar
+        </Link>
+        <Link to="/home" class="list-group-item list-group-item-action">
+          Chat
+        </Link>
+        <Link to="/profile" class="list-group-item list-group-item-action">
+          Profile
+        </Link>
+        <Link to="/listContact" class="list-group-item list-group-item-action">
+          List Contacts
+        </Link>
+        <Link to="/about" class="list-group-item list-group-item-action">
+          About
+        </Link>
       </div>
-      <ul>
-        <li>halo</li>
-        <li>wew</li>
-      </ul>
     </div>
   );
 }
