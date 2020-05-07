@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 
-export default function Profile() {
+export default function ListContact() {
   return (
     <div className="row">
       <div className="col-md-10">

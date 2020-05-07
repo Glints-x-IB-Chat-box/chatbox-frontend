@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Login from "../Login";
 import Home from "./Home";
 import Sidebar from "./Sidebar";
 import Profile from "../Profile/Profile";
 import ListContact from "../ListContact/ListContact";
 import About from "../About/About";
+import Group from "../Group/Group";
 
 export default function Index() {
   return (
@@ -28,8 +30,16 @@ export default function Index() {
               <ListContact />
             </Route>
 
+            <Route path="/group">
+              <Group />
+            </Route>
+
             <Route path="/about">
               <About />
+            </Route>
+
+            <Route exact path="/">
+              <Login />
             </Route>
           </Switch>
         </div>
