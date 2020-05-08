@@ -1,3 +1,12 @@
+.about-card {
+  background-color: #2c3e50 !important;
+  color: white;
+  align-self: center;
+}
+.about-div {
+  height: 100vh;
+  overflow: scroll;
+}
 .chat-profile-pic {
   width: 2.5rem;
   height: 2.5rem;
