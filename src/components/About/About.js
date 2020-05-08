@@ -25,6 +25,7 @@ export default function About() {
             cursus. Sit amet luctus venenatis lectus magna fringilla urna. Id
             neque aliquam vestibulum morbi blandit cursus.
           </h5>
+          <p className="mt-auto text-white">© ChatBoxo. All Rights Reserved</p>
         </div>
       </div>
 
