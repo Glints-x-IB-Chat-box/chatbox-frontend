@@ -9,7 +9,9 @@ export default function Sidebar() {
     window.location.href = "/";
   };
   return (
-    <div style={{ width: "150px" }}>
+    <div
+      style={{ width: "150px", height: "100vh", backgroundColor: "#1f2d3c" }}
+    >
       <div className="list-group">
         <Link to="/profile" class="list-group-item list-group-item-action">
           <img src={logo} alt="..." className="w-100" />
