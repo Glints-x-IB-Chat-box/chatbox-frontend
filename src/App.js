@@ -8,6 +8,7 @@ import { combineReducers } from "redux";
 import reducers from "./reducers/ChatReducer";
 import reducers2 from "./reducers/LoginReducer";
 
+import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home/Index";
@@ -27,6 +28,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
+
           <Route exact path="/home">
             <Home />
           </Route>
@@ -35,9 +37,14 @@ function App() {
             <Register />
           </Route>
 
-          <Route exact path="/">
+          <Route exact path="/login">
             <Login />
           </Route>
+
+          <Route exact path="/">
+            <Landing />
+          </Route>
+
         </Switch>
       </Router>
     </Provider>
