@@ -22,7 +22,7 @@ export default function ListContact() {
         />
 
         <div className="pt-3">
-          <button className="w-100 text-white section-chat">
+          <button className="w-100 text-white listcontact-chat">
             <div className="d-flex d-row">
               <img
                 src={profilePicture}
@@ -43,7 +43,7 @@ export default function ListContact() {
             </div>
           </button>
 
-          <button className="w-100 text-white section-chat">
+          <button className="w-100 text-white listcontact-chat">
             <div className="d-flex d-row">
               <img
                 src={profilePicture}
@@ -64,7 +64,7 @@ export default function ListContact() {
             </div>
           </button>
 
-          <button className="w-100 text-white section-chat">
+          <button className="w-100 text-white listcontact-chat">
             <div className="d-flex d-row">
               <img
                 src={profilePicture2}
