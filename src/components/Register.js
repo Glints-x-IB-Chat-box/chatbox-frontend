@@ -22,6 +22,8 @@ const Register = (props) => {
     setData({
       ...data, [name]: value
     })
+    error[name] = ''
+    alert.show = false
   }
 
   const handleSubmit = (event) => {
