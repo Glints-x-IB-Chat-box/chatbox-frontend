@@ -20,6 +20,7 @@ const Login = (props) => {
     setData({
       ...data, [name]: value
     })
+    alert.show = false
   }
 
   const handleSubmit = (event) => {
