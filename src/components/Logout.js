@@ -1,22 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import './style.css'
 import logo from './../assets/logo.png'
 import { connect } from 'react-redux'
-import { login } from './../actionCreators/LoginAction'
+import { logout } from '../actionCreators/LoginAction'
 
-const Landing = (props) => {
-  const { token } = props
+const Logout = (props) => {
   const history = useHistory()
 
-  useEffect(() => {
-    console.log('token', token)
-    if (token) {
-      history.push('/home')
-    } else {
-      history.push('/login')
-    }
-  }, [token, history])
+  props.logout()
+  history.push('/login')
 
   return (
     <div className="bg-semidark">
@@ -38,6 +31,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = { login }
+const mapDispatchToProps = { logout }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Landing)
+export default connect(mapStateToProps, mapDispatchToProps)(Logout)

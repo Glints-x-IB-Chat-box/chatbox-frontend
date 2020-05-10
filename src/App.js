@@ -9,6 +9,7 @@ import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home/Index";
+import Logout from "./components/Logout";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -32,6 +33,10 @@ function App() {
 
           <Route exact path="/login">
             <Login />
+          </Route>
+
+          <Route exact path="/logout">
+            <Logout />
           </Route>
 
           <Route exact path="/">
