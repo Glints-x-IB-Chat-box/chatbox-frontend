@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="row mx-0">
-      <div className="col-md-4 main-chat-2">
+      <div className="col-md-4 main-chat-2 vh-100">
         <h1 className="text-center text-white py-2">ChatBoxo</h1>
         <input
           type="text"
@@ -78,7 +78,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="col-md-8 bg-light">
+      <div className="col-md-8 bg-light vh-100">
         <div className="text-center">
           <img src={homePicture} alt="..." className="w-75" />
           <h1>Welcome to Chatboxo!</h1>
