@@ -3,14 +3,17 @@ import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+//import reducers from "./reducers"
 
 import { combineReducers } from "redux";
 import reducersChat from "./reducers/ChatReducer";
 import reducersLogin from "./reducers/LoginReducer";
 
+import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home/Index";
+import Logout from "./components/Logout";
 
 const combineReducer = combineReducers({
   reducersChat,
@@ -35,8 +38,16 @@ function App() {
             <Register />
           </Route>
 
-          <Route exact path="/">
+          <Route exact path="/login">
             <Login />
+          </Route>
+
+          <Route exact path="/logout">
+            <Logout />
+          </Route>
+
+          <Route exact path="/">
+            <Landing />
           </Route>
         </Switch>
       </Router>
