@@ -5,7 +5,7 @@ import profilePicture2 from "../../assets/Intan.png";
 import homePicture from "../../assets/text2.png";
 import "../style.css";
 export default function Home() {
-  // const iconSearch = <i class="fas fa-search"></i>;
+  // const iconSearch = <i className="fas fa-search"></i>;
 
   // handling preview limit
   // const maxPreview = 30;

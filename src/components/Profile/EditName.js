@@ -24,11 +24,11 @@ const EditName = (props) => {
         <Modal.Title>Change Your Name</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div class="form-group">
+        <div className="form-group">
           <label for="title">Username</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="username"
             name="username"
             placeholder="change your username here"
