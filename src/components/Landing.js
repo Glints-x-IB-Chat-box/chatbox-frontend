@@ -10,7 +10,7 @@ const Landing = (props) => {
   const history = useHistory()
 
   useEffect(() => {
-    console.log('token', token)
+    // console.log('token', token)
     if (token) {
       history.push('/home')
     } else {
