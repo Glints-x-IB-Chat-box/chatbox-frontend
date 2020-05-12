@@ -1,13 +1,11 @@
-import {
-    combineReducers
-} from "redux";
+import { combineReducers } from "redux";
 
-// import chat from "./ChatReducer";
+import chat from "./ChatReducer";
 import login from "./LoginReducer";
 
 const combineReducer = combineReducers({
-    // chat,
-    login
+  chat,
+  login,
 });
 
-export default combineReducer
+export default combineReducer;
