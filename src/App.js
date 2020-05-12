@@ -22,9 +22,9 @@ import Logout from "./components/Logout";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
-store.subscribe(() => {
-  console.log("store subscribe", store.getState());
-});
+// store.subscribe(() => {
+//   console.log("store subscribe", store.getState());
+// });
 
 function App() {
   return (

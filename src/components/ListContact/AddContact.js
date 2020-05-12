@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-
-import profile from "../../assets/Fred.png";
 import { connect } from "react-redux";
 
-import { hideAddContactForm } from "../../actionCreators/ChatAction";
+import {
+  hideAddContactForm,
+  getDataUser,
+} from "../../actionCreators/ChatAction";
 
 const AddContact = (props) => {
   const [data, setData] = useState({
@@ -18,18 +19,24 @@ const AddContact = (props) => {
       ...data,
       [name]: value,
     });
+    props.getDataUser(value);
   };
+
+  useEffect(() => {
+    props.getDataUser();
+  }, []);
+
   return (
     <Modal show={props.show} onHide={props.hideAddContactForm}>
       <Modal.Header closeButton>
         <Modal.Title>Search Your Friend</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div class="form-group">
-          <label for="title">Username</label>
+        <div className="form-group">
+          <label htmlFor="title">Username</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="username"
             name="username"
             placeholder="Enter your Friend's Username"
@@ -37,8 +44,8 @@ const AddContact = (props) => {
             onChange={handleChange}
           />
         </div>
-        <table class="table">
-          <thead class="thead-dark">
+        <table className="table">
+          <thead className="thead-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Friends</th>
@@ -47,42 +54,23 @@ const AddContact = (props) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>
-                <img src={profile} className="img-search" alt="" />
-              </td>
-              <td>
-                <p className="my-0 contact-icon3">
-                  <i className="fas fa-user-plus" />
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Frederick Chen</td>
-              <td>
-                <img src={profile} className="img-search" alt="" />
-              </td>
-              <td>
-                <p className="my-0 contact-icon3">
-                  <i className="fas fa-user-plus" />
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Benjamin Franklin</td>
-              <td>
-                <img src={profile} className="img-search" alt="" />
-              </td>
-              <td>
-                <p className="my-0 contact-icon3">
-                  <i className="fas fa-user-plus" />
-                </p>
-              </td>
-            </tr>
+            {props.dataContact.map((item, index) => {
+              // console.log(props.dataContact);
+              return (
+                <tr key={index}>
+                  <th scope="row">{index}</th>
+                  <td>{item.username}</td>
+                  <td>
+                    <img src={item.image} className="img-search" alt="" />
+                  </td>
+                  <td>
+                    <p className="my-0 contact-icon3">
+                      <i className="fas fa-user-plus" />
+                    </p>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </Modal.Body>
@@ -94,11 +82,13 @@ const mapStateToProps = (state) => {
   //   console.log(state);
   return {
     show: state.reducersChat.isShowAdd,
+    dataContact: state.reducersChat.dataContact,
   };
 };
 
 const mapDispatchToProps = {
   hideAddContactForm,
+  getDataUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddContact);

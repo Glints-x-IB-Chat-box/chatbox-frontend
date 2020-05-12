@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
-const url = `${process.env.REACT_APP_API_URL}/users`
+const url = `${process.env.REACT_APP_API_URL}/users`;
+// const url = `${process.env.URL_HOSTING_APP}/users`;
 
 export const login = (data) => {
     return async (dispatch) => {
@@ -24,8 +25,8 @@ export const login = (data) => {
         catch (error) {
             console.log(error)
         }
-    }
-}
+  };
+};
 
 export const register = (data) => {
     return async (dispatch) => {
@@ -55,11 +56,11 @@ export const register = (data) => {
                 })
             }
         }
-    }
-}
+  };
+};
 
 export const logout = () => {
-    return {
-        type: 'AUTH_LOGOUT'
-    }
-}
+  return {
+    type: "AUTH_LOGOUT",
+  };
+};
