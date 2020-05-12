@@ -1,3 +1,25 @@
+import axios from "axios";
+
+const url = `${process.env.REACT_APP_API_URL}`;
+// const url = `${process.env.URL_HOSTING_APP}`;
+
+export const getDataUser = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}/users/searchuser`, {
+        params: {
+          username: data,
+        },
+      });
+      dispatch({
+        type: "GET_DATA_CONTACT",
+        payload: response.data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
 export const showEditForm = () => {
   // DISPATCH DIPAKAI DENGAN SYARAT
   return (dispatch) => {

@@ -24,11 +24,11 @@ const EditAbout = (props) => {
         <Modal.Title>Change Your About</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div class="form-group">
+        <div className="form-group">
           <label for="title">About</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="about"
             name="about"
             placeholder="change your about here"
