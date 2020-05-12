@@ -3,17 +3,24 @@ import React from "react";
 import profilePicture from "../../assets/Fred.png";
 import profilePicture2 from "../../assets/Intan.png";
 import homePicture from "../../assets/text.png";
+
+import { connect } from "react-redux";
+import { showAddContactForm } from "../../actionCreators/ChatAction";
+import { showDeleteContactForm } from "../../actionCreators/ChatAction";
+
+import AddContact from "../ListContact/AddContact";
+import DeleteContact from "../ListContact/DeleteContact";
 import "../style.css";
 
-export default function ListContact() {
+const ListContact = (props) => {
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100">
         <div className="d-flex d-row justify-content-center">
           <h2 className="text-white py-2">Your Contacts</h2>
-          <a href="/home" className="contact-icon">
+          <p onClick={props.showAddContactForm} className="contact-icon my-0">
             <i className="fas fa-user-plus" />
-          </a>
+          </p>
         </div>
         <input
           type="text"
@@ -37,8 +44,15 @@ export default function ListContact() {
                 <p className="preview-chat">Dm me later, busy.</p>
               </div>
               <div className="d-flex d-row ml-auto">
-                <i className="fas fa-comment contact-icon2" />
-                <i className="fas fa-user-times contact-icon2" />
+                <a href="/home" className="contact-icon2">
+                  <i className="fas fa-comment" />
+                </a>
+                <p
+                  onClick={props.showDeleteContactForm}
+                  className="contact-icon2 my-0"
+                >
+                  <i className="fas fa-user-times" />
+                </p>
               </div>
             </div>
           </button>
@@ -58,8 +72,15 @@ export default function ListContact() {
                 <p className="preview-chat">Available</p>
               </div>
               <div className="d-flex d-row ml-auto">
-                <i className="fas fa-comment contact-icon2" />
-                <i className="fas fa-user-times contact-icon2" />
+                <a href="/home" className="contact-icon2">
+                  <i className="fas fa-comment" />
+                </a>
+                <p
+                  onClick={props.showDeleteContactForm}
+                  className="contact-icon2 my-0"
+                >
+                  <i className="fas fa-user-times" />
+                </p>
               </div>
             </div>
           </button>
@@ -79,8 +100,15 @@ export default function ListContact() {
                 <p className="preview-chat">Trying this chatboxo is Fun!</p>
               </div>
               <div className="d-flex d-row ml-auto">
-                <i className="fas fa-comment contact-icon2" />
-                <i className="fas fa-user-times contact-icon2" />
+                <a href="/home" className="contact-icon2">
+                  <i className="fas fa-comment" />
+                </a>
+                <p
+                  onClick={props.showDeleteContactForm}
+                  className="contact-icon2 my-0"
+                >
+                  <i className="fas fa-user-times" />
+                </p>
               </div>
             </div>
           </button>
@@ -94,6 +122,13 @@ export default function ListContact() {
           <h3>"You can modify your list contact here."</h3>
         </div>
       </div>
+      <AddContact />
+      <DeleteContact />
     </div>
   );
-}
+};
+const mapDispatchToProps = {
+  showAddContactForm,
+  showDeleteContactForm,
+};
+export default connect(null, mapDispatchToProps)(ListContact);

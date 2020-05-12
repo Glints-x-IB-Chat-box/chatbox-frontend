@@ -29,6 +29,14 @@
 .contact-icon2:hover {
   color: white;
 }
+.contact-icon3 {
+  color: #343a40;
+  align-self: center;
+  font-size: 1.25rem;
+}
+.contact-icon3:hover {
+  color: #007bff;
+}
 .dot {
   height: 15px;
   width: 15px;
@@ -37,6 +45,9 @@
   margin-left: 0.5rem;
   /* making element vertically center */
   align-self: center;
+}
+.img-search {
+  width: 3rem;
 }
 .list-group-item {
   background-color: #1f2d3c !important;

@@ -3,7 +3,25 @@ import React from "react";
 import profilePicture from "../../assets/profile.png";
 import logoPicture from "../../assets/ozy.png";
 
-export default function Profile() {
+import { connect } from "react-redux";
+import { showEditForm } from "../../actionCreators/ChatAction";
+import { showAboutForm } from "../../actionCreators/ChatAction";
+import { showChangeImageForm } from "../../actionCreators/ChatAction";
+
+import Edit from "./EditName";
+import AboutForm from "./EditAbout";
+import EditPicture from "./EditPicture";
+
+const Profile = (props) => {
+  const showFormEdit = () => {
+    props.showEditForm();
+  };
+  const showFormAbout = () => {
+    props.showAboutForm();
+  };
+  const showFormImage = () => {
+    props.showChangeImageForm();
+  };
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100 px-0">
@@ -16,11 +34,14 @@ export default function Profile() {
             />
           </div>
 
-          <button className="w-100 text-white section-chat">
+          <button
+            onClick={showFormImage}
+            className="w-100 text-white section-chat"
+          >
             <div className="d-flex d-row justify-content-center">
-              <a href="/home" className="contact-icon">
+              <p className="contact-icon my-0">
                 <i className="fas fa-camera" />
-              </a>
+              </p>
 
               <h5 className="text-white font-weight-bold pt-4 pb-2 pl-3">
                 Change your profile picture
@@ -36,9 +57,9 @@ export default function Profile() {
                 </h5>
                 <h5 className="pl-4">Chen Frederick</h5>
               </div>
-              <a href="/home" className="profile-icon ml-auto mr-3">
+              <p onClick={showFormEdit} className="profile-icon ml-auto mr-3">
                 <i className="fas fa-pen-square" />
-              </a>
+              </p>
             </div>
           </button>
 
@@ -50,22 +71,31 @@ export default function Profile() {
                 </h5>
                 <h5 className="pl-4">Available</h5>
               </div>
-              <a href="/home" className="profile-icon ml-auto mr-3">
+              <p onClick={showFormAbout} className="profile-icon ml-auto mr-3">
                 <i className="fas fa-pen-square" />
-              </a>
+              </p>
             </div>
           </button>
 
           <p className="mt-auto text-white">© ChatBoxo. All Rights Reserved</p>
         </div>
       </div>
-      <div className="col-md-8 bg-light vh-100">
+      <div className="col-md-8 bg-secondary text-white vh-100">
         <div className="text-center">
           <img src={profilePicture} alt="..." className="w-75" />
           <h1>This is your Profile</h1>
           <h3>"You can modify your Profile details here."</h3>
         </div>
       </div>
+      <Edit />
+      <AboutForm />
+      <EditPicture />
     </div>
   );
-}
+};
+const mapDispatchToProps = {
+  showEditForm,
+  showAboutForm,
+  showChangeImageForm,
+};
+export default connect(null, mapDispatchToProps)(Profile);

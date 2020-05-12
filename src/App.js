@@ -5,16 +5,16 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 import { combineReducers } from "redux";
-import reducers from "./reducers/ChatReducer";
-import reducers2 from "./reducers/LoginReducer";
+import reducersChat from "./reducers/ChatReducer";
+import reducersLogin from "./reducers/LoginReducer";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home/Index";
 
 const combineReducer = combineReducers({
-  reducers,
-  reducers2,
+  reducersChat,
+  reducersLogin,
 });
 const store = createStore(combineReducer, applyMiddleware(thunk));
 
