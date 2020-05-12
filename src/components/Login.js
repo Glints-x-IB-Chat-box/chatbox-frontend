@@ -25,12 +25,12 @@ const Login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(data)
+    // console.log(data)
     props.login(data)
   }
 
   useEffect(() => {
-    console.log('token', token)
+    // console.log('token', token)
     if(token)
     {
       history.push('/home')

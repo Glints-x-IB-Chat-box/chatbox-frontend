@@ -29,12 +29,12 @@ const Register = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(data)
+    // console.log(data)
     props.register(data)
   }
 
   useEffect(() => {
-    console.log('token', token)
+    // console.log('token', token)
     if (token) {
       history.push('/home')
     }
