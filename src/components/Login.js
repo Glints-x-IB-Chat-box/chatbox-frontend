@@ -52,7 +52,7 @@ const Login = (props) => {
 
   return (
     <div className="bg-semidark">
-      <div className="row vh-100 d-flex">
+      <div className="row vh-100 d-flex m-0">
         <div className="col align-self-center">
           <div className="container text-center">
             <img src={logo} alt="logo" />
