@@ -1,4 +1,5 @@
 const initialState = {
+  dataUser: [],
   dataContact: [],
   isShowEdit: false,
   isShowAbout: false,
@@ -9,8 +10,12 @@ const initialState = {
 
 const ChatReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_DATA_USER":
+      return { ...state, dataUser: action.payload };
     case "GET_DATA_CONTACT":
       return { ...state, dataContact: action.payload };
+    case "ADD_DATA_CONTACT":
+      return { ...state, dataContact: [...state.dataContact, action.payload] };
     case "SHOW_EDIT_FORM":
       return { ...state, isShowEdit: true };
     case "HIDE_EDIT_FORM":

@@ -8,7 +8,7 @@ export const login = (data) => {
     try {
       const response = await axios.post(`${url}/login`, data);
       const output = response.data;
-      console.log(output);
+      // console.log(output);
       if (output.status === "success") {
         dispatch({
           type: "AUTH_LOGIN",

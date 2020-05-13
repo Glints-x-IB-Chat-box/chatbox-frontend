@@ -1,54 +1,57 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import './style.css'
-import logo from './../assets/logo.png'
-import { connect } from 'react-redux'
-import { login } from './../actionCreators/LoginAction'
-import { Alert } from 'react-bootstrap'
+import "./style.css";
+import logo from "./../assets/logo.png";
+import { connect } from "react-redux";
+import { login } from "./../actionCreators/LoginAction";
+import { Alert } from "react-bootstrap";
 
 const Login = (props) => {
-
-  const { alert, token } = props
-  const history = useHistory()
+  const { alert, token } = props;
+  const history = useHistory();
   const [data, setData] = useState({
-    username: '',
-    password: ''
-  })
+    username: "",
+    password: "",
+  });
 
   const handleChange = (event) => {
-    const { name, value } = event.currentTarget
+    const { name, value } = event.currentTarget;
     setData({
-      ...data, [name]: value
-    })
-    alert.show = false
-  }
+      ...data,
+      [name]: value,
+    });
+    alert.show = false;
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(data)
-    props.login(data)
-  }
+    event.preventDefault();
+    // console.log(data);
+    props.login(data);
+  };
 
   useEffect(() => {
-    console.log('token', token)
-    if(token)
-    {
-      history.push('/home')
+    console.log("token", token);
+    if (token) {
+      history.push("/home");
     }
-  }, [token, history])
+  }, [token, history]);
 
   const AlertDismissible = () => {
     const [show, setShow] = useState(alert.show);
 
     if (show) {
       return (
-        <Alert variant={alert.variant} onClose={() => setShow(false)} dismissible>
+        <Alert
+          variant={alert.variant}
+          onClose={() => setShow(false)}
+          dismissible
+        >
           {alert.message}
         </Alert>
       );
     }
-    return (<></>);
-  }
+    return <></>;
+  };
 
   return (
     <div className="bg-semidark">
@@ -56,7 +59,9 @@ const Login = (props) => {
         <div className="col align-self-center">
           <div className="container text-center">
             <img src={logo} alt="logo" />
-            <p><b>"Executive Chatbox, for Professionals.</b></p>
+            <p>
+              <b>"Executive Chatbox, for Professionals.</b>
+            </p>
           </div>
         </div>
         <div className="col align-self-center">
@@ -90,10 +95,13 @@ const Login = (props) => {
                   value={data.password}
                 />
               </div>
-              <button className="btn btn-light btn-block" type="submit">LOGIN</button>
+              <button className="btn btn-light btn-block" type="submit">
+                LOGIN
+              </button>
               <Link to="/register">
                 <button className="btn btn-link text-white">
-                  Create your Account <i className="fas fa-long-arrow-alt-right"></i>
+                  Create your Account{" "}
+                  <i className="fas fa-long-arrow-alt-right"></i>
                 </button>
               </Link>
             </form>
@@ -101,17 +109,16 @@ const Login = (props) => {
         </div>
       </div>
     </div>
-
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
-    alert : state.login.alert,
-    token : state.login.token
-  }
-}
+    alert: state.login.alert,
+    token: state.login.token,
+  };
+};
 
-const mapDispatchToProps = { login }
+const mapDispatchToProps = { login };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

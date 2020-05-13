@@ -1,10 +1,14 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import profilePicture from "../../assets/Fred.png";
-import profilePicture2 from "../../assets/Intan.png";
+// import profilePicture2 from "../../assets/Intan.png";
 import homePicture from "../../assets/text2.png";
 import "../style.css";
-export default function Home() {
+
+import { connect } from "react-redux";
+import { getDataContact } from "../../actionCreators/ChatAction";
+
+export default function Home(props) {
   // const iconSearch = <i className="fas fa-search"></i>;
 
   // handling preview limit
@@ -37,42 +41,6 @@ export default function Home() {
                 <p className="preview-chat">Hi,Welcome to Chatboxo.</p>
               </div>
               <p className="ml-auto d-flex align-items-center">12.50</p>
-            </div>
-          </button>
-
-          <button className="w-100 text-white section-chat">
-            <div className="d-flex d-row">
-              <img
-                src={profilePicture}
-                className="chat-profile-pic"
-                alt="..."
-              />
-              <div className="section-chat-div">
-                <div className="d-flex d-row">
-                  <h6 className="my-0 name-chat">Ahmad Fakhrozy</h6>
-                  <span className="dot bg-danger" />
-                </div>
-                <p className="preview-chat">Hi,Frederick!</p>
-              </div>
-              <p className="ml-auto d-flex align-items-center">11.21</p>
-            </div>
-          </button>
-
-          <button className="w-100 text-white section-chat">
-            <div className="d-flex d-row">
-              <img
-                src={profilePicture2}
-                className="chat-profile-pic"
-                alt="..."
-              />
-              <div className="section-chat-div">
-                <div className="d-flex d-row">
-                  <h6 className="my-0 name-chat">Intan Adela</h6>
-                  <span className="dot bg-success" />
-                </div>
-                <p className="preview-chat">Trying this chatboxo is Fun!</p>
-              </div>
-              <p className="ml-auto d-flex align-items-center">23:35</p>
             </div>
           </button>
         </div>
