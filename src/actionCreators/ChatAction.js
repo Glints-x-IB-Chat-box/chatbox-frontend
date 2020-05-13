@@ -34,9 +34,10 @@ export const AddUser = (data) => {
 
 export const getDataContact = () => {
   const tokenString = localStorage.getItem("token");
+
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${url}/contacts/get`, null, {
+      const response = await axios.get(`${url}/contacts/get`, {
         headers: {
           "x-access-token": tokenString,
         },

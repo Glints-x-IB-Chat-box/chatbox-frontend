@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
-import profilePicture from "../../assets/Fred.png";
-// import profilePicture2 from "../../assets/Intan.png";
 import homePicture from "../../assets/text2.png";
 import "../style.css";
 
 import { connect } from "react-redux";
 import { getDataContact } from "../../actionCreators/ChatAction";
 
-export default function Home(props) {
+const Home = (props) => {
   // const iconSearch = <i className="fas fa-search"></i>;
 
   // handling preview limit
   // const maxPreview = 30;
   // stackoverflow-Maximum amount of characters in a div/paragraph tag in react
+
+  useEffect(() => {
+    props.getDataContact();
+  }, []);
 
   return (
     <div className="row mx-0">
@@ -26,23 +28,28 @@ export default function Home(props) {
         />
 
         <div className="pt-3">
-          <button className="w-100 text-white section-chat">
-            <div className="d-flex d-row">
-              <img
-                src={profilePicture}
-                className="chat-profile-pic"
-                alt="..."
-              />
-              <div className="section-chat-div">
+          {props.dataContact.map((item, index) => {
+            console.log(props.dataContact);
+            return (
+              <button className="w-100 text-white section-chat" key={index}>
                 <div className="d-flex d-row">
-                  <h6 className="my-0 name-chat">River Huang</h6>
-                  <span className="dot bg-success" />
+                  <img
+                    src={item.image}
+                    className="chat-profile-pic"
+                    alt="..."
+                  />
+                  <div className="section-chat-div">
+                    <div className="d-flex d-row">
+                      <h6 className="my-0 name-chat">{item.username}</h6>
+                      <span className="dot bg-success" />
+                    </div>
+                    <p className="preview-chat">{item.about}</p>
+                  </div>
+                  <p className="ml-auto d-flex align-items-center">12.50</p>
                 </div>
-                <p className="preview-chat">Hi,Welcome to Chatboxo.</p>
-              </div>
-              <p className="ml-auto d-flex align-items-center">12.50</p>
-            </div>
-          </button>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -55,4 +62,16 @@ export default function Home(props) {
       </div>
     </div>
   );
-}
+};
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    dataContact: state.reducersChat.dataContact,
+  };
+};
+
+const mapDispatchToProps = {
+  getDataContact,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -66,9 +66,10 @@ const AddContact = (props) => {
                   </td>
                   <td>
                     <p
-                      onClick={() => {
+                      onClick={(event) => {
                         props.AddUser(item._id);
                         console.log("success add contact", item._id);
+                        window.alert(`YOU HAVE ADDED ${item.username}`);
                       }}
                       className="my-0 contact-icon3"
                     >
@@ -86,7 +87,7 @@ const AddContact = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  //   console.log(state);
+  console.log(state);
   return {
     show: state.reducersChat.isShowAdd,
     dataUser: state.reducersChat.dataUser,
