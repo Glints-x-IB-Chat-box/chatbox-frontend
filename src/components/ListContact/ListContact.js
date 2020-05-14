@@ -36,7 +36,7 @@ const ListContact = (props) => {
           {props.dataContact.map((item, index) => {
             console.log(props.dataContact);
             return (
-              <button className="w-100 text-white listcontact-chat">
+              <button className="w-100 text-white listcontact-chat" key={index}>
                 <div className="d-flex d-row">
                   <img
                     src={item.image}
