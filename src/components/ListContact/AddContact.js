@@ -69,7 +69,8 @@ const AddContact = (props) => {
                       onClick={(event) => {
                         props.AddUser(item._id);
                         console.log("success add contact", item._id);
-                        window.alert(`YOU HAVE ADDED ${item.username}`);
+                        // RUBAH ALERT SEPERTI NOTIF DI REGISTER
+                        window.alert(`You have added "${item.username}"`);
                       }}
                       className="my-0 contact-icon3"
                     >

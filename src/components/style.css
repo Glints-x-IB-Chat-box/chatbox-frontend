@@ -124,7 +124,6 @@ input.with-icon {
 }
 .scrollable-div {
   flex-grow: 1;
-  /* height: 100vh; */
   vertical-align: unset;
   justify-content: flex-end;
   overflow: auto;
