@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
-import homePicture from "../../assets/text2.png";
+import homePicture from "../../assets/text.png";
 import "../style.css";
 
 import { connect } from "react-redux";
@@ -20,7 +20,7 @@ const Home = (props) => {
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100">
-        <h1 className="text-center text-white py-2">ChatBoxo</h1>
+        <h2 className="text-center text-white py-2">CHATBOXO</h2>
         <input
           type="text"
           placeholder="Search Contacts..."
@@ -45,7 +45,9 @@ const Home = (props) => {
                     </div>
                     <p className="preview-chat">{item.about}</p>
                   </div>
-                  <p className="ml-auto d-flex align-items-center">12.50</p>
+                  <p className="ml-auto d-flex align-items-center time-text">
+                    12.50
+                  </p>
                 </div>
               </button>
             );
@@ -61,10 +63,60 @@ const Home = (props) => {
         </div>
       </div> */}
 
-      <div className="col-md-8 bg-light vh-100 px-0">
-        <div className="scrollable-div">
-          <div className="bg-secondary">
-            <img src={homePicture} alt="..." className="rounded-circle w-75" />
+      <div className="col-md-8 px-0">
+        <div className="bg-main support-scrollable-div">
+          <div className="bg-light d-flex">
+            <img
+              src={homePicture}
+              alt="..."
+              className="rounded-circle img-chat ml-3"
+            />
+            <h4 className="align-self-center font-weight-bold pl-2 my-0">
+              Frederick88
+            </h4>
+          </div>
+
+          <div className="container pt-3 scrollable-div">
+            <h6 className="font-weight-bold text-center pb-3">
+              Thursday,14/05/20
+            </h6>
+            <div className="row justify-content-start">
+              <div className="col-md-6">
+                <div className="bg-light p-3">
+                  <div className="d-flex">
+                    <h6 className="font-weight-bold">Frederick88</h6>
+                    <p className="my-0 ml-auto time-text">12:50</p>
+                  </div>
+                  <h6 className="my-0">
+                    Lorem ipsum dolor sit amet, consecte tur adipiscing elit,
+                    sed do eiusmod t empor incididunt ut labore et dolore magna
+                    aliqua.
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-end">
+              <div className="col-md-6">
+                <div className="bg-mainchat p-3">
+                  <div className="d-flex">
+                    <h6 className="font-weight-bold">Me</h6>
+                    <p className="my-0 ml-auto time-text">12:51</p>
+                  </div>
+                  <h6 className="my-0">
+                    Lorem ipsum dolor sit amet, consecte tur adipiscing elit,
+                    sed do eiusmod t empor incididunt ut labore et dolore magna
+                    aliqua.
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="d-flex pt-2 px-2 bg-white">
+            <input type="text" className="input-chat" />
+
+            <i class="far fa-grin-alt h3 px-3" />
+            <i class="fas fa-paperclip h3" />
+            <i class="fas fa-arrow-circle-right h3 px-3" />
           </div>
         </div>
       </div>
