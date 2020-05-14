@@ -3,6 +3,55 @@ import axios from "axios";
 const url = `${process.env.REACT_APP_API_URL}`;
 // const url = `${process.env.URL_HOSTING_APP}`;
 
+export const AddUser = (data) => {
+  const tokenString = localStorage.getItem("token");
+  // const tokenObj = JSON.parse(tokenString);
+  console.log(tokenString);
+
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${url}/contacts/addcontact`,
+        {
+          userContactId: data,
+        },
+        {
+          headers: {
+            "x-access-token": tokenString,
+          },
+        }
+      );
+      dispatch({
+        type: "ADD_DATA_CONTACT",
+        payload: response.data,
+      });
+      console.log(response.data);
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const getDataContact = () => {
+  const tokenString = localStorage.getItem("token");
+
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}/contacts/get`, {
+        headers: {
+          "x-access-token": tokenString,
+        },
+      });
+      dispatch({
+        type: "GET_DATA_CONTACT",
+        payload: response.data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
 export const getDataUser = (data) => {
   return async (dispatch) => {
     try {
@@ -12,7 +61,7 @@ export const getDataUser = (data) => {
         },
       });
       dispatch({
-        type: "GET_DATA_CONTACT",
+        type: "GET_DATA_USER",
         payload: response.data,
       });
     } catch (error) {

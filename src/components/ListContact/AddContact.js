@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import {
   hideAddContactForm,
   getDataUser,
+  AddUser,
 } from "../../actionCreators/ChatAction";
 
 const AddContact = (props) => {
@@ -54,8 +55,8 @@ const AddContact = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props.dataContact.map((item, index) => {
-              // console.log(props.dataContact);
+            {props.dataUser.map((item, index) => {
+              console.log(props.dataUser);
               return (
                 <tr key={index}>
                   <th scope="row">{index}</th>
@@ -64,7 +65,14 @@ const AddContact = (props) => {
                     <img src={item.image} className="img-search" alt="" />
                   </td>
                   <td>
-                    <p className="my-0 contact-icon3">
+                    <p
+                      onClick={(event) => {
+                        props.AddUser(item._id);
+                        console.log("success add contact", item._id);
+                        window.alert(`YOU HAVE ADDED ${item.username}`);
+                      }}
+                      className="my-0 contact-icon3"
+                    >
                       <i className="fas fa-user-plus" />
                     </p>
                   </td>
@@ -79,16 +87,17 @@ const AddContact = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  //   console.log(state);
+  console.log(state);
   return {
     show: state.reducersChat.isShowAdd,
-    dataContact: state.reducersChat.dataContact,
+    dataUser: state.reducersChat.dataUser,
   };
 };
 
 const mapDispatchToProps = {
   hideAddContactForm,
   getDataUser,
+  AddUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddContact);
