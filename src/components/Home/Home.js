@@ -53,11 +53,19 @@ const Home = (props) => {
         </div>
       </div>
 
-      <div className="col-md-8 bg-light vh-100">
+      {/* <div className="col-md-8 bg-light vh-100">
         <div className="text-center">
           <img src={homePicture} alt="..." className="w-75" />
           <h1>Welcome to Chatboxo!</h1>
           <h3>“Executive Chatbox, for Professionals.”</h3>
+        </div>
+      </div> */}
+
+      <div className="col-md-8 bg-light vh-100 px-0">
+        <div className="scrollable-div">
+          <div className="bg-secondary">
+            <img src={homePicture} alt="..." className="rounded-circle w-75" />
+          </div>
         </div>
       </div>
     </div>
