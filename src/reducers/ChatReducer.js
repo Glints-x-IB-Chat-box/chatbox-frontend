@@ -1,6 +1,7 @@
 const initialState = {
   dataUser: [],
   dataContact: [],
+  dataDelete: [],
   isShowEdit: false,
   isShowAbout: false,
   isShowAdd: false,
@@ -12,6 +13,12 @@ const ChatReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_DATA_USER":
       return { ...state, dataUser: action.payload };
+    case "DELETE_DATA_CONTACT":
+      const dataFiltered = state.data.filter((item) => {
+        if (item.id === action.payload._id) return false;
+        return true;
+      });
+      return { ...state, data: dataFiltered };
     case "GET_DATA_CONTACT":
       return { ...state, dataContact: action.payload };
     case "ADD_DATA_CONTACT":
@@ -29,7 +36,7 @@ const ChatReducer = (state = initialState, action) => {
     case "HIDE_ADDCONTACT_FORM":
       return { ...state, isShowAdd: false };
     case "SHOW_DELETECONTACT_FORM":
-      return { ...state, isShowDelete: true };
+      return { ...state, isShowDelete: true, dataDelete: action.payload };
     case "HIDE_DELETECONTACT_FORM":
       return { ...state, isShowDelete: false };
     case "SHOW_CHANGEIMAGE_FORM":

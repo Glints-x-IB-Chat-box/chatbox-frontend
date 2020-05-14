@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 // import { Link } from "react-router-dom";
 import homePicture from "../../assets/text.png";
 import "../style.css";
@@ -112,7 +112,12 @@ const Home = (props) => {
             </div>
           </div>
           <div className="d-flex pt-2 px-2 bg-white">
-            <textarea rows="2" type="text" className="input-chat" />
+            <textarea
+              rows="2"
+              type="text"
+              placeholder="Input your message here..."
+              className="input-chat"
+            />
             <i className="far fa-grin-alt h3 px-3 align-self-center" />
             <i className="fas fa-paperclip h3 align-self-center" />
             <i className="fas fa-arrow-circle-right h3 px-3 align-self-center" />
