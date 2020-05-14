@@ -29,7 +29,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="col-md-8 bg-light vh-100">
+      <div className="col-md-8 bg-light">
         {/* <div className="text-center">
           <img src={aboutPicture} alt="..." className="w-100" />
           <h1>Chatboxo,</h1>
@@ -37,7 +37,7 @@ export default function About() {
         </div> */}
 
         <div className="container">
-          <div className="about-div">
+          <div className="scrollable-div">
             <h1 className="font-weight-bold text-dark text-center pt-3 pb-2">
               OUR TEAM
             </h1>

@@ -3,7 +3,7 @@
   color: white;
   align-self: center;
 }
-.about-div {
+.scrollable-div {
   height: 100vh;
   overflow: scroll;
 }
