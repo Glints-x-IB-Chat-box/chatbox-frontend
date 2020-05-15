@@ -110,6 +110,7 @@ input.with-icon {
   border-color: rgba(255, 255, 255, 0.125) !important;
 }
 .listcontact-chat {
+  border-left: none !important;
   border-color: transparent;
   background-color: transparent;
 }
@@ -128,9 +129,13 @@ input.with-icon {
   font-size: 0.9rem;
   float: left;
 }
+.profile-chat h6 {
+  font-size: 1.15rem !important;
+}
 .profile-chat {
   border-color: transparent;
   background-color: white;
+  border-radius: 0.5rem;
 }
 .profile-icon {
   color: #2c3e50;
@@ -151,6 +156,13 @@ input.with-icon {
   display: flex;
   height: 100vh;
   flex-direction: column;
+}
+.section-profile {
+  border: none !important;
+  background-color: transparent;
+}
+.section-profile:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
 }
 .section-chat {
   border-left: none !important;

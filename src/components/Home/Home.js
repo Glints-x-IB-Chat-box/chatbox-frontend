@@ -20,8 +20,8 @@ const Home = (props) => {
   return (
     <div className="row mx-0">
       <div className="col-md-4 vh-100 px-0 bg-mainchat border-right-3 border-white scrollable-div">
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action d-flex justify-content-center py-0">
+        <div className="list-group">
+          <div className="list-group-item list-group-item-action d-flex justify-content-center py-0">
             <div className="form-group h-100 my-0 mt-4 mb-4">
               <span className="input-icon">
                 <i className="fas fa-search" />
@@ -40,7 +40,7 @@ const Home = (props) => {
             console.log(props.dataContact);
             return (
               <div
-                class="list-group-item list-group-item-action active section-chat py-3"
+                className="list-group-item list-group-item-action active section-chat py-3"
                 key={index}
               >
                 <div className="d-flex d-row">

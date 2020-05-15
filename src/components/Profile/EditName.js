@@ -25,7 +25,7 @@ const EditName = (props) => {
       </Modal.Header>
       <Modal.Body>
         <div className="form-group">
-          <label for="title">Username</label>
+          <label htmlFor="title">Username</label>
           <input
             type="text"
             className="form-control"

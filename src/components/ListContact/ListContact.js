@@ -21,8 +21,8 @@ const ListContact = (props) => {
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100 px-0 scrollable-div">
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action py-0">
+        <div className="list-group">
+          <div className="list-group-item list-group-item-action py-0">
             <div className="d-flex d-row justify-content-center mt-2">
               <h4 className="text-white py-2">YOUR CONTACTS</h4>
               <p

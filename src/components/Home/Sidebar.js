@@ -14,10 +14,10 @@ export default function Sidebar() {
           to="/profile"
           className="list-group-item list-group-item-action"
         >
-          <i class="fas fa-user-circle fa-lg" />
+          <i className="fas fa-user-circle fa-lg" />
         </NavLink>
         <NavLink to="/home" className="list-group-item list-group-item-action">
-          <i class="fas fa-comment-dots fa-lg" />
+          <i className="fas fa-comment-dots fa-lg" />
         </NavLink>
         {/* <NavLink to="/group" className="list-group-item list-group-item-action">
           Group
@@ -26,17 +26,17 @@ export default function Sidebar() {
           to="/listContact"
           className="list-group-item list-group-item-action"
         >
-          <i class="fas fa-users fa-lg" />
+          <i className="fas fa-users fa-lg" />
         </NavLink>
         <NavLink to="/about" className="list-group-item list-group-item-action">
-          <i class="fas fa-info-circle fa-lg" />
+          <i className="fas fa-info-circle fa-lg" />
         </NavLink>
         <a
           href="/"
           onClick={logOut}
           className="mb-auto list-group-item list-group-item-action mt-auto"
         >
-          <i class="fas fa-sign-out-alt fa-lg" />
+          <i className="fas fa-sign-out-alt fa-lg" />
         </a>
       </div>
     </div>
