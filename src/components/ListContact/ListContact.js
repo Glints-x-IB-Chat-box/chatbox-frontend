@@ -16,7 +16,7 @@ import "../style.css";
 const ListContact = (props) => {
   useEffect(() => {
     props.getDataContact();
-  }, []);
+  }, [props.getDataContact]);
 
   return (
     <div className="row mx-0">

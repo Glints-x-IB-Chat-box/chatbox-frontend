@@ -60,7 +60,7 @@ const Login = (props) => {
           <div className="container text-center">
             <img src={logo} alt="logo" />
             <p>
-              <b>"Executive Chatbox, for Professionals.</b>
+              <b>"Executive Chatbox, for Professionals."</b>
             </p>
           </div>
         </div>
