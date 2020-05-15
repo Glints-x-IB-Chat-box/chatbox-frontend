@@ -49,7 +49,7 @@ const Home = (props) => {
                     className="chat-profile-pic rounded-circle"
                     alt="..."
                   />
-                  <div className="section-chat-div">
+                  <div className="section-chat-div align-self-center">
                     <div className="d-flex d-row">
                       <h6 className="my-0 name-chat">{item.username}</h6>
                       <span className="dot bg-success" />
@@ -76,7 +76,7 @@ const Home = (props) => {
 
       <div className="col-md-8 px-0">
         <div className="bg-main support-scrollable-div">
-          <div className="bg-light d-flex">
+          <div className="bg-light d-flex py-2">
             <img
               src={homePicture}
               alt="..."
