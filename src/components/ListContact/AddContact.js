@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import {
   hideAddContactForm,
   getDataUser,
-  AddUser,
+  AddContacts,
 } from "../../actionCreators/ChatAction";
 
 const AddContact = (props) => {
   const [data, setData] = useState({
     username: "",
   });
-  console.log(data);
+  // console.log(data);
 
   const handleChange = (event) => {
     let { name, value } = event.currentTarget;
@@ -56,7 +56,7 @@ const AddContact = (props) => {
           </thead>
           <tbody>
             {props.dataUser.map((item, index) => {
-              console.log(props.dataUser);
+              // console.log(props.dataUser);
               return (
                 <tr key={index}>
                   <th scope="row">{index}</th>
@@ -67,9 +67,10 @@ const AddContact = (props) => {
                   <td>
                     <p
                       onClick={(event) => {
-                        props.AddUser(item._id);
+                        props.AddContacts(item._id);
                         console.log("success add contact", item._id);
-                        window.alert(`YOU HAVE ADDED ${item.username}`);
+                        // RUBAH ALERT SEPERTI NOTIF DI REGISTER
+                        window.alert(`You have added "${item.username}"`);
                       }}
                       className="my-0 contact-icon3"
                     >
@@ -87,7 +88,7 @@ const AddContact = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     show: state.reducersChat.isShowAdd,
     dataUser: state.reducersChat.dataUser,
@@ -97,7 +98,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   hideAddContactForm,
   getDataUser,
-  AddUser,
+  AddContacts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddContact);
