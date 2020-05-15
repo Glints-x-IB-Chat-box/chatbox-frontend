@@ -59,7 +59,7 @@ const AddContact = (props) => {
               // console.log(props.dataUser);
               return (
                 <tr key={index}>
-                  <th scope="row">{index}</th>
+                  <th scope="row">{1 + index}</th>
                   <td>{item.username}</td>
                   <td>
                     <img src={item.image} className="img-search" alt="" />

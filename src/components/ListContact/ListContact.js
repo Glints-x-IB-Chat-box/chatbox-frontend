@@ -16,24 +16,37 @@ import "../style.css";
 const ListContact = (props) => {
   useEffect(() => {
     props.getDataContact();
-  }, []);
+  }, [props.getDataContact]);
 
   return (
     <div className="row mx-0">
-      <div className="col-md-4 main-chat-2 vh-100">
-        <div className="d-flex d-row justify-content-center">
-          <h2 className="text-white py-2">Your Contacts</h2>
-          <p onClick={props.showAddContactForm} className="contact-icon my-0">
-            <i className="fas fa-user-plus" />
-          </p>
+      <div className="col-md-4 main-chat-2 vh-100 px-0 scrollable-div">
+        <div className="list-group">
+          <div className="list-group-item list-group-item-action py-0">
+            <div className="d-flex d-row justify-content-center mt-2">
+              <h4 className="text-white py-2">YOUR CONTACTS</h4>
+              <p
+                style={{ cursor: "pointer" }}
+                onClick={props.showAddContactForm}
+                className="contact-icon my-0"
+              >
+                <i className="fas fa-user-plus" />
+              </p>
+            </div>
+            <div className="form-group h-100  mb-4">
+              <span className="input-icon">
+                <i className="fas fa-search" />
+              </span>
+              <input
+                type="text"
+                className="form-control with-icon h6 my-0"
+                placeholder="Search Contacts..."
+              />
+            </div>
+          </div>
         </div>
-        <input
-          type="text"
-          placeholder="Search Contacts..."
-          className="w-100 h6 p-2"
-        />
 
-        <div className="pt-3">
+        <div>
           {props.dataContact.map((item, index) => {
             // console.log(props.dataContact);
             return <ListContactItem key={index} dataContacts={item} />;
@@ -42,8 +55,8 @@ const ListContact = (props) => {
       </div>
 
       <div className="col-md-8 bg-light vh-100">
-        <div className="text-center">
-          <img src={homePicture} alt="..." className="w-75" />
+        <div className="text-center center-div">
+          <img src={homePicture} alt="..." className="w-50" />
           <h1>This is your List Contact</h1>
           <h3>"You can modify your list contact here."</h3>
         </div>
