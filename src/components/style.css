@@ -3,6 +3,9 @@
   color: white;
   align-self: center;
 }
+body {
+  font-family: "Varela Round", sans-serif !important;
+}
 .bg-semidark {
   background-color: #2c3e50;
   color: white;
@@ -68,7 +71,7 @@
 }
 
 input.with-icon {
-  padding-left: 30px;
+  padding-left: 40px;
 }
 .input-chat {
   display: flex;
@@ -89,7 +92,16 @@ input.with-icon {
 
 .list-group-item {
   background-color: #1f2d3c !important;
+  color: #aaaaaa !important;
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+  text-align: center !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.125) !important;
+}
+.list-group-item.active {
+  background-color: #2c3e50 !important;
   color: white !important;
+  border-color: rgba(255, 255, 255, 0.125) !important;
 }
 .listcontact-chat {
   border-color: transparent;
@@ -101,6 +113,7 @@ input.with-icon {
 .name-chat {
   font-size: 1.1rem;
 }
+
 .time-text {
   font-size: 0.75rem;
   font-weight: bold;
@@ -134,7 +147,7 @@ input.with-icon {
   flex-direction: column;
 }
 .section-chat {
-  border-color: transparent;
+  border-left: none !important;
   background-color: transparent;
 }
 .section-chat:hover {

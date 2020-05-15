@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
 import homePicture from "../../assets/text.png";
 import "../style.css";
 
 import { connect } from "react-redux";
-// import { getDataContact } from "../../actionCreators/ChatAction";
+import { getDataContact } from "../../actionCreators/ChatAction";
 
 const Home = (props) => {
   // const iconSearch = <i className="fas fa-search"></i>;
@@ -13,29 +13,40 @@ const Home = (props) => {
   // const maxPreview = 30;
   // stackoverflow-Maximum amount of characters in a div/paragraph tag in react
 
-  // useEffect(() => {
-  //   props.getDataContact();
-  // }, []);
+  useEffect(() => {
+    props.getDataContact();
+  }, []);
 
   return (
     <div className="row mx-0">
-      <div className="col-md-4 main-chat-2 vh-100">
-        <h2 className="text-center text-white py-2">CHATBOXO</h2>
-        <input
-          type="text"
-          placeholder="Search Contacts..."
-          className="w-100 h6 p-2"
-        />
+      <div className="col-md-4 vh-100 px-0 bg-mainchat border-right-3 border-white scrollable-div">
+        <div class="list-group">
+          <div class="list-group-item list-group-item-action d-flex justify-content-center py-0">
+            <div className="form-group h-100 my-0 mt-4 mb-4">
+              <span className="input-icon">
+                <i className="fas fa-search" />
+              </span>
+              <input
+                type="text"
+                className="form-control with-icon h6 my-0"
+                placeholder="Search Contacts..."
+              />
+            </div>
+          </div>
+        </div>
 
-        {/* <div className="pt-3">
+        <div>
           {props.dataContact.map((item, index) => {
             console.log(props.dataContact);
             return (
-              <button className="w-100 text-white section-chat" key={index}>
+              <div
+                class="list-group-item list-group-item-action active section-chat py-3"
+                key={index}
+              >
                 <div className="d-flex d-row">
                   <img
                     src={item.image}
-                    className="chat-profile-pic"
+                    className="chat-profile-pic rounded-circle"
                     alt="..."
                   />
                   <div className="section-chat-div">
@@ -49,10 +60,10 @@ const Home = (props) => {
                     12.50
                   </p>
                 </div>
-              </button>
+              </div>
             );
           })}
-        </div> */}
+        </div>
       </div>
 
       {/* <div className="col-md-8 bg-light vh-100">
@@ -127,15 +138,15 @@ const Home = (props) => {
     </div>
   );
 };
-// const mapStateToProps = (state) => {
-//   console.log(state);
-//   return {
-//     dataContact: state.reducersChat.dataContact,
-//   };
-// };
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    dataContact: state.reducersChat.dataContact,
+  };
+};
 
-// const mapDispatchToProps = {
-//   getDataContact,
-// };
+const mapDispatchToProps = {
+  getDataContact,
+};
 
-export default connect(null, null)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

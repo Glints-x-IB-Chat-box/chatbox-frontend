@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/ozy.png";
+import { NavLink } from "react-router-dom";
 import "../style.css";
 
 export default function Sidebar() {
@@ -9,34 +8,35 @@ export default function Sidebar() {
     window.location.href = "/";
   };
   return (
-    <div
-      style={{ width: "100px", height: "100vh", backgroundColor: "#1f2d3c" }}
-    >
+    <div style={{ width: "75px", height: "100vh", backgroundColor: "#1f2d3c" }}>
       <div className="list-group">
-        <Link to="/profile" className="list-group-item list-group-item-action">
-          <img src={logo} alt="..." className="w-100" />
-        </Link>
-        <Link to="/home" className="list-group-item list-group-item-action">
-          Chat
-        </Link>
-        {/* <Link to="/group" className="list-group-item list-group-item-action">
+        <NavLink
+          to="/profile"
+          className="list-group-item list-group-item-action"
+        >
+          <i class="fas fa-user-circle fa-lg" />
+        </NavLink>
+        <NavLink to="/home" className="list-group-item list-group-item-action">
+          <i class="fas fa-comment-dots fa-lg" />
+        </NavLink>
+        {/* <NavLink to="/group" className="list-group-item list-group-item-action">
           Group
-        </Link> */}
-        <Link
+        </NavLink> */}
+        <NavLink
           to="/listContact"
           className="list-group-item list-group-item-action"
         >
-          List Contacts
-        </Link>
-        <Link to="/about" className="list-group-item list-group-item-action">
-          About
-        </Link>
+          <i class="fas fa-users fa-lg" />
+        </NavLink>
+        <NavLink to="/about" className="list-group-item list-group-item-action">
+          <i class="fas fa-info-circle fa-lg" />
+        </NavLink>
         <a
           href="/"
           onClick={logOut}
-          className="mb-auto list-group-item list-group-item-action"
+          className="mb-auto list-group-item list-group-item-action mt-auto"
         >
-          Logout
+          <i class="fas fa-sign-out-alt fa-lg" />
         </a>
       </div>
     </div>
