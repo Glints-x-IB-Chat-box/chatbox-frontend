@@ -66,7 +66,7 @@ const Login = (props) => {
         </div>
         <div className="col align-self-center">
           <div className="container text-center form">
-            <h2>CHATBOXO</h2>
+            <h2>CIRCLE MESSENGER</h2>
             <AlertDismissible />
             <form onSubmit={handleSubmit}>
               <div className="form-group">

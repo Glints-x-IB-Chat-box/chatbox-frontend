@@ -28,6 +28,10 @@ body {
   width: 2.5rem;
   height: 2.5rem;
 }
+.copyright-txt {
+  position: absolute;
+  bottom: 0.5rem;
+}
 .contact-icon {
   color: rgb(214, 214, 214);
   align-self: center;
@@ -126,8 +130,9 @@ input.with-icon {
   font-weight: bold;
 }
 .preview-chat {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   float: left;
+  color: #aaaaaa;
 }
 .profile-chat h6 {
   font-size: 1.15rem !important;
@@ -145,6 +150,10 @@ input.with-icon {
 }
 .profile-icon:hover {
   color: #1f2d3c;
+}
+.scrollable-div-about {
+  height: 100vh;
+  overflow: scroll;
 }
 .scrollable-div {
   flex-grow: 1;
@@ -193,6 +202,9 @@ input.with-icon {
   }
   .section-chat-div {
     padding-left: 0.25rem;
+  }
+  .section-profile h5 {
+    font-size: 1rem;
   }
   .preview-chat {
     font-size: 0.8rem;

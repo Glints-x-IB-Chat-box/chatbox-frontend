@@ -1,61 +1,65 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import './style.css'
-import logo from './../assets/logo.png'
-import { connect } from 'react-redux'
-import { register } from './../actionCreators/LoginAction'
-import { Alert, Form } from 'react-bootstrap'
+import "./style.css";
+import logo from "./../assets/logo.png";
+import { connect } from "react-redux";
+import { register } from "./../actionCreators/LoginAction";
+import { Alert, Form } from "react-bootstrap";
 
 const Register = (props) => {
-
-  const { alert, token, error } = props
-  const history = useHistory()
+  const { alert, token, error } = props;
+  const history = useHistory();
   const [data, setData] = useState({
-    username: '',
-    email: '',
-    phoneNumber: '',
-    password: '',
-    confirmPassword: ''
-  })
+    username: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleChange = (event) => {
-    const { name, value } = event.currentTarget
+    const { name, value } = event.currentTarget;
     setData({
-      ...data, [name]: value
-    })
-    error[name] = ''
-    alert.show = false
-  }
+      ...data,
+      [name]: value,
+    });
+    error[name] = "";
+    alert.show = false;
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     // console.log(data)
-    props.register(data)
-  }
+    props.register(data);
+  };
 
   useEffect(() => {
     // console.log('token', token)
     if (token) {
-      history.push('/home')
+      history.push("/home");
     }
-  }, [token, history])
+  }, [token, history]);
 
   const AlertDismissible = () => {
     const [show, setShow] = useState(alert.show);
 
     if (show) {
       return (
-        <Alert variant={alert.variant} onClose={() => setShow(false)} dismissible>
+        <Alert
+          variant={alert.variant}
+          onClose={() => setShow(false)}
+          dismissible
+        >
           {alert.message}
         </Alert>
       );
     }
-    return (<></>);
-  }
+    return <></>;
+  };
 
   useEffect(() => {
-    console.log('error', error)
-  }, [error])
+    console.log("error", error);
+  }, [error]);
 
   return (
     <div className="bg-semidark">
@@ -63,20 +67,22 @@ const Register = (props) => {
         <div className="col align-self-center">
           <div className="container text-center">
             <img src={logo} alt="logo" />
-            <p><b>"Executive Chatbox, for Professionals.</b></p>
+            <p>
+              <b>"Executive Chatbox, for Professionals.</b>
+            </p>
           </div>
         </div>
         <div className="col align-self-center">
           <div className="container text-center form">
-            <h2>CHATBOXO</h2>
+            <h2>CIRCLE MESSENGER</h2>
             <AlertDismissible />
             <Form onSubmit={handleSubmit}>
               <Form.Group>
                 <span className="input-icon">
                   <i className="fas fa-user"></i>
                 </span>
-                <Form.Control 
-                  type="text" 
+                <Form.Control
+                  type="text"
                   className="with-icon"
                   placeholder="Username"
                   name="username"
@@ -92,9 +98,9 @@ const Register = (props) => {
                 <span className="input-icon">
                   <i className="fas fa-envelope"></i>
                 </span>
-                <Form.Control  
-                  type="email" 
-                  className="with-icon" 
+                <Form.Control
+                  type="email"
+                  className="with-icon"
                   placeholder="Email"
                   name="email"
                   onChange={handleChange}
@@ -109,9 +115,9 @@ const Register = (props) => {
                 <span className="input-icon">
                   <i className="fas fa-mobile-alt"></i>
                 </span>
-                <Form.Control  
-                  type="text" 
-                  className="with-icon" 
+                <Form.Control
+                  type="text"
+                  className="with-icon"
                   placeholder="Phone Number"
                   name="phoneNumber"
                   onChange={handleChange}
@@ -126,9 +132,9 @@ const Register = (props) => {
                 <span className="input-icon">
                   <i className="fas fa-key"></i>
                 </span>
-                <Form.Control 
-                  type="password" 
-                  className="with-icon" 
+                <Form.Control
+                  type="password"
+                  className="with-icon"
                   placeholder="Password"
                   name="password"
                   onChange={handleChange}
@@ -143,9 +149,9 @@ const Register = (props) => {
                 <span className="input-icon">
                   <i className="fas fa-key"></i>
                 </span>
-                <Form.Control  
-                  type="password" 
-                  className="with-icon" 
+                <Form.Control
+                  type="password"
+                  className="with-icon"
                   placeholder="Confirm Password"
                   name="confirmPassword"
                   onChange={handleChange}
@@ -156,10 +162,13 @@ const Register = (props) => {
                   {error.confirmPassword}
                 </Form.Control.Feedback>
               </Form.Group>
-              <button className="btn btn-light btn-block" type="submit">REGISTER</button>
+              <button className="btn btn-light btn-block" type="submit">
+                REGISTER
+              </button>
               <Link to="/login">
                 <button className="btn btn-link text-white">
-                  Already Register? Login <i className="fas fa-long-arrow-alt-right"></i>
+                  Already Register? Login{" "}
+                  <i className="fas fa-long-arrow-alt-right"></i>
                 </button>
               </Link>
             </Form>
@@ -167,18 +176,17 @@ const Register = (props) => {
         </div>
       </div>
     </div>
-
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
     alert: state.login.alert,
     token: state.login.token,
-    error: state.login.error
-  }
-}
+    error: state.login.error,
+  };
+};
 
-const mapDispatchToProps = { register }
+const mapDispatchToProps = { register };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
