@@ -255,7 +255,7 @@ const Home = (props) => {
                     <p className="my-0 ml-auto time-text">12:55</p>
                   </div>
                   <h6 className="my-0">
-                    Wait yaa, let me send you my E-invitation.
+                    Wait yaa, let me send you my E-invitationn.
                   </h6>
                 </div>
               </div>
