@@ -180,9 +180,9 @@ const Home = (props) => {
       </div>
 
       {/* <div className="col-md-8 bg-light vh-100">
-        <div className="text-center">
-          <img src={homePicture} alt="..." className="w-75" />
-          <h1>Welcome to Chatboxo!</h1>
+        <div className="text-center center-div">
+          <img src={homePicture} alt="..." className="w-50" />
+          <h1>Welcome to Circle Messenger!</h1>
           <h3>“Executive Chatbox, for Professionals.”</h3>
         </div>
       </div> */}
