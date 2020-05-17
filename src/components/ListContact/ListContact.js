@@ -1,123 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
-import profilePicture from "../../assets/Fred.png";
-import profilePicture2 from "../../assets/Intan.png";
 import homePicture from "../../assets/text.png";
+import ListContactItem from "./ItemListContact";
 
 import { connect } from "react-redux";
-import { showAddContactForm } from "../../actionCreators/ChatAction";
-import { showDeleteContactForm } from "../../actionCreators/ChatAction";
+import {
+  getDataContact,
+  showAddContactForm,
+} from "../../actionCreators/ChatAction";
 
 import AddContact from "../ListContact/AddContact";
 import DeleteContact from "../ListContact/DeleteContact";
 import "../style.css";
 
 const ListContact = (props) => {
+  useEffect(() => {
+    props.getDataContact();
+  }, [props.getDataContact]);
+
   return (
     <div className="row mx-0">
-      <div className="col-md-4 main-chat-2 vh-100">
-        <div className="d-flex d-row justify-content-center">
-          <h2 className="text-white py-2">Your Contacts</h2>
-          <p onClick={props.showAddContactForm} className="contact-icon my-0">
-            <i className="fas fa-user-plus" />
-          </p>
+      <div className="col-md-4 main-chat-2 vh-100 px-0 scrollable-div">
+        <div className="list-group">
+          <div className="list-group-item list-group-item-action py-0">
+            <div className="d-flex d-row justify-content-center mt-2">
+              <h4 className="text-white py-2">YOUR CONTACTS</h4>
+              <p
+                style={{ cursor: "pointer" }}
+                onClick={props.showAddContactForm}
+                className="contact-icon my-0"
+              >
+                <i className="fas fa-user-plus" />
+              </p>
+            </div>
+            <div className="form-group h-100  mb-4">
+              <span className="input-icon">
+                <i className="fas fa-search" />
+              </span>
+              <input
+                type="text"
+                className="form-control with-icon h6 my-0"
+                placeholder="Search Contacts..."
+              />
+            </div>
+          </div>
         </div>
-        <input
-          type="text"
-          placeholder="Search Contacts..."
-          className="w-100 h6 p-2"
-        />
 
-        <div className="pt-3">
-          <button className="w-100 text-white listcontact-chat">
-            <div className="d-flex d-row">
-              <img
-                src={profilePicture}
-                className="chat-profile-pic"
-                alt="..."
-              />
-              <div className="section-chat-div">
-                <div className="d-flex d-row">
-                  <h6 className="my-0 name-chat">River Huang</h6>
-                  <span className="dot bg-success" />
-                </div>
-                <p className="preview-chat">Dm me later, busy.</p>
-              </div>
-              <div className="d-flex d-row ml-auto">
-                <a href="/home" className="contact-icon2">
-                  <i className="fas fa-comment" />
-                </a>
-                <p
-                  onClick={props.showDeleteContactForm}
-                  className="contact-icon2 my-0"
-                >
-                  <i className="fas fa-user-times" />
-                </p>
-              </div>
-            </div>
-          </button>
-
-          <button className="w-100 text-white listcontact-chat">
-            <div className="d-flex d-row">
-              <img
-                src={profilePicture}
-                className="chat-profile-pic"
-                alt="..."
-              />
-              <div className="section-chat-div">
-                <div className="d-flex d-row">
-                  <h6 className="my-0 name-chat">Ahmad Fakhrozy</h6>
-                  <span className="dot bg-danger" />
-                </div>
-                <p className="preview-chat">Available</p>
-              </div>
-              <div className="d-flex d-row ml-auto">
-                <a href="/home" className="contact-icon2">
-                  <i className="fas fa-comment" />
-                </a>
-                <p
-                  onClick={props.showDeleteContactForm}
-                  className="contact-icon2 my-0"
-                >
-                  <i className="fas fa-user-times" />
-                </p>
-              </div>
-            </div>
-          </button>
-
-          <button className="w-100 text-white listcontact-chat">
-            <div className="d-flex d-row">
-              <img
-                src={profilePicture2}
-                className="chat-profile-pic"
-                alt="..."
-              />
-              <div className="section-chat-div">
-                <div className="d-flex d-row">
-                  <h6 className="my-0 name-chat">Intan Adela</h6>
-                  <span className="dot bg-success" />
-                </div>
-                <p className="preview-chat">Trying this chatboxo is Fun!</p>
-              </div>
-              <div className="d-flex d-row ml-auto">
-                <a href="/home" className="contact-icon2">
-                  <i className="fas fa-comment" />
-                </a>
-                <p
-                  onClick={props.showDeleteContactForm}
-                  className="contact-icon2 my-0"
-                >
-                  <i className="fas fa-user-times" />
-                </p>
-              </div>
-            </div>
-          </button>
+        <div>
+          {props.dataContact.map((item, index) => {
+            // console.log(props.dataContact);
+            return <ListContactItem key={index} dataContacts={item} />;
+          })}
         </div>
       </div>
 
       <div className="col-md-8 bg-light vh-100">
-        <div className="text-center">
-          <img src={homePicture} alt="..." className="w-75" />
+        <div className="text-center center-div">
+          <img src={homePicture} alt="..." className="w-50" />
           <h1>This is your List Contact</h1>
           <h3>"You can modify your list contact here."</h3>
         </div>
@@ -127,8 +66,14 @@ const ListContact = (props) => {
     </div>
   );
 };
-const mapDispatchToProps = {
-  showAddContactForm,
-  showDeleteContactForm,
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return {
+    dataContact: state.reducersChat.dataContact,
+  };
 };
-export default connect(null, mapDispatchToProps)(ListContact);
+const mapDispatchToProps = {
+  getDataContact,
+  showAddContactForm,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListContact);

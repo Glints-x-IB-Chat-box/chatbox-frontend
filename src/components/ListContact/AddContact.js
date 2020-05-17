@@ -5,13 +5,14 @@ import { connect } from "react-redux";
 import {
   hideAddContactForm,
   getDataUser,
+  AddContacts,
 } from "../../actionCreators/ChatAction";
 
 const AddContact = (props) => {
   const [data, setData] = useState({
     username: "",
   });
-  console.log(data);
+  // console.log(data);
 
   const handleChange = (event) => {
     let { name, value } = event.currentTarget;
@@ -54,17 +55,25 @@ const AddContact = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props.dataContact.map((item, index) => {
-              // console.log(props.dataContact);
+            {props.dataUser.map((item, index) => {
+              // console.log(props.dataUser);
               return (
                 <tr key={index}>
-                  <th scope="row">{index}</th>
+                  <th scope="row">{1 + index}</th>
                   <td>{item.username}</td>
                   <td>
                     <img src={item.image} className="img-search" alt="" />
                   </td>
                   <td>
-                    <p className="my-0 contact-icon3">
+                    <p
+                      onClick={(event) => {
+                        props.AddContacts(item._id);
+                        console.log("success add contact", item._id);
+                        // RUBAH ALERT SEPERTI NOTIF DI REGISTER
+                        window.alert(`You have added "${item.username}"`);
+                      }}
+                      className="my-0 contact-icon3"
+                    >
                       <i className="fas fa-user-plus" />
                     </p>
                   </td>
@@ -79,16 +88,17 @@ const AddContact = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  //   console.log(state);
+  // console.log(state);
   return {
     show: state.reducersChat.isShowAdd,
-    dataContact: state.reducersChat.dataContact,
+    dataUser: state.reducersChat.dataUser,
   };
 };
 
 const mapDispatchToProps = {
   hideAddContactForm,
   getDataUser,
+  AddContacts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddContact);

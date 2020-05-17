@@ -36,7 +36,7 @@ const Profile = (props) => {
 
           <button
             onClick={showFormImage}
-            className="w-100 text-white section-chat"
+            className="w-100 text-white section-profile mb-2"
           >
             <div className="d-flex d-row justify-content-center">
               <p className="contact-icon my-0">
@@ -49,29 +49,35 @@ const Profile = (props) => {
             </div>
           </button>
 
-          <button className="w-100 profile-chat mt-2">
+          <button className="w-75 profile-chat mt-2 pb-2 pl-0">
             <div className="d-flex d-row">
               <div>
-                <h5 className="text-black font-weight-bold pt-2 pb-2">
+                <h6 className="text-black font-weight-bold pt-2 pb-2 my-0">
                   <u>Your Name</u>
-                </h5>
-                <h5 className="pl-4">Chen Frederick</h5>
+                </h6>
+                <h6 className="my-0 pl-4 ">Chen Frederick</h6>
               </div>
-              <p onClick={showFormEdit} className="profile-icon ml-auto mr-3">
+              <p
+                onClick={showFormEdit}
+                className="profile-icon ml-auto mr-3 my-0"
+              >
                 <i className="fas fa-pen-square" />
               </p>
             </div>
           </button>
 
-          <button className="w-100 profile-chat mt-4 mb-4">
-            <div className="d-flex d-row">
+          <button className="w-75 profile-chat mt-4 pb-2 mb-4 pl-0">
+            <div className="d-flex d-row my-1">
               <div>
-                <h5 className="text-black font-weight-bold pt-2 pb-2">
+                <h6 className="text-black font-weight-bold pt-2 pb-2 my-0">
                   <u>About</u>
-                </h5>
-                <h5 className="pl-4">Available</h5>
+                </h6>
+                <h6 className="pl-4 my-0">Available</h6>
               </div>
-              <p onClick={showFormAbout} className="profile-icon ml-auto mr-3">
+              <p
+                onClick={showFormAbout}
+                className="profile-icon ml-auto mr-3 my-0"
+              >
                 <i className="fas fa-pen-square" />
               </p>
             </div>
@@ -80,9 +86,9 @@ const Profile = (props) => {
           <p className="mt-auto text-white">© ChatBoxo. All Rights Reserved</p>
         </div>
       </div>
-      <div className="col-md-8 bg-secondary text-white vh-100">
-        <div className="text-center">
-          <img src={profilePicture} alt="..." className="w-75" />
+      <div className="col-md-8 vh-100">
+        <div className="text-center center-div">
+          <img src={profilePicture} alt="..." className="w-50" />
           <h1>This is your Profile</h1>
           <h3>"You can modify your Profile details here."</h3>
         </div>
