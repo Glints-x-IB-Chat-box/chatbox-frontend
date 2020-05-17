@@ -23,7 +23,7 @@ export default function About() {
             Circle Messenger is made for Business. We are here to help you send
             your messages inside your own social circle. Whereever you are and
             whenever you want. Share the love and purpose to your friends,
-            family, and mates over the world!a
+            family, and mates over the world!
           </h6>
           <div className="d-flex justify-content-center">
             <p className="text-white copyright-txt">
