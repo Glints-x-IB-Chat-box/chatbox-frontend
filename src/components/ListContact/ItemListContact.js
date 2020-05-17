@@ -9,12 +9,12 @@ const itemListContact = (props) => {
     props.showDeleteContactForm(props.dataContacts);
   };
   return (
-    <div className="list-group-item list-group-item-action active py-2 listcontact-chat">
+    <div className="list-group-item list-group-item-action active py-2 px-1 listcontact-chat">
       <button className="w-100 text-white listcontact-chat">
         <div className="d-flex d-row">
           <img
             src={props.dataContacts.image}
-            className="chat-profile-pic"
+            className="chat-profile-pic rounded-circle"
             alt="..."
           />
           <div className="section-chat-div">
@@ -22,7 +22,7 @@ const itemListContact = (props) => {
               <h6 className="my-0 name-chat">{props.dataContacts.username}</h6>
               <span className="dot bg-success" />
             </div>
-            <p className="preview-chat">{props.dataContacts.about}</p>
+            <p className="preview-chat my-0">{props.dataContacts.about}</p>
           </div>
           <div className="d-flex d-row ml-auto">
             <a href="/home" className="contact-icon2">

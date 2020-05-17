@@ -16,7 +16,7 @@ import Sidebar from "./components/Home/Sidebar";
 import Profile from "./components/Profile/Profile";
 import ListContact from "./components/ListContact/ListContact";
 import About from "./components/About/About";
-import Group from "./components/Group/Group";
+// import Group from "./components/Group/Group";
 import Logout from "./components/Logout";
 
 function App(props) {

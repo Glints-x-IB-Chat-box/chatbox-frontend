@@ -32,7 +32,7 @@ const Login = (props) => {
   useEffect(() => {
     // console.log('token', token)
     if (token) {
-      history.push("/home");
+      history.push("/");
     }
   }, [token, history]);
 

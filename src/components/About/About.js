@@ -1,6 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import Ozy from "../../assets/ozy.jpg";
+import River from "../../assets/river.jpg";
 import Fred from "../../assets/fred.jpeg";
 import logoPicture from "../../assets/logo.png";
 import "../style.css";
@@ -88,7 +89,7 @@ export default function About() {
                     </p>
                     <a
                       target="blank"
-                      href="https://www.linkedin.com/in/chen-frederick-1324301a8/"
+                      href="https://www.linkedin.com/in/ahmad-fakhrozy-9069741a1/"
                       className="btn btn-light text-dark"
                     >
                       Check My LinkedIn!
@@ -102,20 +103,16 @@ export default function About() {
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
                   <img
-                    src={Fred}
+                    src={River}
                     className="card-img-top w-75 mx-auto d-block pt-4 rounded-circle"
                     alt="..."
                   />
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">River Huang</h5>
-                    <p className="card-text">
-                      Hello! I'm Frederick, creating solutions for problems in
-                      this 4.0 Era is a great thing to do for me, why not we
-                      greet each other?
-                    </p>
+                    <p className="card-text">Santuyyyyyyyy...</p>
                     <a
                       target="blank"
-                      href="https://www.linkedin.com/in/chen-frederick-1324301a8/"
+                      href="https://www.linkedin.com/in/river-huang-43a979192/"
                       className="btn btn-light text-dark"
                     >
                       Check My LinkedIn!
@@ -140,7 +137,7 @@ export default function About() {
                     </p>
                     <a
                       target="blank"
-                      href="https://www.linkedin.com/in/chen-frederick-1324301a8/"
+                      href="https://www.linkedin.com/in/intanadela/"
                       className="btn btn-light text-dark"
                     >
                       Check My LinkedIn!
