@@ -12,7 +12,6 @@ const DeleteContact = (props) => {
   const handleDelete = () => {
     console.log(props.dataDelete);
     props.deleteContacts(props.dataDelete);
-    window.alert(`Deleted Contact ${props.dataDelete.username}`);
   };
   return (
     <Modal show={props.show} onHide={props.hideDeleteContactForm}>

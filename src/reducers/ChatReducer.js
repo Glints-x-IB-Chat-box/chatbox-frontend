@@ -14,11 +14,11 @@ const ChatReducer = (state = initialState, action) => {
     case "GET_DATA_USER":
       return { ...state, dataUser: action.payload };
     case "DELETE_DATA_CONTACT":
-      const dataFiltered = state.data.filter((item) => {
-        if (item.id === action.payload._id) return false;
+      const dataFiltered = state.dataContact.filter((item) => {
+        if (item._id === action.payload) return false;
         return true;
       });
-      return { ...state, data: dataFiltered };
+      return { ...state, dataContact: dataFiltered };
     case "GET_DATA_CONTACT":
       return { ...state, dataContact: action.payload };
     case "ADD_DATA_CONTACT":

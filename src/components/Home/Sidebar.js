@@ -10,14 +10,15 @@ export default function Sidebar() {
   return (
     <div style={{ width: "75px", height: "100vh", backgroundColor: "#1f2d3c" }}>
       <div className="list-group">
+        <NavLink to="/" className="list-group-item list-group-item-action">
+          <i className="fas fa-comment-dots fa-lg" />
+        </NavLink>
+
         <NavLink
           to="/profile"
           className="list-group-item list-group-item-action"
         >
           <i className="fas fa-user-circle fa-lg" />
-        </NavLink>
-        <NavLink to="/home" className="list-group-item list-group-item-action">
-          <i className="fas fa-comment-dots fa-lg" />
         </NavLink>
         {/* <NavLink to="/group" className="list-group-item list-group-item-action">
           Group

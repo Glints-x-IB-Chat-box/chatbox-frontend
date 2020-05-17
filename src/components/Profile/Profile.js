@@ -83,7 +83,11 @@ const Profile = (props) => {
             </div>
           </button>
 
-          <p className="mt-auto text-white">© ChatBoxo. All Rights Reserved</p>
+          <div className="d-flex justify-content-center">
+            <p className="text-white copyright-txt">
+              © CircleMessenger. All Rights Reserved
+            </p>
+          </div>
         </div>
       </div>
       <div className="col-md-8 vh-100">

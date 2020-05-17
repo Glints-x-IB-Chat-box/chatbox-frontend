@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
-// import { Link } from "react-router-dom";
-import homePicture from "../../assets/text.png";
+// import homePicture from "../../assets/default.jpg";
+import profilePicture from "../../assets/default.jpg";
+import user1 from "../../assets/ozy.png";
+import user2 from "../../assets/Fred.png";
+import user3 from "../../assets/Intan.png";
 import "../style.css";
 
 import { connect } from "react-redux";
@@ -21,8 +24,11 @@ const Home = (props) => {
     <div className="row mx-0">
       <div className="col-md-4 vh-100 px-0 bg-mainchat border-right-3 border-white scrollable-div">
         <div className="list-group">
-          <div className="list-group-item list-group-item-action d-flex justify-content-center py-0">
-            <div className="form-group h-100 my-0 mt-4 mb-4">
+          <div className="list-group-item list-group-item-action py-0">
+            <div className="text-center mt-2">
+              <h4 className="text-white py-2">CIRCLE MESSENGER</h4>
+            </div>
+            <div className="form-group h-100  mb-4">
               <span className="input-icon">
                 <i className="fas fa-search" />
               </span>
@@ -35,7 +41,7 @@ const Home = (props) => {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           {props.dataContact.map((item, index) => {
             console.log(props.dataContact);
             return (
@@ -55,6 +61,9 @@ const Home = (props) => {
                       <span className="dot bg-success" />
                     </div>
                     <p className="preview-chat">{item.about}</p>
+                    <p className="preview-chat my-0 text-secondary">
+                      Hi! I'm new to Circle Messenger
+                    </p>
                   </div>
                   <p className="ml-auto d-flex align-items-center time-text">
                     12.50
@@ -63,6 +72,110 @@ const Home = (props) => {
               </div>
             );
           })}
+        </div> */}
+        <div className="list-group-item list-group-item-action active section-chat py-3">
+          <div className="d-flex d-row">
+            <img
+              src={user1}
+              className="chat-profile-pic rounded-circle"
+              alt="..."
+            />
+            <div className="section-chat-div align-self-center">
+              <div className="d-flex d-row">
+                <h6 className="my-0 name-chat">Frederick88</h6>
+                <span className="dot bg-success" />
+              </div>
+              {/* <p className="preview-chat">{item.about}</p> */}
+              <p className="preview-chat my-0">
+                Wait yaa, let me send you my E-invitation.
+              </p>
+            </div>
+            <p className="ml-auto d-flex align-items-center time-text">12.55</p>
+          </div>
+        </div>
+
+        <div className="list-group-item list-group-item-action active section-chat py-3">
+          <div className="d-flex d-row">
+            <img
+              src={user3}
+              className="chat-profile-pic rounded-circle"
+              alt="..."
+            />
+            <div className="section-chat-div align-self-center">
+              <div className="d-flex d-row">
+                <h6 className="my-0 name-chat">Carol Hughes</h6>
+                <span className="dot bg-success" />
+              </div>
+              {/* <p className="preview-chat">{item.about}</p> */}
+              <p className="preview-chat my-0">
+                Okay honey, let's go dinner tonight.
+              </p>
+            </div>
+            <p className="ml-auto d-flex align-items-center time-text">10.08</p>
+          </div>
+        </div>
+
+        <div className="list-group-item list-group-item-action active section-chat py-3">
+          <div className="d-flex d-row">
+            <img
+              src={user2}
+              className="chat-profile-pic rounded-circle"
+              alt="..."
+            />
+            <div className="section-chat-div align-self-center">
+              <div className="d-flex d-row">
+                <h6 className="my-0 name-chat">Michael Tamsil</h6>
+                <span className="dot bg-success" />
+              </div>
+              {/* <p className="preview-chat">{item.about}</p> */}
+              <p className="preview-chat my-0">
+                Yep, give your best and get better!
+              </p>
+            </div>
+            <p className="ml-auto d-flex align-items-center time-text">08.12</p>
+          </div>
+        </div>
+
+        <div className="list-group-item list-group-item-action active section-chat py-3">
+          <div className="d-flex d-row">
+            <img
+              src={profilePicture}
+              className="chat-profile-pic rounded-circle"
+              alt="..."
+            />
+            <div className="section-chat-div align-self-center">
+              <div className="d-flex d-row">
+                <h6 className="my-0 name-chat">Clarissa Gomez</h6>
+                <span className="dot bg-success" />
+              </div>
+              {/* <p className="preview-chat">{item.about}</p> */}
+              <p className="preview-chat my-0">See you tomorrow!</p>
+            </div>
+            <p className="ml-auto d-flex align-items-center time-text">
+              Yesterday
+            </p>
+          </div>
+        </div>
+
+        <div className="list-group-item list-group-item-action active section-chat py-3">
+          <div className="d-flex d-row">
+            <img
+              src={profilePicture}
+              className="chat-profile-pic rounded-circle"
+              alt="..."
+            />
+            <div className="section-chat-div align-self-center">
+              <div className="d-flex d-row">
+                <h6 className="my-0 name-chat">billdelvin</h6>
+                <span className="dot bg-success" />
+              </div>
+              {/* <p className="preview-chat">{item.about}</p> */}
+              <p className="preview-chat my-0">DO BIG GO BIG.</p>
+            </div>
+            <p className="ml-auto d-flex align-items-center time-text">
+              Yesterday
+            </p>
+          </div>
         </div>
       </div>
 
@@ -78,7 +191,7 @@ const Home = (props) => {
         <div className="bg-main support-scrollable-div">
           <div className="bg-light d-flex py-2">
             <img
-              src={homePicture}
+              src={user1}
               alt="..."
               className="rounded-circle img-chat ml-3"
             />
@@ -89,7 +202,7 @@ const Home = (props) => {
 
           <div className="container pt-3 scrollable-div">
             <h6 className="font-weight-bold text-center pb-1">
-              Thursday,14/05/20
+              Friday,15/05/20
             </h6>
             <div className="row justify-content-start pt-2">
               <div className="col-md-6">
@@ -99,9 +212,22 @@ const Home = (props) => {
                     <p className="my-0 ml-auto time-text">12:50</p>
                   </div>
                   <h6 className="my-0">
-                    Lorem ipsum dolor sit amet, consecte tur adipiscing elit,
-                    sed do eiusmod t empor incididunt ut labore et dolore magna
-                    aliqua.
+                    Hey Mate! Long time no see broo how are you going? I bet
+                    you're doing great in your career yeahh.
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-start pt-2">
+              <div className="col-md-6">
+                <div className="bg-light p-3">
+                  <div className="d-flex">
+                    <h6 className="font-weight-bold">Frederick88</h6>
+                    <p className="my-0 ml-auto time-text">12:50</p>
+                  </div>
+                  <h6 className="my-0">
+                    I want to invite you to my Wedding Party, come and lets
+                    celebrate my big day with me brother.
                   </h6>
                 </div>
               </div>
@@ -114,9 +240,22 @@ const Home = (props) => {
                     <p className="my-0 ml-auto time-text">12:51</p>
                   </div>
                   <h6 className="my-0">
-                    Lorem ipsum dolor sit amet, consecte tur adipiscing elit,
-                    sed do eiusmod t empor incididunt ut labore et dolore magna
-                    aliqua.
+                    Hey Fred! I'm doing great here, just promoted to a higher
+                    division hehhe... Sure thanks for invited me broo, when it
+                    will be held?
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-start pt-2">
+              <div className="col-md-6">
+                <div className="bg-light p-3">
+                  <div className="d-flex">
+                    <h6 className="font-weight-bold">Frederick88</h6>
+                    <p className="my-0 ml-auto time-text">12:55</p>
+                  </div>
+                  <h6 className="my-0">
+                    Wait yaa, let me send you my E-invitation.
                   </h6>
                 </div>
               </div>
@@ -129,9 +268,16 @@ const Home = (props) => {
               placeholder="Input your message here..."
               className="input-chat"
             />
-            <i className="far fa-grin-alt h3 px-3 align-self-center" />
-            <i className="fas fa-paperclip h3 align-self-center" />
-            <i className="fas fa-arrow-circle-right h3 px-3 align-self-center" />
+
+            <p className="align-self-center my-0">
+              <i className="far fa-grin-alt h3 px-3 " />
+            </p>
+            <p className="align-self-center my-0">
+              <i className="fas fa-paperclip h3 " />
+            </p>
+            <p className="align-self-center my-0">
+              <i className="fas fa-arrow-circle-right h3 px-3 " />
+            </p>
           </div>
         </div>
       </div>
