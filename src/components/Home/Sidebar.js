@@ -16,7 +16,7 @@ export default function Sidebar() {
         >
           <i className="fas fa-user-circle fa-lg" />
         </NavLink>
-        <NavLink to="/home" className="list-group-item list-group-item-action">
+        <NavLink to="/" className="list-group-item list-group-item-action">
           <i className="fas fa-comment-dots fa-lg" />
         </NavLink>
         {/* <NavLink to="/group" className="list-group-item list-group-item-action">
