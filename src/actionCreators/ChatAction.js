@@ -43,9 +43,12 @@ export const AddContacts = (data) => {
         type: "ADD_DATA_CONTACT",
         payload: response.data,
       });
+      dispatch({
+        type: "HIDE_ADDCONTACT_FORM",
+      });
       console.log(response.data);
     } catch (error) {
-      window.alert(error);
+      window.alert("Can't add a same user");
     }
   };
 };
@@ -72,18 +75,18 @@ export const getDataContact = () => {
 
 export const deleteContacts = (data) => {
   const token = localStorage.getItem("token");
-  console.log(data);
+  console.log(token);
 
   return async (dispatch) => {
     try {
-      await axios.delete(`${url}/contacts/delete/${data._id}`, data, {
+      await axios.delete(`${url}/contacts/delete/${data._id}`, {
         headers: {
           "x-access-token": token,
         },
       });
       dispatch({
         type: "DELETE_DATA_CONTACT",
-        payload: data,
+        payload: data._id,
       });
       dispatch({
         type: "HIDE_DELETECONTACT_FORM",
