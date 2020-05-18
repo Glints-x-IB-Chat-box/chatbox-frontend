@@ -90,8 +90,8 @@ const AddContact = (props) => {
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    show: state.reducersChat.isShowAdd,
-    dataUser: state.reducersChat.dataUser,
+    show: state.mainReducer.isShowAdd,
+    dataUser: state.mainReducer.dataUser,
   };
 };
 

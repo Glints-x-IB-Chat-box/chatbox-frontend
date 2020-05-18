@@ -9,7 +9,7 @@ const initialState = {
   isShowPictureForm: false,
 };
 
-const ChatReducer = (state = initialState, action) => {
+const MainReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_DATA_USER":
       return { ...state, dataUser: action.payload };
@@ -48,4 +48,4 @@ const ChatReducer = (state = initialState, action) => {
   }
 };
 
-export default ChatReducer;
+export default MainReducer;

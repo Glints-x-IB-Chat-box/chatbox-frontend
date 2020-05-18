@@ -31,7 +31,7 @@ const EditPicture = (props) => {
 const mapStateToProps = (state) => {
   //   console.log(state);
   return {
-    show: state.reducersChat.isShowPictureForm,
+    show: state.mainReducer.isShowPictureForm,
   };
 };
 

@@ -52,7 +52,7 @@ const EditName = (props) => {
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    show: state.reducersChat.isShowEdit,
+    show: state.mainReducer.isShowEdit,
   };
 };
 

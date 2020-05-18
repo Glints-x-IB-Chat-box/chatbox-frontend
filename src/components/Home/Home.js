@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import homePicture from "../../assets/default.jpg";
+import homePicture from "../../assets/text2.png";
 import profilePicture from "../../assets/default.jpg";
 import user1 from "../../assets/ozy.png";
 import user2 from "../../assets/Fred.png";
@@ -179,15 +179,15 @@ const Home = (props) => {
         </div>
       </div>
 
-      {/* <div className="col-md-8 bg-light vh-100">
+      <div className="col-md-8 bg-light vh-100">
         <div className="text-center center-div">
           <img src={homePicture} alt="..." className="w-50" />
           <h1>Welcome to Circle Messenger!</h1>
           <h3>“Executive Chatbox, for Professionals.”</h3>
         </div>
-      </div> */}
+      </div>
 
-      <div className="col-md-8 px-0">
+      {/* <div className="col-md-8 px-0">
         <div className="bg-main support-scrollable-div">
           <div className="bg-light d-flex py-2">
             <img
@@ -280,14 +280,14 @@ const Home = (props) => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    dataContact: state.reducersChat.dataContact,
+    dataContact: state.mainReducer.dataContact,
   };
 };
 

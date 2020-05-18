@@ -52,7 +52,7 @@ const EditAbout = (props) => {
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    show: state.reducersChat.isShowAbout,
+    show: state.mainReducer.isShowAbout,
   };
 };
 

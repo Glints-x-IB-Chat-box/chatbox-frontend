@@ -34,10 +34,10 @@ const DeleteContact = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.reducersChat.dataDelete);
+  console.log(state.mainReducer.dataDelete);
   return {
-    show: state.reducersChat.isShowDelete,
-    dataDelete: state.reducersChat.dataDelete,
+    show: state.mainReducer.isShowDelete,
+    dataDelete: state.mainReducer.dataDelete,
   };
 };
 

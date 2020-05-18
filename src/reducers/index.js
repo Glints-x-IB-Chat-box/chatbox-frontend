@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 
-import reducersChat from "./ChatReducer";
+import mainReducer from "./MainReducer";
 import login from "./LoginReducer";
 
 const combineReducer = combineReducers({
-  reducersChat,
+  mainReducer,
   login,
 });
 
