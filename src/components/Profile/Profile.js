@@ -4,9 +4,9 @@ import profilePicture from "../../assets/profile.png";
 import logoPicture from "../../assets/ozy.png";
 
 import { connect } from "react-redux";
-import { showEditForm } from "../../actionCreators/ChatAction";
-import { showAboutForm } from "../../actionCreators/ChatAction";
-import { showChangeImageForm } from "../../actionCreators/ChatAction";
+import { showEditForm } from "../../actionCreators/MainAction";
+import { showAboutForm } from "../../actionCreators/MainAction";
+import { showChangeImageForm } from "../../actionCreators/MainAction";
 
 import Edit from "./EditName";
 import AboutForm from "./EditAbout";

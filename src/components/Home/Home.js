@@ -7,7 +7,7 @@ import user3 from "../../assets/Intan.png";
 import "../style.css";
 
 import { connect } from "react-redux";
-import { getDataContact } from "../../actionCreators/ChatAction";
+import { getDataContact } from "../../actionCreators/MainAction";
 
 const Home = (props) => {
   // const iconSearch = <i className="fas fa-search"></i>;

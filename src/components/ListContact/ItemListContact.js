@@ -2,7 +2,7 @@ import React from "react";
 import "../style.css";
 import { connect } from "react-redux";
 
-import { showDeleteContactForm } from "../../actionCreators/ChatAction";
+import { showDeleteContactForm } from "../../actionCreators/MainAction";
 
 const itemListContact = (props) => {
   const showFormDelete = () => {

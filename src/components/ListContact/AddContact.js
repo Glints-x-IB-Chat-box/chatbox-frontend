@@ -6,7 +6,7 @@ import {
   hideAddContactForm,
   getDataUser,
   AddContacts,
-} from "../../actionCreators/ChatAction";
+} from "../../actionCreators/MainAction";
 
 const AddContact = (props) => {
   const [data, setData] = useState({

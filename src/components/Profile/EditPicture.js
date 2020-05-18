@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 import { connect } from "react-redux";
 
-import { hideChangeImageForm } from "../../actionCreators/ChatAction";
+import { hideChangeImageForm } from "../../actionCreators/MainAction";
 
 const EditPicture = (props) => {
   return (

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import {
   hideDeleteContactForm,
   deleteContacts,
-} from "../../actionCreators/ChatAction";
+} from "../../actionCreators/MainAction";
 
 const DeleteContact = (props) => {
   const handleDelete = () => {

@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 import { connect } from "react-redux";
 
-import { hideAboutForm } from "../../actionCreators/ChatAction";
+import { hideAboutForm } from "../../actionCreators/MainAction";
 
 const EditAbout = (props) => {
   const [data, setData] = useState({

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import {
   getDataContact,
   showAddContactForm,
-} from "../../actionCreators/ChatAction";
+} from "../../actionCreators/MainAction";
 
 import AddContact from "../ListContact/AddContact";
 import DeleteContact from "../ListContact/DeleteContact";
