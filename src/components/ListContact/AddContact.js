@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import {
@@ -9,10 +9,29 @@ import {
 } from "../../actionCreators/MainAction";
 
 const AddContact = (props) => {
+  const [show, setShow] = useState(false);
   const [data, setData] = useState({
     username: "",
   });
-  // console.log(data);
+
+  const handleAdd = (data) => {
+    props.AddContacts(data._id);
+    setShow(true);
+    // window.alert(`You have added "${data.username}"`);
+  };
+
+  const AlertDismissible = () => {
+    if (show) {
+      return (
+        <Alert variant="success">
+          <Alert.Heading className="h5">
+            You've Successfully added an User!
+          </Alert.Heading>
+        </Alert>
+      );
+    }
+    return <></>;
+  };
 
   const handleChange = (event) => {
     let { name, value } = event.currentTarget;
@@ -33,6 +52,7 @@ const AddContact = (props) => {
         <Modal.Title>Search Your Friend</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <AlertDismissible />
         <div className="form-group">
           <label htmlFor="title">Username</label>
           <input
@@ -66,11 +86,8 @@ const AddContact = (props) => {
                   </td>
                   <td>
                     <p
-                      onClick={(event) => {
-                        props.AddContacts(item._id);
-                        console.log("success add contact", item._id);
-                        // RUBAH ALERT SEPERTI NOTIF DI REGISTER
-                        window.alert(`You have added "${item.username}"`);
+                      onClick={() => {
+                        handleAdd(item);
                       }}
                       className="my-0 contact-icon3"
                     >

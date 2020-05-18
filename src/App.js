@@ -22,16 +22,12 @@ import Logout from "./components/Logout";
 function App(props) {
   return (
     <Router>
-      <Switch>
-        <div className="d-flex flex-row">
-          <div className="flex-grow-2">
-            <Sidebar />
-          </div>
+      <div className="d-flex flex-row">
+        <div className="flex-grow-2">
+          <Sidebar />
+        </div>
+        <Switch>
           <div className="flex-fill">
-            {/* <Route path="/home">
-              <Home />
-            </Route> */}
-
             <Route path="/profile">
               {props.token ? <Profile /> : <Redirect push to="/login" />}
             </Route>
@@ -39,10 +35,6 @@ function App(props) {
             <Route path="/listContact">
               {props.token ? <ListContact /> : <Redirect push to="/login" />}
             </Route>
-
-            {/* <Route path="/group">
-            {props.token ? <Group /> : <Redirect push to="/login" />}
-            </Route> */}
 
             <Route path="/about">
               {props.token ? <About /> : <Redirect push to="/login" />}
@@ -64,8 +56,8 @@ function App(props) {
               {props.token ? <Home /> : <Redirect push to="/login" />}
             </Route>
           </div>
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </Router>
   );
 }

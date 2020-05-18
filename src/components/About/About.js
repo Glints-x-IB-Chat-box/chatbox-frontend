@@ -1,6 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import Ozy from "../../assets/ozy.jpg";
+import Intan from "../../assets/intan.jpg";
 import River from "../../assets/river.jpg";
 import Fred from "../../assets/fred.jpeg";
 import logoPicture from "../../assets/logo.png";
@@ -124,16 +125,15 @@ export default function About() {
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
                   <img
-                    src={Ozy}
+                    src={Intan}
                     className="card-img-top w-75 mx-auto d-block pt-4 rounded-circle"
                     alt="..."
                   />
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">Intan Adela</h5>
                     <p className="card-text">
-                      Hello! I'm Frederick, creating solutions for problems in
-                      this 4.0 Era is a great thing to do for me, why not we
-                      greet each other?
+                      Hi! I'm Intan Adela, student of Glints Academy. Leave a
+                      job opportunity in my LinkedIn's inbox.
                     </p>
                     <a
                       target="blank"
