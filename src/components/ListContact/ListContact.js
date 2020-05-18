@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import {
   getDataContact,
   showAddContactForm,
-} from "../../actionCreators/ChatAction";
+} from "../../actionCreators/MainAction";
 
 import AddContact from "../ListContact/AddContact";
 import DeleteContact from "../ListContact/DeleteContact";
@@ -69,7 +69,7 @@ const ListContact = (props) => {
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    dataContact: state.reducersChat.dataContact,
+    dataContact: state.mainReducer.dataContact,
   };
 };
 const mapDispatchToProps = {
