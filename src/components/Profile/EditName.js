@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 import { connect } from "react-redux";
 
-import { hideEditForm } from "../../actionCreators/ChatAction";
+import { hideEditForm } from "../../actionCreators/MainAction";
 
 const EditName = (props) => {
   const [data, setData] = useState({
@@ -52,7 +52,7 @@ const EditName = (props) => {
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    show: state.reducersChat.isShowEdit,
+    show: state.mainReducer.isShowEdit,
   };
 };
 

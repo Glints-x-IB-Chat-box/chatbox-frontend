@@ -4,9 +4,9 @@ import profilePicture from "../../assets/profile.png";
 import logoPicture from "../../assets/ozy.png";
 
 import { connect } from "react-redux";
-import { showEditForm } from "../../actionCreators/ChatAction";
-import { showAboutForm } from "../../actionCreators/ChatAction";
-import { showChangeImageForm } from "../../actionCreators/ChatAction";
+import { showEditForm } from "../../actionCreators/MainAction";
+import { showAboutForm } from "../../actionCreators/MainAction";
+import { showChangeImageForm } from "../../actionCreators/MainAction";
 
 import Edit from "./EditName";
 import AboutForm from "./EditAbout";
@@ -83,7 +83,11 @@ const Profile = (props) => {
             </div>
           </button>
 
-          <p className="mt-auto text-white">© ChatBoxo. All Rights Reserved</p>
+          <div className="d-flex justify-content-center">
+            <p className="text-white copyright-txt">
+              © CircleMessenger. All Rights Reserved
+            </p>
+          </div>
         </div>
       </div>
       <div className="col-md-8 vh-100">

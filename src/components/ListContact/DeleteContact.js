@@ -6,13 +6,12 @@ import { connect } from "react-redux";
 import {
   hideDeleteContactForm,
   deleteContacts,
-} from "../../actionCreators/ChatAction";
+} from "../../actionCreators/MainAction";
 
 const DeleteContact = (props) => {
   const handleDelete = () => {
     console.log(props.dataDelete);
     props.deleteContacts(props.dataDelete);
-    window.alert(`Deleted Contact ${props.dataDelete.username}`);
   };
   return (
     <Modal show={props.show} onHide={props.hideDeleteContactForm}>
@@ -35,10 +34,10 @@ const DeleteContact = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.reducersChat.dataDelete);
+  // console.log(state.mainReducer.dataDelete);
   return {
-    show: state.reducersChat.isShowDelete,
-    dataDelete: state.reducersChat.dataDelete,
+    show: state.mainReducer.isShowDelete,
+    dataDelete: state.mainReducer.dataDelete,
   };
 };
 

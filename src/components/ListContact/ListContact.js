@@ -2,21 +2,23 @@ import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
 import homePicture from "../../assets/text.png";
 import ListContactItem from "./ItemListContact";
-
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   getDataContact,
   showAddContactForm,
-} from "../../actionCreators/ChatAction";
+} from "../../actionCreators/MainAction";
 
 import AddContact from "../ListContact/AddContact";
 import DeleteContact from "../ListContact/DeleteContact";
 import "../style.css";
 
 const ListContact = (props) => {
+  const history = useHistory();
+
   useEffect(() => {
     props.getDataContact();
-  }, [props.getDataContact]);
+  }, []);
 
   return (
     <div className="row mx-0">
@@ -49,7 +51,13 @@ const ListContact = (props) => {
         <div>
           {props.dataContact.map((item, index) => {
             // console.log(props.dataContact);
-            return <ListContactItem key={index} dataContacts={item} />;
+            return (
+              <ListContactItem
+                key={index}
+                dataContacts={item}
+                history={history}
+              />
+            );
           })}
         </div>
       </div>
@@ -67,9 +75,9 @@ const ListContact = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  // console.log(state);
+  console.log(state);
   return {
-    dataContact: state.reducersChat.dataContact,
+    dataContact: state.mainReducer.dataContact,
   };
 };
 const mapDispatchToProps = {

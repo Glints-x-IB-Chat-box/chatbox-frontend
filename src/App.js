@@ -1,59 +1,71 @@
 import React from "react";
-import { createStore, applyMiddleware } from "redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import reducers from "./reducers";
 
-// import { combineReducers } from "redux";
-// import reducersChat from "./reducers/ChatReducer";
-// import reducersLogin from "./reducers/LoginReducer";
+import { connect } from "react-redux";
+import {
+  Redirect,
+  HashRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
 
-import Landing from "./components/Landing";
+// import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./components/Home/Index";
+import Home from "./components/Home/Home";
+import Sidebar from "./components/Home/Sidebar";
+import Profile from "./components/Profile/Profile";
+import ListContact from "./components/ListContact/ListContact";
+import About from "./components/About/About";
+// import Group from "./components/Group/Group";
 import Logout from "./components/Logout";
 
-// const combineReducer = combineReducers({
-//   reducersChat,
-//   reducersLogin,
-// });
-
-const store = createStore(reducers, applyMiddleware(thunk));
-
-// store.subscribe(() => {
-//   console.log("store subscribe", store.getState());
-// });
-
-function App() {
+function App(props) {
   return (
-    <Provider store={store}>
-      <Router>
+    <Router>
+      <div className="d-flex flex-row">
+        <div className="flex-grow-2">
+          <Sidebar />
+        </div>
         <Switch>
-          <Route exact path="/home">
-            <Home />
-          </Route>
+          <div className="flex-fill">
+            <Route path="/profile">
+              {props.token ? <Profile /> : <Redirect push to="/login" />}
+            </Route>
 
-          <Route exact path="/register">
-            <Register />
-          </Route>
+            <Route path="/listContact">
+              {props.token ? <ListContact /> : <Redirect push to="/login" />}
+            </Route>
 
-          <Route exact path="/login">
-            <Login />
-          </Route>
+            <Route path="/about">
+              {props.token ? <About /> : <Redirect push to="/login" />}
+            </Route>
 
-          <Route exact path="/logout">
-            <Logout />
-          </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
 
-          <Route exact path="/">
-            <Landing />
-          </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+
+            <Route exact path="/logout">
+              <Logout />
+            </Route>
+
+            <Route exact path="/">
+              {props.token ? <Home /> : <Redirect push to="/login" />}
+            </Route>
+          </div>
         </Switch>
-      </Router>
-    </Provider>
+      </div>
+    </Router>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    token: state.login.token,
+  };
+};
+
+export default connect(mapStateToProps)(App);
