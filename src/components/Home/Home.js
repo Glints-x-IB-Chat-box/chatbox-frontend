@@ -44,6 +44,7 @@ const Home = (props) => {
           {props.RecentChatContacts.map((item, index) => {
             return (
               <div
+                style={{ cursor: "pointer" }}
                 onClick={() => changeFirstShow(item)}
                 className="list-group-item list-group-item-action active section-chat py-3"
                 key={index}
