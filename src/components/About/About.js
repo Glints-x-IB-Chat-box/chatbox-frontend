@@ -58,8 +58,8 @@ export default function About() {
                     <h5 className="card-title font-weight-bold">Frederick</h5>
                     <p className="card-text">
                       Hello! I'm Frederick, creating solutions for problems in
-                      this 4.0 Era is a great thing to do for me, why not we
-                      greet each other?
+                      this 4.0 Era is a great thing to do for me as a fullstack
+                      developer, Why not we greet each other?
                     </p>
                     <a
                       target="blank"
@@ -84,9 +84,9 @@ export default function About() {
                       Ahmad Fakhrozy
                     </h5>
                     <p className="card-text">
-                      Hello! I'm Ahmad Fakhrozy, creating solutions for problems
-                      in this 4.0 Era is a great thing to do for me, why not we
-                      greet each other?
+                      Ahmad Fakhrozy is a full-stack developer which love to
+                      challenge himself to learn new things. Open to job
+                      opportunities!
                     </p>
                     <a
                       target="blank"

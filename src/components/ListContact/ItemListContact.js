@@ -1,6 +1,7 @@
 import React from "react";
 import "../style.css";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { createNewChat } from "../../actionCreators/ChatAction";
 import { showDeleteContactForm } from "../../actionCreators/MainAction";
@@ -9,9 +10,9 @@ const itemListContact = (props) => {
   const addNewChat = (data) => {
     props.createNewChat(data);
 
-    props.history.push({
-      pathname: "/",
-    });
+    // props.history.push({
+    //   pathname: "/",
+    // });
   };
   const showFormDelete = () => {
     props.showDeleteContactForm(props.dataContacts);
@@ -33,12 +34,14 @@ const itemListContact = (props) => {
             <p className="preview-chat my-0">{props.dataContacts.about}</p>
           </div>
           <div className="d-flex d-row ml-auto">
-            <p
-              onClick={() => addNewChat(props.dataContacts)}
-              className="contact-icon2 my-0"
-            >
-              <i className="fas fa-comment" />
-            </p>
+            <Link to={`/chat/${props.dataContacts._id}`}>
+              <p
+                onClick={() => addNewChat(props.dataContacts)}
+                className="contact-icon2 my-0"
+              >
+                <i className="fas fa-comment" />
+              </p>
+            </Link>
             <p onClick={showFormDelete} className="contact-icon2 my-0">
               <i className="fas fa-user-times" />
             </p>
