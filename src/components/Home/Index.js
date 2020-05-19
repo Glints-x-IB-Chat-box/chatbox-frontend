@@ -1,7 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useRouteMatch
+} from "react-router-dom";
 
-import Login from "../Login";
 import Home from "./Home";
 import Sidebar from "./Sidebar";
 import Profile from "../Profile/Profile";
@@ -10,41 +13,36 @@ import About from "../About/About";
 import Group from "../Group/Group";
 
 export default function Index() {
+  let match = useRouteMatch();
+
   return (
-    <Router>
       <div className="d-flex flex-row">
         <div className="flex-grow-2">
           <Sidebar />
         </div>
         <div className="flex-fill">
           <Switch>
-            <Route path="/home">
+            <Route exact path={match.path}>
               <Home />
             </Route>
 
-            <Route path="/profile">
+            <Route path={`${match.path}/profile`}>
               <Profile />
             </Route>
 
-            <Route path="/listContact">
+            <Route path={`${match.path}/listContact`}>
               <ListContact />
             </Route>
 
-            <Route path="/group">
+            <Route path={`${match.path}/group`}>
               <Group />
             </Route>
 
-            <Route path="/about">
+            <Route path={`${match.path}/about`}>
               <About />
-            </Route>
-
-            <Route exact path="/">
-              <Login />
             </Route>
           </Switch>
         </div>
       </div>
-      {/* </div> */}
-    </Router>
   );
 }
