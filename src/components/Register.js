@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./style.css";
 import logo from "./../assets/logo.png";
 import { connect } from "react-redux";
@@ -7,8 +7,7 @@ import { register } from "./../actionCreators/LoginAction";
 import { Alert, Form } from "react-bootstrap";
 
 const Register = (props) => {
-  const { alert, token, error } = props;
-  const history = useHistory();
+  const { alert, error } = props;
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -32,13 +31,6 @@ const Register = (props) => {
     // console.log(data)
     props.register(data);
   };
-
-  useEffect(() => {
-    // console.log('token', token)
-    if (token) {
-      history.push("/home");
-    }
-  }, [token, history]);
 
   const AlertDismissible = () => {
     const [show, setShow] = useState(alert.show);
@@ -182,7 +174,6 @@ const Register = (props) => {
 const mapStateToProps = (state) => {
   return {
     alert: state.login.alert,
-    token: state.login.token,
     error: state.login.error,
   };
 };

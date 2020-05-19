@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 import logo from "./../assets/logo.png";
 import { connect } from "react-redux";
@@ -7,8 +7,7 @@ import { login } from "./../actionCreators/LoginAction";
 import { Alert } from "react-bootstrap";
 
 const Login = (props) => {
-  const { alert, token } = props;
-  const history = useHistory();
+  const { alert } = props;
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -28,13 +27,6 @@ const Login = (props) => {
     // console.log(data)
     props.login(data);
   };
-
-  useEffect(() => {
-    // console.log('token', token)
-    if (token) {
-      history.push("/");
-    }
-  }, [token, history]);
 
   const AlertDismissible = () => {
     const [show, setShow] = useState(alert.show);
@@ -114,8 +106,7 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    alert: state.login.alert,
-    token: state.login.token,
+    alert: state.login.alert
   };
 };
 
