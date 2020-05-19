@@ -3,7 +3,10 @@ import homePicture from "../../assets/text2.png";
 import { Link } from "react-router-dom";
 import "../style.css";
 
-import { showDetailRecentChat } from "../../actionCreators/ChatAction";
+import {
+  showDetailRecentChat,
+  addMessage,
+} from "../../actionCreators/ChatAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
@@ -26,7 +29,9 @@ const Home = (props) => {
     });
   };
 
-  const sendMessage = (data) => {};
+  const sendMessage = (data, dataMessage) => {
+    props.addMessage(data, dataMessage);
+  };
 
   // useEffect(() => {
   //   props.RecentChatContacts();
@@ -162,7 +167,8 @@ const Home = (props) => {
                 <i className="fas fa-paperclip h3 " />
               </p>
               <p
-                onclick={() => sendMessage(props.DetailChatRecentContact._id)}
+                style={{ cursor: "pointer" }}
+                onClick={() => sendMessage(props.DetailChatRecentContact._id)}
                 className="align-self-center my-0"
               >
                 <i className="fas fa-arrow-circle-right h3 px-3 " />
@@ -184,6 +190,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   showDetailRecentChat,
+  addMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
