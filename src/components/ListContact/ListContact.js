@@ -65,8 +65,8 @@ const ListContact = (props) => {
       <div className="col-md-8 bg-light vh-100">
         <div className="text-center center-div">
           <img src={homePicture} alt="..." className="w-50" />
-          <h1>This is your List Contact</h1>
-          <h3>"You can modify your list contact here."</h3>
+          <h2>This is your List Contact</h2>
+          <h4>"You can modify your list contact here."</h4>
         </div>
       </div>
       <AddContact />
