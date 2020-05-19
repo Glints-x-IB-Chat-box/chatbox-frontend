@@ -1,0 +1,38 @@
+            <div className="row justify-content-start pt-2">
+              <div className="col-md-6">
+                <div className="bg-light p-3">
+                  <div className="d-flex">
+                    <h6 className="font-weight-bold">Frederick88</h6>
+                    <p className="my-0 ml-auto time-text">12:56</p>
+                  </div>
+                  <div className="d-flex flex-row">
+                    <img src={logopdf} alt="..." className="img-pdf" />
+                    <div className="pl-2">
+                      <h6 className="my-0">My E-Invitation.pdf</h6>
+                      <p className="btn-link my-0">Download</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="row justify-content-start pt-2">
+              <div className="col-md-6">
+                <div className="bg-light p-3">
+                  <div className="d-flex">
+                    <h6 className="font-weight-bold">Frederick88</h6>
+                    <p className="my-0 ml-auto time-text">12:56</p>
+                  </div>
+                  <div className="d-flex flex-row">
+                    <img src={wedding} alt="..." className="img-pdf" />
+                    <div className="pl-2">
+                      <h6 className="my-0">My Wedding E-Invitation.jpg</h6>
+                      <div className="d-flex flex-row">
+                        <p className="btn-link my-0">Download</p>
+                        <p className="btn-link my-0 pl-2">Preview</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import homePicture from "../../assets/text2.png";
-// import profilePicture from "../../assets/default.jpg";
-// import user1 from "../../assets/ozy.png";
+import { NavLink } from "react-router-dom";
 import "../style.css";
 
 import { showDetailRecentChat } from "../../actionCreators/ChatAction";
@@ -43,30 +42,32 @@ const Home = (props) => {
         <div>
           {props.RecentChatContacts.map((item, index) => {
             return (
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => changeFirstShow(item)}
-                className="list-group-item list-group-item-action active section-chat py-3"
-                key={index}
-              >
-                <div className="d-flex d-row">
-                  <img
-                    src={item.image}
-                    className="chat-profile-pic rounded-circle"
-                    alt="..."
-                  />
-                  <div className="section-chat-div align-self-center">
-                    <div className="d-flex d-row">
-                      <h6 className="my-0 name-chat">{item.username}</h6>
-                      <span className="dot bg-success" />
+              <NavLink to={`/chat/${item._id}`}>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => changeFirstShow(item)}
+                  className="list-group-item list-group-item-action active section-chat py-3"
+                  key={index}
+                >
+                  <div className="d-flex d-row">
+                    <img
+                      src={item.image}
+                      className="chat-profile-pic rounded-circle"
+                      alt="..."
+                    />
+                    <div className="section-chat-div align-self-center">
+                      <div className="d-flex d-row">
+                        <h6 className="my-0 name-chat">{item.username}</h6>
+                        <span className="dot bg-success" />
+                      </div>
+                      <p className="preview-chat my-0">(Recent Chat)</p>
                     </div>
-                    <p className="preview-chat my-0">(Recent Chat)</p>
+                    <p className="ml-auto d-flex align-items-center time-text">
+                      12.50
+                    </p>
                   </div>
-                  <p className="ml-auto d-flex align-items-center time-text">
-                    12.50
-                  </p>
                 </div>
-              </div>
+              </NavLink>
             );
           })}
         </div>
@@ -131,7 +132,7 @@ const Home = (props) => {
                 </div>
               </div>
             </div>
-            <div className="d-flex pt-2 px-2 bg-white">
+            <div className="d-flex pt-2 px-2 bg-white ">
               <textarea
                 rows="2"
                 type="text"

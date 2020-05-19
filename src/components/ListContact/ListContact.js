@@ -14,7 +14,7 @@ import DeleteContact from "../ListContact/DeleteContact";
 import "../style.css";
 
 const ListContact = (props) => {
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     props.getDataContact();
@@ -55,7 +55,7 @@ const ListContact = (props) => {
               <ListContactItem
                 key={index}
                 dataContacts={item}
-                history={history}
+                // history={history}
               />
             );
           })}

@@ -28,6 +28,9 @@ function App(props) {
         </div>
         <Switch>
           <div className="flex-fill">
+            <Route exact path="/chat/:id">
+              <Home />
+            </Route>
             <Route path="/profile">
               {props.token ? <Profile /> : <Redirect push to="/login" />}
             </Route>
