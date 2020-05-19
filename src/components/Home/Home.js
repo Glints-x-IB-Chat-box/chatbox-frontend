@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import homePicture from "../../assets/text2.png";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style.css";
 
 import { showDetailRecentChat } from "../../actionCreators/ChatAction";
@@ -8,11 +8,25 @@ import { connect } from "react-redux";
 
 const Home = (props) => {
   const [firstShow, setFirstShow] = useState(true);
+  const [dataMessage, setDataMessage] = useState({
+    message: "",
+  });
+  console.log(dataMessage);
 
   const changeFirstShow = (data) => {
     props.showDetailRecentChat(data);
     setFirstShow(false);
   };
+
+  const handleChangeMessage = (event) => {
+    let { name, value } = event.currentTarget;
+    setDataMessage({
+      ...dataMessage,
+      [name]: value,
+    });
+  };
+
+  const sendMessage = (data) => {};
 
   // useEffect(() => {
   //   props.RecentChatContacts();
@@ -42,12 +56,11 @@ const Home = (props) => {
         <div>
           {props.RecentChatContacts.map((item, index) => {
             return (
-              <NavLink to={`/chat/${item._id}`}>
+              <Link to={`/chat/${item._id}`} key={index}>
                 <div
                   style={{ cursor: "pointer" }}
                   onClick={() => changeFirstShow(item)}
                   className="list-group-item list-group-item-action active section-chat py-3"
-                  key={index}
                 >
                   <div className="d-flex d-row">
                     <img
@@ -67,7 +80,7 @@ const Home = (props) => {
                     </p>
                   </div>
                 </div>
-              </NavLink>
+              </Link>
             );
           })}
         </div>
@@ -134,19 +147,24 @@ const Home = (props) => {
             </div>
             <div className="d-flex pt-2 px-2 bg-white ">
               <textarea
+                name="message"
                 rows="2"
                 type="text"
                 placeholder="Input your message here..."
                 className="input-chat"
+                value={dataMessage.message}
+                onChange={handleChangeMessage}
               />
-
               <p className="align-self-center my-0">
                 <i className="far fa-grin-alt h3 px-3 " />
               </p>
               <p className="align-self-center my-0">
                 <i className="fas fa-paperclip h3 " />
               </p>
-              <p className="align-self-center my-0">
+              <p
+                onclick={() => sendMessage(props.DetailChatRecentContact._id)}
+                className="align-self-center my-0"
+              >
                 <i className="fas fa-arrow-circle-right h3 px-3 " />
               </p>
             </div>
