@@ -61,7 +61,7 @@ const Home = (props) => {
         <div>
           {props.RecentChatContacts.map((item, index) => {
             return (
-              <Link to={`/chat/${item._id}`} key={index}>
+              <Link to={`/app/chat/${item._id}`} key={index}>
                 <div
                   style={{ cursor: "pointer" }}
                   onClick={() => changeFirstShow(item)}
