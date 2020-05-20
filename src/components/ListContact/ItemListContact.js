@@ -34,7 +34,7 @@ const itemListContact = (props) => {
             <p className="preview-chat my-0">{props.dataContacts.about}</p>
           </div>
           <div className="d-flex d-row ml-auto">
-            <Link to={`/chat/${props.dataContacts._id}`}>
+            <Link to={`/app/chat/${props.dataContacts._id}`}>
               <p
                 onClick={() => addNewChat(props.dataContacts)}
                 className="contact-icon2 my-0"
