@@ -2,6 +2,7 @@ const initialState = {
   dataUser: [],
   dataContact: [],
   dataDelete: [],
+  dataProfile: [],
   isShowEdit: false,
   isShowAbout: false,
   isShowAdd: false,
@@ -43,6 +44,10 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, isShowPictureForm: true };
     case "HIDE_CHANGEIMAGE_FORM":
       return { ...state, isShowPictureForm: false };
+    case "GET_DATA_PROFILE":
+      return { ...state, dataProfile: action.payload};
+    case 'UPDATE_DATA_PROFILE':
+      return { ...state, dataProfile: action.payload};
     default:
       return state;
   }

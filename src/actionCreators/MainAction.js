@@ -199,3 +199,44 @@ export const hideChangeImageForm = () => {
     type: "HIDE_CHANGEIMAGE_FORM",
   };
 };
+
+export const getDataProfile = () => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}/usersSecure/getProfile`, {
+        headers: {
+          "x-access-token": token,
+        }
+      });
+      dispatch({
+        type: "GET_DATA_PROFILE",
+        payload: response.data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const updateProfile = (data) => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`${url}/usersSecure/edit`, {
+        ...data
+      },{
+        headers: {
+          "x-access-token": token,
+        }
+      });
+      dispatch({
+        type: "UPDATE_DATA_PROFILE",
+        payload: response.data,
+      });
+    } catch (error) {
+      const output = error.response.data;
+      console.log(output)
+    }
+  };
+};
