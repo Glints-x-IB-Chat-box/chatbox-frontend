@@ -19,13 +19,16 @@ const Profile = (props) => {
   const { profile, showEditForm, showAboutForm, showChangeImageForm } = props;
 
   useEffect(() => {
-    props.getDataProfile()
     setData({
       username: profile.username,
       about: profile.about,
       image: profile.image
     });
-  }, [props, profile])
+  }, [profile])
+
+  useEffect(() => {
+    props.getDataProfile();
+  }, []);
 
   const myProfile = {
     backgroundImage: `url(${data.image})`,
