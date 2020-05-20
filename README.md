@@ -1,4 +1,4 @@
-V.01
+## V.01
 this version users able to create account, add to contact, edit profile(excluded avatar), chat with another user but not in the real time(socket.io not added yet)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
