@@ -18,6 +18,7 @@ const ListContact = (props) => {
 
   useEffect(() => {
     props.getDataContact();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -1,41 +1,54 @@
-import React from "react";
-// import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import profilePicture from "../../assets/profile.png";
-import logoPicture from "../../assets/ozy.png";
 
 import { connect } from "react-redux";
-import { showEditForm } from "../../actionCreators/MainAction";
-import { showAboutForm } from "../../actionCreators/MainAction";
-import { showChangeImageForm } from "../../actionCreators/MainAction";
+import { 
+  showEditForm, showAboutForm, showChangeImageForm, getDataProfile
+} from "../../actionCreators/MainAction";
 
 import Edit from "./EditName";
 import AboutForm from "./EditAbout";
 import EditPicture from "./EditPicture";
 
 const Profile = (props) => {
-  const showFormEdit = () => {
-    props.showEditForm();
-  };
-  const showFormAbout = () => {
-    props.showAboutForm();
-  };
-  const showFormImage = () => {
-    props.showChangeImageForm();
-  };
+  const [data, setData] = useState({
+    username: '',
+    about: '',
+    image: ''
+  });
+  const { profile, showEditForm, showAboutForm, showChangeImageForm } = props;
+
+  useEffect(() => {
+    setData({
+      username: profile.username,
+      about: profile.about,
+      image: profile.image
+    });
+  }, [profile])
+
+  useEffect(() => {
+    props.getDataProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const myProfile = {
+    backgroundImage: `url(${data.image})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '200px',
+    width: '200px',
+    borderRadius: '50%'
+  }
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100 px-0">
         <div className="text-center">
           <div>
-            <img
-              src={logoPicture}
-              alt="..."
-              className="rounded-circle w-50 pt-4"
-            />
+            <div className="mt-4 mx-auto" style={myProfile}>&nbsp;</div>
           </div>
 
           <button
-            onClick={showFormImage}
+            onClick={showChangeImageForm}
             className="w-100 text-white section-profile mb-2"
           >
             <div className="d-flex d-row justify-content-center">
@@ -51,14 +64,14 @@ const Profile = (props) => {
 
           <button className="w-75 profile-chat mt-2 pb-2 pl-0">
             <div className="d-flex d-row">
-              <div>
-                <h6 className="text-black font-weight-bold pt-2 pb-2 my-0">
-                  <u>Your Name</u>
+              <div className="text-left">
+                <h6 className="text-black font-weight-bold py-2 pl-4 my-0">
+                  <u>Username</u>
                 </h6>
-                <h6 className="my-0 pl-4 ">Chen Frederick</h6>
+                <h6 className="my-0 pl-4">{data.username}</h6>
               </div>
               <p
-                onClick={showFormEdit}
+                onClick={showEditForm}
                 className="profile-icon ml-auto mr-3 my-0"
               >
                 <i className="fas fa-pen-square" />
@@ -66,16 +79,16 @@ const Profile = (props) => {
             </div>
           </button>
 
-          <button className="w-75 profile-chat mt-4 pb-2 mb-4 pl-0">
-            <div className="d-flex d-row my-1">
-              <div>
-                <h6 className="text-black font-weight-bold pt-2 pb-2 my-0">
+          <button className="w-75 profile-chat my-4 pb-2 pl-0">
+            <div className="d-flex d-row">
+              <div className="text-left">
+                <h6 className="text-black font-weight-bold py-2 pl-4 my-0">
                   <u>About</u>
                 </h6>
-                <h6 className="pl-4 my-0">Available</h6>
+                <h6 className="my-0 pl-4">{data.about}</h6>
               </div>
               <p
-                onClick={showFormAbout}
+                onClick={showAboutForm}
                 className="profile-icon ml-auto mr-3 my-0"
               >
                 <i className="fas fa-pen-square" />
@@ -97,15 +110,21 @@ const Profile = (props) => {
           <h4>"You can modify your Profile details here."</h4>
         </div>
       </div>
-      <Edit />
-      <AboutForm />
+      <Edit username={data.username} />
+      <AboutForm about={data.about}  />
       <EditPicture />
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    profile: state.mainReducer.dataProfile
+  };
+};
 const mapDispatchToProps = {
+  getDataProfile,
   showEditForm,
   showAboutForm,
-  showChangeImageForm,
+  showChangeImageForm
 };
-export default connect(null, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

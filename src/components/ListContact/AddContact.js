@@ -44,6 +44,7 @@ const AddContact = (props) => {
 
   useEffect(() => {
     props.getDataUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
