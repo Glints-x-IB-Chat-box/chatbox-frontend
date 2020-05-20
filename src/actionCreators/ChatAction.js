@@ -19,9 +19,10 @@ export const showDetailRecentChat = (data) => {
     });
   };
 };
-export const addMessage = (data, data2) => {
-  console.log(data);
-  console.log(data2);
+// ...DATA DENGAN INI KITA BISA MASUKKAN 2 VALUE DARI HOME COMPONENT
+export const addMessage = (...data) => {
+  console.log(data[0]);
+  console.log(data[1].message);
 
   const token = localStorage.getItem("token");
   const decodeToken = jwt(localStorage.getItem("token"));
@@ -31,7 +32,7 @@ export const addMessage = (data, data2) => {
         `${url}/chat/postchat`,
         {
           targetUserId: data,
-          message: data2,
+          // message: data2,
         },
         {
           headers: {

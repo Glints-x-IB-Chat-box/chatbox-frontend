@@ -29,7 +29,7 @@ const Home = (props) => {
     });
   };
 
-  const sendMessage = (data, dataMessage) => {
+  const sendMessage = (data) => {
     props.addMessage(data, dataMessage);
   };
 
