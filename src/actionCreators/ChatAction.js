@@ -21,18 +21,21 @@ export const showDetailRecentChat = (data) => {
 };
 // ...DATA DENGAN INI KITA BISA MASUKKAN 2 VALUE DARI HOME COMPONENT
 export const addMessage = (...data) => {
-  console.log(data[0]);
-  console.log(data[1].message);
+  // console.log(data[0]);
+  // console.log(data[1].message);
 
   const token = localStorage.getItem("token");
   const decodeToken = jwt(localStorage.getItem("token"));
+  // console.log(decodeToken);
+
   return async (dispatch) => {
     try {
-      await axios.post(
+      const response = await axios.post(
         `${url}/chat/postchat`,
         {
-          targetUserId: data,
-          // message: data2,
+          senderUserId: decodeToken.id,
+          targetUserId: data[0],
+          message: data[1].message,
         },
         {
           headers: {
@@ -40,6 +43,32 @@ export const addMessage = (...data) => {
           },
         }
       );
+      dispatch({
+        type: "ADD_MESSAGE",
+        payload: response.data,
+      });
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+};
+
+export const getDataMessage = (dataTargetUserId) => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${url}/chat/gettarget/${dataTargetUserId}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      dispatch({
+        type: "GET_DATA_MESSAGE",
+        payload: response.data[0].messages,
+      });
     } catch (error) {
       window.alert(error);
     }
