@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import homePicture from "../../assets/text2.png";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import "../style.css";
 import Chatcomponent from "./ChatComponent";
+// import io from "socket.io-client";
 
 import {
   showDetailRecentChat,
@@ -13,14 +14,19 @@ import {
 import { connect } from "react-redux";
 
 const Home = (props) => {
+  // const socket = io(`${process.env.REACT_APP_API_URL}`);
   const [firstShow, setFirstShow] = useState(true);
+  const [targetUserId, setTargetUserId] = useState();
+  const [messagesApi, setMessagesApi] = useState([]);
+  // setMessagesApi(props.dataMessage);
+
   const [dataMessage, setDataMessage] = useState({
     message: "",
   });
   console.log(dataMessage);
 
   const changeFirstShow = (data) => {
-    props.getDataMessage(data._id);
+    setTargetUserId(data._id);
     props.showDetailRecentChat(data);
     setFirstShow(false);
   };
@@ -38,8 +44,8 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    props.RecentChatContacts();
-  }, []);
+    props.getDataMessage(targetUserId);
+  }, [sendMessage, firstShow, targetUserId]);
 
   return (
     <div className="row mx-0">
@@ -130,6 +136,7 @@ const Home = (props) => {
 
                     <Chatcomponent
                       dataItem={item}
+                      // dataMessageApi={messagesApi}
                       DetailChatRecentContact={props.DetailChatRecentContact}
                       key={index}
                     />
@@ -170,7 +177,6 @@ const Home = (props) => {
 };
 const mapStateToProps = (state) => {
   console.log(state);
-  // console.log(state.chatReducer.dataMessage[0]);
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,

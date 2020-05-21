@@ -10,7 +10,7 @@ const Chatcomponent = (props) => {
   return (
     <div>
       {decodedToken.id === props.dataItem.senderUserId ? (
-        <div className="row justify-content-end pt-2">
+        <div className="row justify-content-end pb-2">
           <div className="col-md-6">
             <div className="bg-mainchat p-3">
               <div className="d-flex">
@@ -22,7 +22,7 @@ const Chatcomponent = (props) => {
           </div>
         </div>
       ) : (
-        <div className="row justify-content-start pt-2">
+        <div className="row justify-content-start pb-2">
           <div className="col-md-6">
             <div className="bg-light p-3">
               <div className="d-flex">
