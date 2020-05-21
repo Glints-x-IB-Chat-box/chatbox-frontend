@@ -110,7 +110,10 @@ export default function About() {
                   />
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">River Huang</h5>
-                    <p className="card-text">Santuyyyyyyyy...</p>
+                    <p className="card-text">
+                      Hello! I'm River, a Fullstack Developer! I'm ready to make
+                      application becomes Reality. Hit me up!
+                    </p>
                     <a
                       target="blank"
                       href="https://www.linkedin.com/in/river-huang-43a979192/"
