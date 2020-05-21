@@ -69,8 +69,6 @@ export const getDataMessage = (dataTargetUserId) => {
         type: "GET_DATA_MESSAGE",
         payload: response.data[0].messages,
       });
-    } catch (error) {
-      window.alert(error);
-    }
+    } catch (error) {}
   };
 };

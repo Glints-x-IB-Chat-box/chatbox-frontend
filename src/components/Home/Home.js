@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import homePicture from "../../assets/text2.png";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import jwt from "jwt-decode";
 import "../style.css";
+import Chatcomponent from "./ChatComponent";
 
 import {
   showDetailRecentChat,
@@ -13,7 +13,6 @@ import {
 import { connect } from "react-redux";
 
 const Home = (props) => {
-  const decodedToken = jwt(localStorage.getItem("token"));
   const [firstShow, setFirstShow] = useState(true);
   const [dataMessage, setDataMessage] = useState({
     message: "",
@@ -38,9 +37,9 @@ const Home = (props) => {
     props.addMessage(dataTargetUserId, dataMessage);
   };
 
-  // useEffect(() => {
-  //   props.RecentChatContacts();
-  // }, []);
+  useEffect(() => {
+    props.RecentChatContacts();
+  }, []);
 
   return (
     <div className="row mx-0">
@@ -121,44 +120,19 @@ const Home = (props) => {
             <div className="container pt-3 scrollable-div">
               {props.dataMessage.map((item, index) => {
                 const time = moment(`${item.createdAt}`);
-                const fixTime = time.format("HH:mm");
+                // const time2 = moment(`${item.createdAt}`).subtract(1, "days");
+
                 const fixDate = time.format("dddd,D MMMM YYYY");
+                // const fixDate2 = time2.format("dddd,D MMMM YYYY");
                 return (
-                  <div key={index}>
-                    <h6 className="font-weight-bold text-center pb-1">
-                      {fixDate}
-                    </h6>
-                    {decodedToken.id === item.senderUserId ? (
-                      <div className="row justify-content-end pt-2">
-                        <div className="col-md-6">
-                          <div className="bg-mainchat p-3">
-                            <div className="d-flex">
-                              <h6 className="font-weight-bold">Me</h6>
-                              <p className="my-0 ml-auto time-text">
-                                {fixTime}
-                              </p>
-                            </div>
-                            <h6 className="my-0">{item.message}</h6>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="row justify-content-start pt-2">
-                        <div className="col-md-6">
-                          <div className="bg-light p-3">
-                            <div className="d-flex">
-                              <h6 className="font-weight-bold">
-                                {props.DetailChatRecentContact.username}
-                              </h6>
-                              <p className="my-0 ml-auto time-text">
-                                {fixTime}
-                              </p>
-                            </div>
-                            <h6 className="my-0">{item.message}</h6>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                  <div>
+                    <h6 className="font-weight-bold text-center pb-1">DATE</h6>
+
+                    <Chatcomponent
+                      dataItem={item}
+                      DetailChatRecentContact={props.DetailChatRecentContact}
+                      key={index}
+                    />
                   </div>
                 );
               })}
@@ -172,6 +146,7 @@ const Home = (props) => {
                 className="input-chat"
                 value={dataMessage.message}
                 onChange={handleChangeMessage}
+                required
               />
               <p className="align-self-center my-0">
                 <i className="far fa-grin-alt h3 px-3 " />
@@ -194,7 +169,7 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  // console.log(state);
+  console.log(state);
   // console.log(state.chatReducer.dataMessage[0]);
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
