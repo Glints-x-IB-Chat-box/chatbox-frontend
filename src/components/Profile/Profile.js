@@ -56,7 +56,7 @@ const Profile = (props) => {
                 <i className="fas fa-camera" />
               </p>
 
-              <h5 className="text-white font-weight-bold pt-4 pb-2 pl-3">
+              <h5 className="text-white font-weight-bold pt-4 pb-2 pl-3 mb-2">
                 Change your profile picture
               </h5>
             </div>
@@ -106,8 +106,8 @@ const Profile = (props) => {
       <div className="col-md-8 vh-100">
         <div className="text-center center-div">
           <img src={profilePicture} alt="..." className="w-50" />
-          <h1>This is your Profile</h1>
-          <h3>"You can modify your Profile details here."</h3>
+          <h2>This is your Profile</h2>
+          <h4>"You can modify your Profile details here."</h4>
         </div>
       </div>
       <Edit username={data.username} />

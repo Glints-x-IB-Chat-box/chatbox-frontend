@@ -1,18 +1,41 @@
 import React, { useState } from "react";
 import homePicture from "../../assets/text2.png";
-// import profilePicture from "../../assets/default.jpg";
-// import user1 from "../../assets/ozy.png";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import jwt from "jwt-decode";
 import "../style.css";
 
-import { showDetailRecentChat } from "../../actionCreators/ChatAction";
+import {
+  showDetailRecentChat,
+  addMessage,
+  getDataMessage,
+} from "../../actionCreators/ChatAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
+  const decodedToken = jwt(localStorage.getItem("token"));
   const [firstShow, setFirstShow] = useState(true);
+  const [dataMessage, setDataMessage] = useState({
+    message: "",
+  });
+  console.log(dataMessage);
 
   const changeFirstShow = (data) => {
+    props.getDataMessage(data._id);
     props.showDetailRecentChat(data);
     setFirstShow(false);
+  };
+
+  const handleChangeMessage = (event) => {
+    let { name, value } = event.currentTarget;
+    setDataMessage({
+      ...dataMessage,
+      [name]: value,
+    });
+  };
+
+  const sendMessage = (dataTargetUserId) => {
+    props.addMessage(dataTargetUserId, dataMessage);
   };
 
   // useEffect(() => {
@@ -43,30 +66,31 @@ const Home = (props) => {
         <div>
           {props.RecentChatContacts.map((item, index) => {
             return (
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => changeFirstShow(item)}
-                className="list-group-item list-group-item-action active section-chat py-3"
-                key={index}
-              >
-                <div className="d-flex d-row">
-                  <img
-                    src={item.image}
-                    className="chat-profile-pic rounded-circle"
-                    alt="..."
-                  />
-                  <div className="section-chat-div align-self-center">
-                    <div className="d-flex d-row">
-                      <h6 className="my-0 name-chat">{item.username}</h6>
-                      <span className="dot bg-success" />
+              <Link to={`/app/chat/${item._id}`} key={index}>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => changeFirstShow(item)}
+                  className="list-group-item list-group-item-action active section-chat py-3"
+                >
+                  <div className="d-flex d-row">
+                    <img
+                      src={item.image}
+                      className="chat-profile-pic rounded-circle"
+                      alt="..."
+                    />
+                    <div className="section-chat-div align-self-center">
+                      <div className="d-flex d-row">
+                        <h6 className="my-0 name-chat">{item.username}</h6>
+                        <span className="dot bg-success" />
+                      </div>
+                      <p className="preview-chat my-0">(Recent Chat)</p>
                     </div>
-                    <p className="preview-chat my-0">(Recent Chat)</p>
+                    <p className="ml-auto d-flex align-items-center time-text">
+                      12.50
+                    </p>
                   </div>
-                  <p className="ml-auto d-flex align-items-center time-text">
-                    12.50
-                  </p>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -76,8 +100,8 @@ const Home = (props) => {
         <div className="col-md-8 bg-light vh-100">
           <div className="text-center center-div">
             <img src={homePicture} alt="..." className="w-50" />
-            <h1>Welcome to Circle Messenger!</h1>
-            <h3>“Executive Chatbox, for Professionals.”</h3>
+            <h2>Welcome to Circle Messenger!</h2>
+            <h4>“Executive Chatbox, for Professionals.”</h4>
           </div>
         </div>
       ) : (
@@ -95,57 +119,71 @@ const Home = (props) => {
             </div>
 
             <div className="container pt-3 scrollable-div">
-              <h6 className="font-weight-bold text-center pb-1">
-                Friday,15/05/20
-              </h6>
-
-              <div className="row justify-content-start pt-2">
-                <div className="col-md-6">
-                  <div className="bg-light p-3">
-                    <div className="d-flex">
-                      <h6 className="font-weight-bold">
-                        {props.DetailChatRecentContact.username}
-                      </h6>
-                      <p className="my-0 ml-auto time-text">12:50</p>
-                    </div>
-                    <h6 className="my-0">
-                      I want to invite you to my Wedding Party, come and lets
-                      celebrate my big day with me brother.
+              {props.dataMessage.map((item, index) => {
+                const time = moment(`${item.createdAt}`);
+                const fixTime = time.format("HH:mm");
+                const fixDate = time.format("dddd,D MMMM YYYY");
+                return (
+                  <div key={index}>
+                    <h6 className="font-weight-bold text-center pb-1">
+                      {fixDate}
                     </h6>
+                    {decodedToken.id === item.senderUserId ? (
+                      <div className="row justify-content-end pt-2">
+                        <div className="col-md-6">
+                          <div className="bg-mainchat p-3">
+                            <div className="d-flex">
+                              <h6 className="font-weight-bold">Me</h6>
+                              <p className="my-0 ml-auto time-text">
+                                {fixTime}
+                              </p>
+                            </div>
+                            <h6 className="my-0">{item.message}</h6>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="row justify-content-start pt-2">
+                        <div className="col-md-6">
+                          <div className="bg-light p-3">
+                            <div className="d-flex">
+                              <h6 className="font-weight-bold">
+                                {props.DetailChatRecentContact.username}
+                              </h6>
+                              <p className="my-0 ml-auto time-text">
+                                {fixTime}
+                              </p>
+                            </div>
+                            <h6 className="my-0">{item.message}</h6>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-              </div>
-              <div className="row justify-content-end pt-2">
-                <div className="col-md-6">
-                  <div className="bg-mainchat p-3">
-                    <div className="d-flex">
-                      <h6 className="font-weight-bold">Me</h6>
-                      <p className="my-0 ml-auto time-text">12:51</p>
-                    </div>
-                    <h6 className="my-0">
-                      Hey Fred! I'm doing great here, just promoted to a higher
-                      division hehhe... Sure thanks for invited me broo, when it
-                      will be held?
-                    </h6>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
-            <div className="d-flex pt-2 px-2 bg-white">
+            <div className="d-flex pt-2 px-2 bg-white ">
               <textarea
+                name="message"
                 rows="2"
                 type="text"
                 placeholder="Input your message here..."
                 className="input-chat"
+                value={dataMessage.message}
+                onChange={handleChangeMessage}
               />
-
               <p className="align-self-center my-0">
                 <i className="far fa-grin-alt h3 px-3 " />
               </p>
               <p className="align-self-center my-0">
                 <i className="fas fa-paperclip h3 " />
               </p>
-              <p className="align-self-center my-0">
+              <p
+                style={{ cursor: "pointer" }}
+                onClick={() => sendMessage(props.DetailChatRecentContact._id)}
+                className="align-self-center my-0"
+              >
                 <i className="fas fa-arrow-circle-right h3 px-3 " />
               </p>
             </div>
@@ -156,15 +194,19 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
+  // console.log(state.chatReducer.dataMessage[0]);
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
+    dataMessage: state.chatReducer.dataMessage,
   };
 };
 
 const mapDispatchToProps = {
   showDetailRecentChat,
+  addMessage,
+  getDataMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
