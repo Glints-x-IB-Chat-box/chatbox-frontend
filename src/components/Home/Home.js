@@ -17,8 +17,9 @@ const Home = (props) => {
   // const socket = io(`${process.env.REACT_APP_API_URL}`);
   const [firstShow, setFirstShow] = useState(true);
   const [targetUserId, setTargetUserId] = useState();
+  console.log(targetUserId);
+
   const [messagesApi, setMessagesApi] = useState([]);
-  // setMessagesApi(props.dataMessage);
 
   const [dataMessage, setDataMessage] = useState({
     message: "",
@@ -41,11 +42,20 @@ const Home = (props) => {
 
   const sendMessage = (dataTargetUserId) => {
     props.addMessage(dataTargetUserId, dataMessage);
+    // setMessagesApi("");
+    // socket.emit("sendMessage", dataMessage, () => setMessagesApi(""));
   };
 
   useEffect(() => {
+    // console.log(targetUserId);
+    // setMessagesApi(props.dataMessage);
     props.getDataMessage(targetUserId);
-  }, [sendMessage, firstShow, targetUserId]);
+    // socket.on("sendMessage", (Message) => {
+    //   setMessagesApi(props.dataMessage, Message);
+    // });
+  }, [sendMessage, targetUserId]);
+
+  let chatDate = undefined;
 
   return (
     <div className="row mx-0">
@@ -126,13 +136,23 @@ const Home = (props) => {
             <div className="container pt-3 scrollable-div">
               {props.dataMessage.map((item, index) => {
                 const time = moment(`${item.createdAt}`);
-                // const time2 = moment(`${item.createdAt}`).subtract(1, "days");
 
                 const fixDate = time.format("dddd,D MMMM YYYY");
-                // const fixDate2 = time2.format("dddd,D MMMM YYYY");
+
+                // PERBANDINGAN STRING DI TIME
+                let showTanggal = <></>;
+                if (chatDate != fixDate) {
+                  showTanggal = (
+                    <h6 className="font-weight-bold text-center pb-1">
+                      {fixDate}
+                    </h6>
+                  );
+                  chatDate = fixDate;
+                }
+
                 return (
                   <div>
-                    <h6 className="font-weight-bold text-center pb-1">DATE</h6>
+                    {showTanggal}
 
                     <Chatcomponent
                       dataItem={item}
@@ -176,7 +196,7 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
+  console.log(state.chatReducer.dataMessage);
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,

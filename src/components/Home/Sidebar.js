@@ -27,7 +27,7 @@ export default function Sidebar() {
           to={`${match.url}/listContact`}
           className="list-group-item list-group-item-action"
         >
-          <i className="fas fa-users fa-lg" />
+          <i className="fas fa-address-book fa-lg" />
         </NavLink>
         <NavLink
           to={`${match.url}/about`}
