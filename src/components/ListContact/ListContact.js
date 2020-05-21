@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import homePicture from "../../assets/text.png";
 import ListContactItem from "./ItemListContact";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   getDataContact,
