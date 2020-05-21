@@ -8,17 +8,17 @@ export default function Sidebar() {
     <div style={{ width: "75px", height: "100vh", backgroundColor: "#1f2d3c" }}>
       <div className="list-group">
         <NavLink
-          to={`${match.url}/profile`}
-          className="list-group-item list-group-item-action"
-        >
-          <i className="fas fa-user-circle fa-lg" />
-        </NavLink>
-
-        <NavLink
           to={match.url}
           className="list-group-item list-group-item-action"
         >
           <i className="fas fa-comment-dots fa-lg" />
+        </NavLink>
+
+        <NavLink
+          to={`${match.url}/profile`}
+          className="list-group-item list-group-item-action"
+        >
+          <i className="fas fa-user-circle fa-lg" />
         </NavLink>
         {/* <Link to={`${match.url}/group`} className="list-group-item list-group-item-action">
           Group
