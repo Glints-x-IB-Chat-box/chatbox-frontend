@@ -17,15 +17,22 @@ const itemListContact = (props) => {
   const showFormDelete = () => {
     props.showDeleteContactForm(props.dataContacts);
   };
+
+  const contactPic = (picture) => {
+    const url = process.env.REACT_APP_API_URL;
+    const image = `${url}/${picture}`;
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
+    return {
+      backgroundImage: `url(${image}), url(${imageNotFound})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center"
+    };
+  };
   return (
     <div className="list-group-item list-group-item-action active py-2 px-1 listcontact-chat">
       <button className="w-100 text-white listcontact-chat">
         <div className="d-flex d-row">
-          <img
-            src={props.dataContacts.image}
-            className="chat-profile-pic rounded-circle"
-            alt="..."
-          />
+          <div className="chat-profile-pic rounded-circle" style={contactPic(props.dataContacts.image)}></div>
           <div className="section-chat-div">
             <div className="d-flex d-row">
               <h6 className="my-0 name-chat">{props.dataContacts.username}</h6>
