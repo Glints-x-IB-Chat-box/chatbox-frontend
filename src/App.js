@@ -8,10 +8,10 @@ import {
   Switch,
 } from "react-router-dom";
 
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 import Home from "./components/Home/Index";
-import Logout from "./components/Logout";
+import Logout from "./components/Auth/Logout";
 
 function App(props) {
   return (
