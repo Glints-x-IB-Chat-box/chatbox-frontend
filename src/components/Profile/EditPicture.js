@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import FormData from "form-data";
 import { connect } from "react-redux";
@@ -8,7 +8,7 @@ import { hideChangeImageForm, updateProfPic } from "../../actionCreators/MainAct
 class EditPicture extends Component {
   constructor(props) {
     super(props)
-    this.imageRef = React.createRef()
+    this.imageRef = createRef()
   }
 
   handleSubmit = (event) => {

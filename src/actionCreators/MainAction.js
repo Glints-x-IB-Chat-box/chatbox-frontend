@@ -248,7 +248,7 @@ export const updateProfPic = (data) => {
       const response = await axios.put(`${url}/usersSecure/edit`, data, {
         headers: {
           "x-access-token": token,
-          "content-type": `multipart/form-data; boundary=${data._boundary}`
+          "content-type": `multipart/form-data`
         }
       });
       dispatch({
