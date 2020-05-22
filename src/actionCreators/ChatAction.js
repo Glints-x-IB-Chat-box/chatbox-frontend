@@ -35,7 +35,7 @@ export const addMessage = (...data) => {
         {
           senderUserId: decodeToken.id,
           targetUserId: data[0],
-          message: data[1].message,
+          message: data[1],
         },
         {
           headers: {

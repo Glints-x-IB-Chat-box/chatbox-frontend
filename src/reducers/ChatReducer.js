@@ -9,7 +9,7 @@ const ChatReducer = (state = initialState, action) => {
     case "CREATE_NEW_CHAT_CONTACT":
       console.log(action.payload);
       const find = state.RecentChatContacts.find((item) => {
-        return item._id == action.payload._id;
+        return item._id === action.payload._id;
       });
       let newRecentChatContacts = [];
 
@@ -30,7 +30,7 @@ const ChatReducer = (state = initialState, action) => {
       return { ...state, dataMessage: [action.payload] };
     case "GET_DATA_MESSAGE":
       const found = state.dataMessage.find((item) => {
-        return item._id == action.payload._id;
+        return item._id === action.payload._id;
       });
 
       let newDataMessage = [];
@@ -41,7 +41,7 @@ const ChatReducer = (state = initialState, action) => {
         // console.log(state.dataMessage);
 
         newDataMessage = state.dataMessage.map((item) => {
-          if (action.payload._id == item._id) {
+          if (action.payload._id === item._id) {
             return action.payload;
           }
           return item;

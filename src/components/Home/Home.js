@@ -14,14 +14,11 @@ import {
   getDataMessage,
 } from "../../actionCreators/ChatAction";
 import { connect } from "react-redux";
-import { findAllByAltText } from "@testing-library/react";
 
 const Home = (props) => {
   // const socket = io(`${process.env.REACT_APP_API_URL}`);
   const [firstShow, setFirstShow] = useState(true);
-  const [targetUserId, setTargetUserId] = useState();
   const [dataMessage, setDataMessage] = useState([]);
-  // console.log(targetUserId);
   let { id } = useParams();
 
   // const [messagesApi, setMessagesApi] = useState([]);
@@ -31,7 +28,6 @@ const Home = (props) => {
 
   const changeFirstShow = (data) => {
     console.log(data);
-    setTargetUserId(data._id);
     props.showDetailRecentChat(data);
     setFirstShow(false);
   };
@@ -42,7 +38,7 @@ const Home = (props) => {
   };
 
   const sendMessage = (dataTargetUserId) => {
-    props.addMessage(dataTargetUserId, dataMessage);
+    props.addMessage(dataTargetUserId, message);
     // setMessagesApi("");
     // socket.emit("sendMessage", dataMessage, () => setMessagesApi(""));
   };
@@ -56,22 +52,21 @@ const Home = (props) => {
   //   // });
   // }, [sendMessage, changeFirstShow]);
 
-  useEffect(() => {
-    props.getDataMessage(id);
+  // useEffect(() => {
+  //   props.getDataMessage(id);
 
-    // const newDataMessage = dataMessage.find((item) => {
-    //   return id == item.usersId;
-    // });
-    // console.log(newDataMessage);
-    console.log("useEffect", id);
-  }, []);
+  //   // const newDataMessage = dataMessage.find((item) => {
+  //   //   return id == item.usersId;
+  //   // });
+  //   // console.log("useEffect", id);
+  // }, [sendMessage]);
 
   useEffect(() => {
     console.log(props.dataMessage);
     console.log(id);
 
     let newDataMessage = props.dataMessage.find((item) => {
-      return item._id == id;
+      return item._id === id;
     });
     if (!newDataMessage) {
       setDataMessage(props.dataMessage);
@@ -80,8 +75,10 @@ const Home = (props) => {
     }
     console.log(dataMessage);
 
+    props.getDataMessage(id);
+
     // setDataMessage(newDataMessage || []);
-  }, [props.dataMessage]);
+  }, [props.dataMessage, sendMessage]);
 
   let chatDate = undefined;
 
@@ -145,7 +142,7 @@ const Home = (props) => {
               {dataMessage.map((item, index) => {
                 console.log(item);
                 let newChatComponent = <></>;
-                if (item.usersId.find((item) => item._id == id)) {
+                if (item.usersId.find((item) => item._id === id)) {
                   newChatComponent = item.messages.map((itemMessage, index) => {
                     console.log(itemMessage);
 
