@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import "./style.css";
-import logo from "./../assets/logo.png";
+import "./../style.css";
+import logo from "./../../assets/logo.png";
 import { connect } from "react-redux";
-import { logout } from "../actionCreators/LoginAction";
+import { logout } from "../../actionCreators/LoginAction";
 
 const Logout = (props) => {
   const history = useHistory();

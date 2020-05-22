@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./style.css";
-import logo from "./../assets/logo.png";
+import "./../style.css";
+import logo from "./../../assets/logo.png";
 import { connect } from "react-redux";
-import { register } from "./../actionCreators/LoginAction";
+import { register } from "../../actionCreators/LoginAction";
 import { Alert, Form } from "react-bootstrap";
 
 const Register = (props) => {
