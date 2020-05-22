@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./style.css";
-import logo from "./../assets/logo.png";
+import "./../style.css";
+import logo from "./../../assets/logo.png";
 import { connect } from "react-redux";
-import { login } from "./../actionCreators/LoginAction";
+import { login } from "../../actionCreators/LoginAction";
 import { Alert } from "react-bootstrap";
 
 const Login = (props) => {

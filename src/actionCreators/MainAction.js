@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const url = `${process.env.REACT_APP_API_URL}`;
-// const url = `${process.env.URL_HOSTING_APP}`;
+const url = process.env.REACT_APP_API_URL;
+// const url = process.env.URL_HOSTING_APP;
 
 export const getDataUser = (data) => {
   return async (dispatch) => {
@@ -227,7 +227,28 @@ export const updateProfile = (data) => {
         ...data
       },{
         headers: {
+          "x-access-token": token
+        }
+      });
+      dispatch({
+        type: "UPDATE_DATA_PROFILE",
+        payload: response.data,
+      });
+    } catch (error) {
+      const output = error.response.data;
+      console.log(output)
+    }
+  };
+};
+
+export const updateProfPic = (data) => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`${url}/usersSecure/edit`, data, {
+        headers: {
           "x-access-token": token,
+          "content-type": `multipart/form-data`
         }
       });
       dispatch({
