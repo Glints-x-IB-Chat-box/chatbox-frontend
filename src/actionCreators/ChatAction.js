@@ -65,12 +65,11 @@ export const getDataMessage = (dataTargetUserId) => {
           },
         }
       );
+
       dispatch({
         type: "GET_DATA_MESSAGE",
         payload: response.data[0].messages,
       });
-    } catch (error) {
-      window.alert(error);
-    }
+    } catch (error) {}
   };
 };
