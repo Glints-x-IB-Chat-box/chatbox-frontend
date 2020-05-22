@@ -47,6 +47,16 @@ const AddContact = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const contactPic = (picture) => {
+    const url = process.env.REACT_APP_API_URL;
+    const image = `${url}/${picture}`;
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
+    return {
+      backgroundImage: `url(${image}), url(${imageNotFound})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center"
+    };
+  };
   return (
     <Modal show={props.show} onHide={props.hideAddContactForm}>
       <Modal.Header closeButton>
@@ -83,7 +93,7 @@ const AddContact = (props) => {
                   <th scope="row">{1 + index}</th>
                   <td>{item.username}</td>
                   <td>
-                    <img src={item.image} className="img-search" alt="" />
+                    <div className="img-search rounded-circle" style={contactPic(item.image)}></div>
                   </td>
                   <td>
                     <p

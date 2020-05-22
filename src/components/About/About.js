@@ -10,15 +10,14 @@ import "../style.css";
 export default function About() {
   const aboutPic = (picture) => {
     const url = process.env.REACT_APP_API_URL;
-    const image = picture;
+    const image = `${url}/${picture}`;
     const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
     return {
       backgroundImage: `url(${image}), url(${imageNotFound})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       paddingTop: "75%",
-      width: "75%",
-      borderRadius: "50%",
+      width: "75%"
     };
   };
 
@@ -68,7 +67,7 @@ export default function About() {
               <div className="col-5 col-md-5">
                 <div className="card about-card">
                   <div
-                    className="card-img-top mt-4 mx-auto"
+                    className="card-img-top mt-4 mx-auto rounded-circle"
                     style={aboutPic(Fred)}
                   ></div>
                   <div className="card-body">
@@ -92,7 +91,7 @@ export default function About() {
               <div className="col-5 col-md-5 ">
                 <div className="card about-card">
                   <div
-                    className="card-img-top mt-4 mx-auto"
+                    className="card-img-top mt-4 mx-auto rounded-circle"
                     style={aboutPic(Ozy)}
                   ></div>
                   <div className="card-body">
@@ -120,7 +119,7 @@ export default function About() {
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
                   <div
-                    className="card-img-top mt-4 mx-auto"
+                    className="card-img-top mt-4 mx-auto rounded-circle"
                     style={aboutPic(River)}
                   ></div>
                   <div className="card-body">
@@ -143,7 +142,7 @@ export default function About() {
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
                   <div
-                    className="card-img-top mt-4 mx-auto"
+                    className="card-img-top mt-4 mx-auto rounded-circle"
                     style={aboutPic(Intan)}
                   ></div>
                   <div className="card-body">
