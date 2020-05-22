@@ -19,7 +19,7 @@ const Home = (props) => {
   const [targetUserId, setTargetUserId] = useState();
   console.log(targetUserId);
 
-  const [messagesApi, setMessagesApi] = useState([]);
+  // const [messagesApi, setMessagesApi] = useState([]);
 
   const [dataMessage, setDataMessage] = useState({
     message: "",
@@ -53,7 +53,7 @@ const Home = (props) => {
     // socket.on("sendMessage", (Message) => {
     //   setMessagesApi(props.dataMessage, Message);
     // });
-  }, [sendMessage, targetUserId]);
+  }, [sendMessage]);
 
   let chatDate = undefined;
 
@@ -141,7 +141,7 @@ const Home = (props) => {
 
                 // PERBANDINGAN STRING DI TIME
                 let showTanggal = <></>;
-                if (chatDate != fixDate) {
+                if (chatDate !== fixDate) {
                   showTanggal = (
                     <h6 className="font-weight-bold text-center pb-1">
                       {fixDate}
