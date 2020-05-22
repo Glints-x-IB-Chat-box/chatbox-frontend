@@ -59,14 +59,16 @@ const Profile = (props) => {
               <p className="contact-icon my-0">
                 <i className="fas fa-camera" />
               </p>
-
               <h5 className="text-white font-weight-bold pt-4 pb-2 pl-3 mb-2">
                 Change your profile picture
               </h5>
             </div>
           </button>
 
-          <button className="w-75 profile-chat mt-2 pb-2 pl-0">
+          <button
+            onClick={showEditForm}
+            className="w-75 profile-chat mt-2 pb-2 pl-0"
+          >
             <div className="d-flex d-row">
               <div className="text-left">
                 <h6 className="text-black font-weight-bold py-2 pl-4 my-0">
@@ -74,16 +76,16 @@ const Profile = (props) => {
                 </h6>
                 <h6 className="my-0 pl-4">{data.username}</h6>
               </div>
-              <p
-                onClick={showEditForm}
-                className="profile-icon ml-auto mr-3 my-0"
-              >
+              <p className="profile-icon ml-auto mr-3 my-0">
                 <i className="fas fa-pen-square" />
               </p>
             </div>
           </button>
 
-          <button className="w-75 profile-chat my-4 pb-2 pl-0">
+          <button
+            onClick={showAboutForm}
+            className="w-75 profile-chat my-4 pb-2 pl-0"
+          >
             <div className="d-flex d-row">
               <div className="text-left">
                 <h6 className="text-black font-weight-bold py-2 pl-4 my-0">
@@ -91,10 +93,7 @@ const Profile = (props) => {
                 </h6>
                 <h6 className="my-0 pl-4">{data.about}</h6>
               </div>
-              <p
-                onClick={showAboutForm}
-                className="profile-icon ml-auto mr-3 my-0"
-              >
+              <p className="profile-icon ml-auto mr-3 my-0">
                 <i className="fas fa-pen-square" />
               </p>
             </div>
