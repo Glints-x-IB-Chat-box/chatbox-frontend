@@ -54,18 +54,14 @@ const Home = (props) => {
 
   useEffect(() => {
     props.getDataMessage(id);
-
-    //   // const newDataMessage = dataMessage.find((item) => {
-    //   //   return id == item.usersId;
-    //   // });
-    //   // console.log("useEffect", id);
   }, []);
 
   useEffect(() => {
     console.log(props.dataMessage);
     console.log(id);
-
-    props.getDataMessage(id);
+    setTimeout(() => {
+      props.getDataMessage(id);
+    }, 1000);
 
     let newDataMessage = props.dataMessage.find((item) => {
       if (!item) {
@@ -78,8 +74,6 @@ const Home = (props) => {
       setDataMessage([]);
     }
     console.log(dataMessage);
-
-    // setDataMessage(newDataMessage || []);
   }, [props.dataMessage]);
 
   let chatDate = undefined;
@@ -141,10 +135,10 @@ const Home = (props) => {
             </div>
 
             <div className="container pt-3 scrollable-div">
-              {dataMessage.map((item, index) => {
-                console.log(item);
+              {dataMessage.map((item) => {
+                console.log(dataMessage.item);
                 let newChatComponent = <></>;
-                if (item.usersId.find((item) => item._id === id)) {
+                if (item && item.usersId.find((item) => item._id === id)) {
                   newChatComponent = item.messages.map((itemMessage, index) => {
                     // console.log(itemMessage);
 
