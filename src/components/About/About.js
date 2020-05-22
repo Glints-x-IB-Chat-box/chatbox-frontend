@@ -8,6 +8,24 @@ import logoPicture from "../../assets/logo.png";
 import "../style.css";
 
 export default function About() {
+  const aboutPic = (picture) => {
+    const url = process.env.REACT_APP_API_URL;
+    const image = picture
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`
+    return ({
+      backgroundImage: `url(${image}), url(${imageNotFound})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      paddingTop: '75%',
+      width: '75%',
+      borderRadius: '50%'
+    })
+  }
+
+  const cardText = {
+    height: '110px'
+  }
+
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100">
@@ -49,14 +67,10 @@ export default function About() {
             <div className="row mx-0 d-flex justify-content-center">
               <div className="col-5 col-md-5">
                 <div className="card about-card">
-                  <img
-                    src={Fred}
-                    className="card-img-top w-75 mx-auto d-block pt-4 rounded-circle"
-                    alt="..."
-                  />
+                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(Fred)}></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">Frederick</h5>
-                    <p className="card-text">
+                    <p className="card-text overflow-auto" style={cardText}>
                       Hello! I'm Frederick, creating solutions for problems in
                       this 4.0 Era is a great thing to do for me as a fullstack
                       developer, Why not we greet each other?
@@ -64,7 +78,7 @@ export default function About() {
                     <a
                       target="blank"
                       href="https://www.linkedin.com/in/chen-frederick-1324301a8/"
-                      className="btn btn-light text-dark"
+                      className="btn btn-light btn-block text-dark"
                     >
                       Check My LinkedIn!
                     </a>
@@ -74,16 +88,12 @@ export default function About() {
 
               <div className="col-5 col-md-5 ">
                 <div className="card about-card">
-                  <img
-                    src={Ozy}
-                    className="card-img-top w-75 mx-auto d-block pt-4 rounded-circle"
-                    alt="..."
-                  />
+                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(Ozy)}></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">
                       Ahmad Fakhrozy
                     </h5>
-                    <p className="card-text">
+                    <p className="card-text overflow-auto" style={cardText}>
                       Ahmad Fakhrozy is a full-stack developer which love to
                       challenge himself to learn new things. Open to job
                       opportunities!
@@ -91,7 +101,7 @@ export default function About() {
                     <a
                       target="blank"
                       href="https://www.linkedin.com/in/ahmad-fakhrozy-9069741a1/"
-                      className="btn btn-light text-dark"
+                      className="btn btn-light btn-block text-dark"
                     >
                       Check My LinkedIn!
                     </a>
@@ -103,21 +113,17 @@ export default function About() {
             <div className="row mx-0 d-flex justify-content-center">
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
-                  <img
-                    src={River}
-                    className="card-img-top w-75 mx-auto d-block pt-4 rounded-circle"
-                    alt="..."
-                  />
+                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(River)}></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">River Huang</h5>
-                    <p className="card-text">
+                    <p className="card-text overflow-auto" style={cardText}>
                       Hello! I'm River, a Fullstack Developer! I'm ready to make
                       application becomes Reality. Hit me up!
                     </p>
                     <a
                       target="blank"
                       href="https://www.linkedin.com/in/river-huang-43a979192/"
-                      className="btn btn-light text-dark"
+                      className="btn btn-light btn-block text-dark"
                     >
                       Check My LinkedIn!
                     </a>
@@ -127,21 +133,17 @@ export default function About() {
 
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
-                  <img
-                    src={Intan}
-                    className="card-img-top w-75 mx-auto d-block pt-4 rounded-circle"
-                    alt="..."
-                  />
+                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(Intan)}></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">Intan Adela</h5>
-                    <p className="card-text">
+                    <p className="card-text overflow-auto" style={cardText}>
                       Hi! I'm Intan Adela, student of Glints Academy. Leave a
                       job opportunity in my LinkedIn's inbox.
                     </p>
                     <a
                       target="blank"
                       href="https://www.linkedin.com/in/intanadela/"
-                      className="btn btn-light text-dark"
+                      className="btn btn-light btn-block text-dark"
                     >
                       Check My LinkedIn!
                     </a>
