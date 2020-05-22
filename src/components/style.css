@@ -24,6 +24,10 @@ body {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+.chat-btn:hover {
+  color: #285b8f;
+  font-size: 1.6rem !important;
+}
 .chat-profile-pic {
   width: 2.5rem;
   height: 2.5rem;

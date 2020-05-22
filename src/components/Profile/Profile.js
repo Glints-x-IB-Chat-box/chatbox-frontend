@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import profilePicture from "../../assets/profile.png";
 
 import { connect } from "react-redux";
-import { 
-  showEditForm, showAboutForm, showChangeImageForm, getDataProfile
+import {
+  showEditForm,
+  showAboutForm,
+  showChangeImageForm,
+  getDataProfile,
 } from "../../actionCreators/MainAction";
 
 import Edit from "./EditName";
@@ -12,9 +15,9 @@ import EditPicture from "./EditPicture";
 
 const Profile = (props) => {
   const [data, setData] = useState({
-    username: '',
-    about: '',
-    image: ''
+    username: "",
+    about: "",
+    image: "",
   });
   const { profile, showEditForm, showAboutForm, showChangeImageForm } = props;
   const url = process.env.REACT_APP_API_URL;
@@ -23,32 +26,36 @@ const Profile = (props) => {
     setData({
       username: profile.username,
       about: profile.about,
-      image: profile.image
+      image: profile.image,
     });
-  }, [profile])
+  }, [profile]);
 
   useEffect(() => {
     props.getDataProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const image = `${url}/${data.image || 'public/usersImage/default-user-icon.jpg'}`
-  const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`
+  console.log(data.image);
+  const image = `${url}/${
+    data.image || "public/usersImage/default-user-icon.jpg"
+  }`;
+  const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
 
   const myProfile = {
     backgroundImage: `url(${image}), url(${imageNotFound})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '200px',
-    width: '200px',
-    borderRadius: '50%'
-  }
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "200px",
+    width: "200px",
+    borderRadius: "50%",
+  };
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100 px-0">
         <div className="text-center">
           <div>
-            <div className="mt-4 mx-auto" style={myProfile}>&nbsp;</div>
+            <div className="mt-4 mx-auto" style={myProfile}>
+              &nbsp;
+            </div>
           </div>
 
           <button
@@ -114,20 +121,20 @@ const Profile = (props) => {
         </div>
       </div>
       <Edit username={data.username} />
-      <AboutForm about={data.about}  />
+      <AboutForm about={data.about} />
       <EditPicture />
     </div>
   );
 };
 const mapStateToProps = (state) => {
   return {
-    profile: state.mainReducer.dataProfile
+    profile: state.mainReducer.dataProfile,
   };
 };
 const mapDispatchToProps = {
   getDataProfile,
   showEditForm,
   showAboutForm,
-  showChangeImageForm
+  showChangeImageForm,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

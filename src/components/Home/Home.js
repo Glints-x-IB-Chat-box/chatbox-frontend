@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import homePicture from "../../assets/text2.png";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import moment from "moment";
 import "../style.css";
 import Chatcomponent from "./ChatComponent";
+import RecentContact from "./RecentContact";
+
 // import io from "socket.io-client";
 
 import {
@@ -16,44 +18,69 @@ import { connect } from "react-redux";
 const Home = (props) => {
   // const socket = io(`${process.env.REACT_APP_API_URL}`);
   const [firstShow, setFirstShow] = useState(true);
-  const [targetUserId, setTargetUserId] = useState();
-  console.log(targetUserId);
+  const [dataMessage, setDataMessage] = useState([]);
+  let { id } = useParams();
 
-  const [messagesApi, setMessagesApi] = useState([]);
+  // const [messagesApi, setMessagesApi] = useState([]);
 
-  const [dataMessage, setDataMessage] = useState({
-    message: "",
-  });
-  console.log(dataMessage);
+  const [message, setMessage] = useState("");
+  // console.log(message);
 
   const changeFirstShow = (data) => {
-    setTargetUserId(data._id);
+    console.log(data);
     props.showDetailRecentChat(data);
     setFirstShow(false);
   };
 
   const handleChangeMessage = (event) => {
-    let { name, value } = event.currentTarget;
-    setDataMessage({
-      ...dataMessage,
-      [name]: value,
-    });
+    let { value } = event.currentTarget;
+    setMessage(value);
   };
 
   const sendMessage = (dataTargetUserId) => {
-    props.addMessage(dataTargetUserId, dataMessage);
+    props.addMessage(dataTargetUserId, message);
     // setMessagesApi("");
     // socket.emit("sendMessage", dataMessage, () => setMessagesApi(""));
   };
 
+  // useEffect(() => {
+  //   // console.log(targetUserId);
+  //   // setMessagesApi(props.dataMessage);
+  //   props.getDataMessage(targetUserId);
+  //   // socket.on("sendMessage", (Message) => {
+  //   //   setMessagesApi(props.dataMessage, Message);
+  //   // });
+  // }, [sendMessage, changeFirstShow]);
+
   useEffect(() => {
-    // console.log(targetUserId);
-    // setMessagesApi(props.dataMessage);
-    props.getDataMessage(targetUserId);
-    // socket.on("sendMessage", (Message) => {
-    //   setMessagesApi(props.dataMessage, Message);
-    // });
-  }, [sendMessage, targetUserId]);
+    props.getDataMessage(id);
+
+    //   // const newDataMessage = dataMessage.find((item) => {
+    //   //   return id == item.usersId;
+    //   // });
+    //   // console.log("useEffect", id);
+  }, []);
+
+  useEffect(() => {
+    console.log(props.dataMessage);
+    console.log(id);
+
+    props.getDataMessage(id);
+
+    let newDataMessage = props.dataMessage.find((item) => {
+      if (!item) {
+        setDataMessage([]);
+      } else return item._id === id;
+    });
+    if (!newDataMessage) {
+      setDataMessage(props.dataMessage);
+    } else {
+      setDataMessage([]);
+    }
+    console.log(dataMessage);
+
+    // setDataMessage(newDataMessage || []);
+  }, [props.dataMessage]);
 
   let chatDate = undefined;
 
@@ -81,31 +108,11 @@ const Home = (props) => {
         <div>
           {props.RecentChatContacts.map((item, index) => {
             return (
-              <Link to={`/app/chat/${item._id}`} key={index}>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => changeFirstShow(item)}
-                  className="list-group-item list-group-item-action active section-chat py-3"
-                >
-                  <div className="d-flex d-row">
-                    <img
-                      src={item.image}
-                      className="chat-profile-pic rounded-circle"
-                      alt="..."
-                    />
-                    <div className="section-chat-div align-self-center">
-                      <div className="d-flex d-row">
-                        <h6 className="my-0 name-chat">{item.username}</h6>
-                        <span className="dot bg-success" />
-                      </div>
-                      <p className="preview-chat my-0">(Recent Chat)</p>
-                    </div>
-                    <p className="ml-auto d-flex align-items-center time-text">
-                      12.50
-                    </p>
-                  </div>
-                </div>
-              </Link>
+              <RecentContact
+                item={item}
+                key={index}
+                changeFirstShow={changeFirstShow}
+              />
             );
           })}
         </div>
@@ -134,34 +141,45 @@ const Home = (props) => {
             </div>
 
             <div className="container pt-3 scrollable-div">
-              {props.dataMessage.map((item, index) => {
-                const time = moment(`${item.createdAt}`);
+              {dataMessage.map((item, index) => {
+                console.log(item);
+                let newChatComponent = <></>;
+                if (item.usersId.find((item) => item._id === id)) {
+                  newChatComponent = item.messages.map((itemMessage, index) => {
+                    // console.log(itemMessage);
 
-                const fixDate = time.format("dddd,D MMMM YYYY");
+                    const time = moment(`${itemMessage.createdAt}`);
 
-                // PERBANDINGAN STRING DI TIME
-                let showTanggal = <></>;
-                if (chatDate != fixDate) {
-                  showTanggal = (
-                    <h6 className="font-weight-bold text-center pb-1">
-                      {fixDate}
-                    </h6>
-                  );
-                  chatDate = fixDate;
+                    const fixDate = time.format("dddd,D MMMM YYYY");
+
+                    // PERBANDINGAN STRING DI TIME
+                    let showTanggal = <></>;
+                    if (chatDate !== fixDate) {
+                      showTanggal = (
+                        <h6 className="font-weight-bold text-center pb-1">
+                          {fixDate}
+                        </h6>
+                      );
+                      chatDate = fixDate;
+                    }
+
+                    return (
+                      <div key={index}>
+                        {showTanggal}
+
+                        <Chatcomponent
+                          item={itemMessage}
+                          // dataMessageApi={messagesApi}
+                          DetailChatRecentContact={
+                            props.DetailChatRecentContact
+                          }
+                        />
+                      </div>
+                    );
+                  });
+                  return newChatComponent;
                 }
-
-                return (
-                  <div>
-                    {showTanggal}
-
-                    <Chatcomponent
-                      dataItem={item}
-                      // dataMessageApi={messagesApi}
-                      DetailChatRecentContact={props.DetailChatRecentContact}
-                      key={index}
-                    />
-                  </div>
-                );
+                return;
               })}
             </div>
             <div className="d-flex pt-2 px-2 bg-white ">
@@ -171,22 +189,22 @@ const Home = (props) => {
                 type="text"
                 placeholder="Input your message here..."
                 className="input-chat"
-                value={dataMessage.message}
+                value={message}
                 onChange={handleChangeMessage}
                 required
               />
-              <p className="align-self-center my-0">
-                <i className="far fa-grin-alt h3 px-3 " />
+              <p className="align-self-center my-0 ">
+                <i className="far fa-grin-alt h3 px-3 chat-btn" />
               </p>
-              <p className="align-self-center my-0">
-                <i className="fas fa-paperclip h3 " />
+              <p className="align-self-center my-0 ">
+                <i className="fas fa-paperclip h3 chat-btn" />
               </p>
               <p
                 style={{ cursor: "pointer" }}
                 onClick={() => sendMessage(props.DetailChatRecentContact._id)}
                 className="align-self-center my-0"
               >
-                <i className="fas fa-arrow-circle-right h3 px-3 " />
+                <i className="fas fa-arrow-circle-right h3 px-3 chat-btn" />
               </p>
             </div>
           </div>
@@ -197,6 +215,14 @@ const Home = (props) => {
 };
 const mapStateToProps = (state) => {
   console.log(state.chatReducer.dataMessage);
+
+  // const newDataMessage = state.chatReducer.dataMessage.find((item) => {
+  //   if (id == item.usersId) {
+  //     return true;
+  //   }
+  //   return false;
+  // });
+
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,

@@ -35,7 +35,7 @@ export const addMessage = (...data) => {
         {
           senderUserId: decodeToken.id,
           targetUserId: data[0],
-          message: data[1].message,
+          message: data[1],
         },
         {
           headers: {
@@ -68,7 +68,7 @@ export const getDataMessage = (dataTargetUserId) => {
 
       dispatch({
         type: "GET_DATA_MESSAGE",
-        payload: response.data[0].messages,
+        payload: response.data[0],
       });
     } catch (error) {}
   };

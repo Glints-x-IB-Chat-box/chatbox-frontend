@@ -3,13 +3,17 @@ import moment from "moment";
 import jwt from "jwt-decode";
 
 const Chatcomponent = (props) => {
-  const decodedToken = jwt(localStorage.getItem("token"));
-  const time = moment(`${props.dataItem.createdAt}`);
-  const fixTime = time.format("HH:mm");
+  // console.log(props.item);
 
+  const decodedToken = jwt(localStorage.getItem("token"));
+  const time = moment(`${props.item.createdAt}`);
+  const fixTime = time.format("HH:mm");
+  // if (0 >= props.item.length) {
+  //   return false;
+  // } else
   return (
     <div>
-      {decodedToken.id === props.dataItem.senderUserId ? (
+      {decodedToken.id === props.item.senderUserId ? (
         <div className="row justify-content-end pb-2">
           <div className="col-md-6">
             <div className="bg-mainchat p-3">
@@ -17,7 +21,7 @@ const Chatcomponent = (props) => {
                 <h6 className="font-weight-bold">Me</h6>
                 <p className="my-0 ml-auto time-text">{fixTime}</p>
               </div>
-              <h6 className="my-0">{props.dataItem.message}</h6>
+              <h6 className="my-0">{props.item.message}</h6>
             </div>
           </div>
         </div>
@@ -31,7 +35,7 @@ const Chatcomponent = (props) => {
                 </h6>
                 <p className="my-0 ml-auto time-text">{fixTime}</p>
               </div>
-              <h6 className="my-0">{props.dataItem.message}</h6>
+              <h6 className="my-0">{props.item.message}</h6>
             </div>
           </div>
         </div>
