@@ -17,6 +17,7 @@ const Profile = (props) => {
     image: ''
   });
   const { profile, showEditForm, showAboutForm, showChangeImageForm } = props;
+  const url = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     setData({
@@ -31,8 +32,11 @@ const Profile = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const image = `${url}/${data.image || 'public/usersImage/default-user-icon.jpg'}`
+  const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`
+
   const myProfile = {
-    backgroundImage: `url(${data.image})`,
+    backgroundImage: `url(${image}), url(${imageNotFound})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '200px',
