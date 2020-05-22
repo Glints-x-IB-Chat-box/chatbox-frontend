@@ -14,7 +14,6 @@ class EditPicture extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     var formData = new FormData()
-    console.log('imageRef', this.imageRef.current)
     formData.append("image", this.imageRef.current.files[0])
     this.props.hideChangeImageForm()
     this.props.updateProfPic(formData)
