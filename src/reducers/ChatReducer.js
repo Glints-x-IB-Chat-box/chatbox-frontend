@@ -34,12 +34,11 @@ const ChatReducer = (state = initialState, action) => {
       });
 
       let newDataMessage = [];
+      console.log(state.dataMessage);
 
       if (!found) {
         newDataMessage = [...state.dataMessage, action.payload];
       } else {
-        // console.log(state.dataMessage);
-
         newDataMessage = state.dataMessage.map((item) => {
           if (action.payload._id === item._id) {
             return action.payload;

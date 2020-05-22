@@ -3,7 +3,7 @@ import moment from "moment";
 import jwt from "jwt-decode";
 
 const Chatcomponent = (props) => {
-  console.log(props.item);
+  // console.log(props.item);
 
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);

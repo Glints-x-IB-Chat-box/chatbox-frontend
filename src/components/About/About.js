@@ -10,21 +10,21 @@ import "../style.css";
 export default function About() {
   const aboutPic = (picture) => {
     const url = process.env.REACT_APP_API_URL;
-    const image = picture
-    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`
-    return ({
+    const image = picture;
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
+    return {
       backgroundImage: `url(${image}), url(${imageNotFound})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      paddingTop: '75%',
-      width: '75%',
-      borderRadius: '50%'
-    })
-  }
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      paddingTop: "75%",
+      width: "75%",
+      borderRadius: "50%",
+    };
+  };
 
   const cardText = {
-    height: '110px'
-  }
+    height: "120px",
+  };
 
   return (
     <div className="row mx-0">
@@ -67,13 +67,16 @@ export default function About() {
             <div className="row mx-0 d-flex justify-content-center">
               <div className="col-5 col-md-5">
                 <div className="card about-card">
-                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(Fred)}></div>
+                  <div
+                    className="card-img-top mt-4 mx-auto"
+                    style={aboutPic(Fred)}
+                  ></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">Frederick</h5>
                     <p className="card-text overflow-auto" style={cardText}>
-                      Hello! I'm Frederick, creating solutions for problems in
-                      this 4.0 Era is a great thing to do for me as a fullstack
-                      developer, Why not we greet each other?
+                      Hello! I'm Frederick, as a Fullstack Developer, creating
+                      solutions for problems in digital era is a great thing to
+                      do for me. Why not we greet each other?
                     </p>
                     <a
                       target="blank"
@@ -88,7 +91,10 @@ export default function About() {
 
               <div className="col-5 col-md-5 ">
                 <div className="card about-card">
-                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(Ozy)}></div>
+                  <div
+                    className="card-img-top mt-4 mx-auto"
+                    style={aboutPic(Ozy)}
+                  ></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">
                       Ahmad Fakhrozy
@@ -113,7 +119,10 @@ export default function About() {
             <div className="row mx-0 d-flex justify-content-center">
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
-                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(River)}></div>
+                  <div
+                    className="card-img-top mt-4 mx-auto"
+                    style={aboutPic(River)}
+                  ></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">River Huang</h5>
                     <p className="card-text overflow-auto" style={cardText}>
@@ -133,7 +142,10 @@ export default function About() {
 
               <div className="col-5 col-md-5 pt-4">
                 <div className="card about-card">
-                  <div className="card-img-top mt-4 mx-auto" style={aboutPic(Intan)}></div>
+                  <div
+                    className="card-img-top mt-4 mx-auto"
+                    style={aboutPic(Intan)}
+                  ></div>
                   <div className="card-body">
                     <h5 className="card-title font-weight-bold">Intan Adela</h5>
                     <p className="card-text overflow-auto" style={cardText}>

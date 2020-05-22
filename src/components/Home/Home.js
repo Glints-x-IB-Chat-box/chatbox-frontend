@@ -52,21 +52,25 @@ const Home = (props) => {
   //   // });
   // }, [sendMessage, changeFirstShow]);
 
-  // useEffect(() => {
-  //   props.getDataMessage(id);
+  useEffect(() => {
+    props.getDataMessage(id);
 
-  //   // const newDataMessage = dataMessage.find((item) => {
-  //   //   return id == item.usersId;
-  //   // });
-  //   // console.log("useEffect", id);
-  // }, [sendMessage]);
+    //   // const newDataMessage = dataMessage.find((item) => {
+    //   //   return id == item.usersId;
+    //   // });
+    //   // console.log("useEffect", id);
+  }, []);
 
   useEffect(() => {
     console.log(props.dataMessage);
     console.log(id);
 
+    props.getDataMessage(id);
+
     let newDataMessage = props.dataMessage.find((item) => {
-      return item._id === id;
+      if (!item) {
+        setDataMessage([]);
+      } else return item._id === id;
     });
     if (!newDataMessage) {
       setDataMessage(props.dataMessage);
@@ -75,10 +79,8 @@ const Home = (props) => {
     }
     console.log(dataMessage);
 
-    props.getDataMessage(id);
-
     // setDataMessage(newDataMessage || []);
-  }, [props.dataMessage, sendMessage]);
+  }, [props.dataMessage]);
 
   let chatDate = undefined;
 
@@ -144,7 +146,7 @@ const Home = (props) => {
                 let newChatComponent = <></>;
                 if (item.usersId.find((item) => item._id === id)) {
                   newChatComponent = item.messages.map((itemMessage, index) => {
-                    console.log(itemMessage);
+                    // console.log(itemMessage);
 
                     const time = moment(`${itemMessage.createdAt}`);
 
