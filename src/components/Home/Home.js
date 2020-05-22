@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import homePicture from "../../assets/text2.png";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import jwt from "jwt-decode";
 import "../style.css";
+import Chatcomponent from "./ChatComponent";
+// import io from "socket.io-client";
 
 import {
   showDetailRecentChat,
@@ -13,15 +14,20 @@ import {
 import { connect } from "react-redux";
 
 const Home = (props) => {
-  const decodedToken = jwt(localStorage.getItem("token"));
+  // const socket = io(`${process.env.REACT_APP_API_URL}`);
   const [firstShow, setFirstShow] = useState(true);
+  const [targetUserId, setTargetUserId] = useState();
+  console.log(targetUserId);
+
+  const [messagesApi, setMessagesApi] = useState([]);
+
   const [dataMessage, setDataMessage] = useState({
     message: "",
   });
   console.log(dataMessage);
 
   const changeFirstShow = (data) => {
-    props.getDataMessage(data._id);
+    setTargetUserId(data._id);
     props.showDetailRecentChat(data);
     setFirstShow(false);
   };
@@ -36,11 +42,20 @@ const Home = (props) => {
 
   const sendMessage = (dataTargetUserId) => {
     props.addMessage(dataTargetUserId, dataMessage);
+    // setMessagesApi("");
+    // socket.emit("sendMessage", dataMessage, () => setMessagesApi(""));
   };
 
-  // useEffect(() => {
-  //   props.RecentChatContacts();
-  // }, []);
+  useEffect(() => {
+    // console.log(targetUserId);
+    // setMessagesApi(props.dataMessage);
+    props.getDataMessage(targetUserId);
+    // socket.on("sendMessage", (Message) => {
+    //   setMessagesApi(props.dataMessage, Message);
+    // });
+  }, [sendMessage, targetUserId]);
+
+  let chatDate = undefined;
 
   return (
     <div className="row mx-0">
@@ -121,44 +136,30 @@ const Home = (props) => {
             <div className="container pt-3 scrollable-div">
               {props.dataMessage.map((item, index) => {
                 const time = moment(`${item.createdAt}`);
-                const fixTime = time.format("HH:mm");
+
                 const fixDate = time.format("dddd,D MMMM YYYY");
-                return (
-                  <div key={index}>
+
+                // PERBANDINGAN STRING DI TIME
+                let showTanggal = <></>;
+                if (chatDate != fixDate) {
+                  showTanggal = (
                     <h6 className="font-weight-bold text-center pb-1">
                       {fixDate}
                     </h6>
-                    {decodedToken.id === item.senderUserId ? (
-                      <div className="row justify-content-end pt-2">
-                        <div className="col-md-6">
-                          <div className="bg-mainchat p-3">
-                            <div className="d-flex">
-                              <h6 className="font-weight-bold">Me</h6>
-                              <p className="my-0 ml-auto time-text">
-                                {fixTime}
-                              </p>
-                            </div>
-                            <h6 className="my-0">{item.message}</h6>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="row justify-content-start pt-2">
-                        <div className="col-md-6">
-                          <div className="bg-light p-3">
-                            <div className="d-flex">
-                              <h6 className="font-weight-bold">
-                                {props.DetailChatRecentContact.username}
-                              </h6>
-                              <p className="my-0 ml-auto time-text">
-                                {fixTime}
-                              </p>
-                            </div>
-                            <h6 className="my-0">{item.message}</h6>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                  );
+                  chatDate = fixDate;
+                }
+
+                return (
+                  <div>
+                    {showTanggal}
+
+                    <Chatcomponent
+                      dataItem={item}
+                      // dataMessageApi={messagesApi}
+                      DetailChatRecentContact={props.DetailChatRecentContact}
+                      key={index}
+                    />
                   </div>
                 );
               })}
@@ -172,6 +173,7 @@ const Home = (props) => {
                 className="input-chat"
                 value={dataMessage.message}
                 onChange={handleChangeMessage}
+                required
               />
               <p className="align-self-center my-0">
                 <i className="far fa-grin-alt h3 px-3 " />
@@ -194,8 +196,7 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  // console.log(state);
-  // console.log(state.chatReducer.dataMessage[0]);
+  console.log(state.chatReducer.dataMessage);
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
