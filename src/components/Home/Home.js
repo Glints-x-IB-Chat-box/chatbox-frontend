@@ -53,7 +53,7 @@ const Home = (props) => {
     // socket.on("sendMessage", (Message) => {
     //   setMessagesApi(props.dataMessage, Message);
     // });
-  }, [sendMessage]);
+  }, [sendMessage, changeFirstShow]);
 
   let chatDate = undefined;
 
@@ -175,18 +175,18 @@ const Home = (props) => {
                 onChange={handleChangeMessage}
                 required
               />
-              <p className="align-self-center my-0">
-                <i className="far fa-grin-alt h3 px-3 " />
+              <p className="align-self-center my-0 ">
+                <i className="far fa-grin-alt h3 px-3 chat-btn" />
               </p>
-              <p className="align-self-center my-0">
-                <i className="fas fa-paperclip h3 " />
+              <p className="align-self-center my-0 ">
+                <i className="fas fa-paperclip h3 chat-btn" />
               </p>
               <p
                 style={{ cursor: "pointer" }}
                 onClick={() => sendMessage(props.DetailChatRecentContact._id)}
                 className="align-self-center my-0"
               >
-                <i className="fas fa-arrow-circle-right h3 px-3 " />
+                <i className="fas fa-arrow-circle-right h3 px-3 chat-btn" />
               </p>
             </div>
           </div>
