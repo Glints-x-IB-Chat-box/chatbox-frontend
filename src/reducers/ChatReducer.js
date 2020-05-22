@@ -27,7 +27,9 @@ const ChatReducer = (state = initialState, action) => {
     case "SHOW_DETAIL_RECENT_CHAT":
       return { ...state, DetailChatRecentContact: action.payload };
     case "ADD_MESSAGE":
-      return { ...state, dataMessage: [action.payload] };
+      console.log(state.dataMessage);
+
+      return { ...state, dataMessage: [...state.dataMessage, action.payload] };
     case "GET_DATA_MESSAGE":
       const found = state.dataMessage.find((item) => {
         return item._id === action.payload._id;
