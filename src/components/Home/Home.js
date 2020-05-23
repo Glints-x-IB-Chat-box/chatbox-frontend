@@ -12,6 +12,7 @@ import {
   showDetailRecentChat,
   addMessage,
   getDataMessage,
+  fetchHistoryChat,
 } from "../../actionCreators/ChatAction";
 import { connect } from "react-redux";
 
@@ -20,15 +21,14 @@ const Home = (props) => {
   const [firstShow, setFirstShow] = useState(true);
   const [dataMessage, setDataMessage] = useState([]);
   let { id } = useParams();
-
   // const [messagesApi, setMessagesApi] = useState([]);
 
   const [message, setMessage] = useState("");
-  // console.log(message);
 
   const changeFirstShow = (data) => {
     console.log(data);
     props.showDetailRecentChat(data);
+    props.getDataMessage(data._id);
     setFirstShow(false);
   };
 
@@ -53,7 +53,8 @@ const Home = (props) => {
   // }, [sendMessage, changeFirstShow]);
 
   useEffect(() => {
-    props.getDataMessage(id);
+    // props.getDataMessage(id);
+    props.fetchHistoryChat();
   }, []);
 
   useEffect(() => {
@@ -163,7 +164,6 @@ const Home = (props) => {
 
                         <Chatcomponent
                           item={itemMessage}
-                          // dataMessageApi={messagesApi}
                           DetailChatRecentContact={
                             props.DetailChatRecentContact
                           }
@@ -173,10 +173,10 @@ const Home = (props) => {
                   });
                   return newChatComponent;
                 }
-                return;
+                return <></>;
               })}
             </div>
-            <div className="d-flex pt-2 px-2 bg-white ">
+            <div className="d-flex pt-2 px-2 bg-white justify-content-center">
               <textarea
                 name="message"
                 rows="2"
@@ -208,14 +208,8 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
+  console.log(state);
   console.log(state.chatReducer.dataMessage);
-
-  // const newDataMessage = state.chatReducer.dataMessage.find((item) => {
-  //   if (id == item.usersId) {
-  //     return true;
-  //   }
-  //   return false;
-  // });
 
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
@@ -228,6 +222,7 @@ const mapDispatchToProps = {
   showDetailRecentChat,
   addMessage,
   getDataMessage,
+  fetchHistoryChat,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

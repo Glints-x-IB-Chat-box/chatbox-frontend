@@ -8,9 +8,6 @@ const Chatcomponent = (props) => {
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);
   const fixTime = time.format("HH:mm");
-  // if (0 >= props.item.length) {
-  //   return false;
-  // } else
   return (
     <div>
       {decodedToken.id === props.item.senderUserId ? (
