@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import homePicture from "../../assets/text2.png";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import jwt from "jwt-decode";
 import "../style.css";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
+import axios from "axios";
 
 // import io from "socket.io-client";
+import { Planet } from "react-planet";
 
 import {
   showDetailRecentChat,
@@ -23,8 +26,81 @@ const Home = (props) => {
   const [dataMessage, setDataMessage] = useState([]);
   let { id } = useParams();
   // const [messagesApi, setMessagesApi] = useState([]);
+  const sender = jwt(localStorage.getItem("token"));
 
   const [message, setMessage] = useState("");
+
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("");
+  // console.log(id);
+  const selectFile = (e) => {
+    console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+  const selectDocuments = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+  const sendDocument = (e) => {
+    e.preventDefault();
+    const fd = new FormData();
+    fd.append("documents", file);
+    fd.append("senderUserId", sender.id);
+    fd.append("targetUserId", id);
+    axios
+      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          console.log(
+            `Upload Progress: ${
+              (progressEvent.loaded, progressEvent.total)
+            } ${Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            )} %`
+          );
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setFile("");
+        setFileName("");
+      })
+      .catch((err) => console.log(err));
+  };
+  const sendImage = (e) => {
+    e.preventDefault();
+
+    const fd = new FormData();
+    fd.append("images", file);
+    fd.append("senderUserId", sender.id);
+    fd.append("targetUserId", id);
+    axios
+      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          console.log(
+            `Upload Progress: ${
+              (progressEvent.loaded, progressEvent.total)
+            } ${Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            )} %`
+          );
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setFile("");
+        setFileName("");
+      })
+      .catch((err) => console.log(err));
+  };
 
   const changeFirstShow = (data) => {
     console.log(data);
@@ -211,13 +287,49 @@ const Home = (props) => {
               <p className="align-self-center my-0 ">
                 <i className="far fa-grin-alt h3 px-3 chat-btn" />
               </p>
-              <p className="align-self-center my-0 ">
-                <i className="fas fa-paperclip h3 chat-btn" />
-              </p>
+
+              {/* <input type="file"  ref={inputRef} className="form-control-file" onChange={selectFile}/>   */}
+              <Planet
+                className="align-self-center my-0 "
+                centerContent={
+                  <p
+                    className="align-self-center my-0 "
+                    style={{ cursor: "pointer" }}
+                  >
+                    <i className="fas fa-paperclip h3 chat-btn" />
+                  </p>
+                }
+                hideOrbit
+                autoClose
+                orbitRadius={60}
+                rotation={105}
+                // the bounce direction is minimal visible
+                // but on close it seems the button wobbling a bit to the bottom
+                bounceDirection="BOTTOM"
+              >
+                <button onClick={sendImage}>test</button>
+                <button onClick={sendDocument}>documents</button>
+                <input
+                  type="file"
+                  className="form-control-file"
+                  onChange={selectDocuments}
+                />
+                <input
+                  type="file"
+                  // ref={inputRef}
+                  className="form-control-file"
+                  onChange={selectFile}
+                />
+                <div />
+                <div />
+                <div />
+                <div />
+              </Planet>
+
               <p
                 style={{ cursor: "pointer" }}
                 onClick={() => sendMessage(props.DetailChatRecentContact._id)}
-                className="align-self-center my-0"
+                className="align-self-center ml-3 my-0"
               >
                 <i className="fas fa-arrow-circle-right h3 px-3 chat-btn" />
               </p>
