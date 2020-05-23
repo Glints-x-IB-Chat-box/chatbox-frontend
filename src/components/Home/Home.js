@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import homePicture from "../../assets/text2.png";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import jwt from "jwt-decode";
 import "../style.css";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
+import axios from "axios";
 
 // import io from "socket.io-client";
+import { Planet } from "react-planet";
 
 import {
   showDetailRecentChat,
   addMessage,
   getDataMessage,
+  fetchHistoryChat,
 } from "../../actionCreators/ChatAction";
+import { getDataContact } from "../../actionCreators/MainAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
@@ -20,15 +25,87 @@ const Home = (props) => {
   const [firstShow, setFirstShow] = useState(true);
   const [dataMessage, setDataMessage] = useState([]);
   let { id } = useParams();
-
   // const [messagesApi, setMessagesApi] = useState([]);
+  const sender = jwt(localStorage.getItem("token"));
 
   const [message, setMessage] = useState("");
-  // console.log(message);
+
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("");
+  // console.log(id);
+  const selectFile = (e) => {
+    console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+  const selectDocuments = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+  const sendDocument = (e) => {
+    e.preventDefault();
+    const fd = new FormData();
+    fd.append("documents", file);
+    fd.append("senderUserId", sender.id);
+    fd.append("targetUserId", id);
+    axios
+      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          console.log(
+            `Upload Progress: ${
+              (progressEvent.loaded, progressEvent.total)
+            } ${Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            )} %`
+          );
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setFile("");
+        setFileName("");
+      })
+      .catch((err) => console.log(err));
+  };
+  const sendImage = (e) => {
+    e.preventDefault();
+
+    const fd = new FormData();
+    fd.append("images", file);
+    fd.append("senderUserId", sender.id);
+    fd.append("targetUserId", id);
+    axios
+      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          console.log(
+            `Upload Progress: ${
+              (progressEvent.loaded, progressEvent.total)
+            } ${Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            )} %`
+          );
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setFile("");
+        setFileName("");
+      })
+      .catch((err) => console.log(err));
+  };
 
   const changeFirstShow = (data) => {
     console.log(data);
     props.showDetailRecentChat(data);
+    props.getDataMessage(data._id);
     setFirstShow(false);
   };
 
@@ -51,14 +128,16 @@ const Home = (props) => {
   //   //   setMessagesApi(props.dataMessage, Message);
   //   // });
   // }, [sendMessage, changeFirstShow]);
-
   useEffect(() => {
-    props.getDataMessage(id);
+    props.getDataContact();
   }, []);
 
   useEffect(() => {
-    console.log(props.dataMessage);
-    console.log(id);
+    // props.getDataMessage(id);
+    props.fetchHistoryChat();
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
       props.getDataMessage(id);
     }, 1000);
@@ -77,6 +156,17 @@ const Home = (props) => {
   }, [props.dataMessage]);
 
   let chatDate = undefined;
+
+  const contactPic = (picture) => {
+    const url = process.env.REACT_APP_API_URL;
+    const image = `${url}/${picture}`;
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
+    return {
+      backgroundImage: `url(${image}), url(${imageNotFound})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    };
+  };
 
   return (
     <div className="row mx-0">
@@ -101,6 +191,9 @@ const Home = (props) => {
 
         <div>
           {props.RecentChatContacts.map((item, index) => {
+            // console.log(item);
+            // console.log(props.dataContact);
+
             return (
               <RecentContact
                 item={item}
@@ -109,6 +202,10 @@ const Home = (props) => {
               />
             );
           })}
+        </div>
+        <div className="pb-4">
+          <h5 className="pt-3 text-center">Unadded Contacts</h5>
+          <hr className="bg-light mt-0 w-50" />
         </div>
       </div>
 
@@ -124,8 +221,8 @@ const Home = (props) => {
         <div className="col-md-8 px-0">
           <div className="bg-main support-scrollable-div">
             <div className="bg-light d-flex py-2">
-              <img
-                src={props.DetailChatRecentContact.image}
+              <div
+                style={contactPic(props.DetailChatRecentContact.image)}
                 alt="..."
                 className="rounded-circle img-chat ml-3"
               />
@@ -136,8 +233,9 @@ const Home = (props) => {
 
             <div className="container pt-3 scrollable-div">
               {dataMessage.map((item) => {
-                console.log(dataMessage.item);
                 let newChatComponent = <></>;
+                // IF item.id == id - mengcover agar saat pindah ke user lain data messagenya adalah milik user itu
+                // item && item.usersId - mengcover error pada item._id, dmana error bisa terjadi saat si "item"._id ini ngga ada.
                 if (item && item.usersId.find((item) => item._id === id)) {
                   newChatComponent = item.messages.map((itemMessage, index) => {
                     // console.log(itemMessage);
@@ -163,7 +261,6 @@ const Home = (props) => {
 
                         <Chatcomponent
                           item={itemMessage}
-                          // dataMessageApi={messagesApi}
                           DetailChatRecentContact={
                             props.DetailChatRecentContact
                           }
@@ -173,10 +270,10 @@ const Home = (props) => {
                   });
                   return newChatComponent;
                 }
-                return;
+                return <></>;
               })}
             </div>
-            <div className="d-flex pt-2 px-2 bg-white ">
+            <div className="d-flex pt-2 px-2 bg-white justify-content-center">
               <textarea
                 name="message"
                 rows="2"
@@ -190,13 +287,49 @@ const Home = (props) => {
               <p className="align-self-center my-0 ">
                 <i className="far fa-grin-alt h3 px-3 chat-btn" />
               </p>
-              <p className="align-self-center my-0 ">
-                <i className="fas fa-paperclip h3 chat-btn" />
-              </p>
+
+              {/* <input type="file"  ref={inputRef} className="form-control-file" onChange={selectFile}/>   */}
+              <Planet
+                className="align-self-center my-0 "
+                centerContent={
+                  <p
+                    className="align-self-center my-0 "
+                    style={{ cursor: "pointer" }}
+                  >
+                    <i className="fas fa-paperclip h3 chat-btn" />
+                  </p>
+                }
+                hideOrbit
+                autoClose
+                orbitRadius={60}
+                rotation={105}
+                // the bounce direction is minimal visible
+                // but on close it seems the button wobbling a bit to the bottom
+                bounceDirection="BOTTOM"
+              >
+                <button onClick={sendImage}>test</button>
+                <button onClick={sendDocument}>documents</button>
+                <input
+                  type="file"
+                  className="form-control-file"
+                  onChange={selectDocuments}
+                />
+                <input
+                  type="file"
+                  // ref={inputRef}
+                  className="form-control-file"
+                  onChange={selectFile}
+                />
+                <div />
+                <div />
+                <div />
+                <div />
+              </Planet>
+
               <p
                 style={{ cursor: "pointer" }}
                 onClick={() => sendMessage(props.DetailChatRecentContact._id)}
-                className="align-self-center my-0"
+                className="align-self-center ml-3 my-0"
               >
                 <i className="fas fa-arrow-circle-right h3 px-3 chat-btn" />
               </p>
@@ -208,18 +341,15 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state.chatReducer.dataMessage);
-
-  // const newDataMessage = state.chatReducer.dataMessage.find((item) => {
-  //   if (id == item.usersId) {
-  //     return true;
-  //   }
-  //   return false;
+  console.log(state);
+  // const mappedDataContact = state.mainReducer.dataContact.map((item) => {
+  //   return item._id;
   // });
 
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
+    // dataContact: mappedDataContact,
     dataMessage: state.chatReducer.dataMessage,
   };
 };
@@ -228,6 +358,8 @@ const mapDispatchToProps = {
   showDetailRecentChat,
   addMessage,
   getDataMessage,
+  fetchHistoryChat,
+  getDataContact,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

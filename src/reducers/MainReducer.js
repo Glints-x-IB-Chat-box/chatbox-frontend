@@ -45,9 +45,9 @@ const MainReducer = (state = initialState, action) => {
     case "HIDE_CHANGEIMAGE_FORM":
       return { ...state, isShowPictureForm: false };
     case "GET_DATA_PROFILE":
-      return { ...state, dataProfile: action.payload};
-    case 'UPDATE_DATA_PROFILE':
-      return { ...state, dataProfile: action.payload};
+      return { ...state, dataProfile: action.payload };
+    case "UPDATE_DATA_PROFILE":
+      return { ...state, dataProfile: action.payload };
     default:
       return state;
   }

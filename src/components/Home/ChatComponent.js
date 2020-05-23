@@ -3,14 +3,11 @@ import moment from "moment";
 import jwt from "jwt-decode";
 
 const Chatcomponent = (props) => {
-  // console.log(props.item);
+  console.log(props.item);
 
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);
   const fixTime = time.format("HH:mm");
-  // if (0 >= props.item.length) {
-  //   return false;
-  // } else
   return (
     <div>
       {decodedToken.id === props.item.senderUserId ? (
@@ -21,6 +18,34 @@ const Chatcomponent = (props) => {
                 <h6 className="font-weight-bold">Me</h6>
                 <p className="my-0 ml-auto time-text">{fixTime}</p>
               </div>
+
+              {props.item.images.length >= 1
+                ? props.item.images.map((image) => {
+                    return (
+                      <img
+                        style={{ width: "100px" }}
+                        src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                        alt={image}
+                      />
+                    );
+                  })
+                : null}
+              {props.item.documents.length >= 1
+                ? props.item.documents.map((document) => {
+                    return (
+                      <div>
+                        <a
+                          href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
+                          width="100px"
+                          target="_blank"
+                        >
+                          {document}
+                        </a>
+                        {/* <button href={`http://localhost:8000/public/uploads/${document}`} download>test</button> */}
+                      </div>
+                    );
+                  })
+                : null}
               <h6 className="my-0">{props.item.message}</h6>
             </div>
           </div>
@@ -35,6 +60,33 @@ const Chatcomponent = (props) => {
                 </h6>
                 <p className="my-0 ml-auto time-text">{fixTime}</p>
               </div>
+              {props.item.images.length >= 1
+                ? props.item.images.map((image) => {
+                    return (
+                      <img
+                        style={{ width: "100px" }}
+                        src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                        alt="..."
+                      />
+                    );
+                  })
+                : null}
+              {props.item.documents.length >= 1
+                ? props.item.documents.map((document) => {
+                    return (
+                      <div>
+                        <a
+                          href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
+                          width="100px"
+                          target="_blank"
+                        >
+                          {document}
+                        </a>
+                        {/* <button href={`http://localhost:8000/public/uploads/${document}`} download>test</button> */}
+                      </div>
+                    );
+                  })
+                : null}
               <h6 className="my-0">{props.item.message}</h6>
             </div>
           </div>

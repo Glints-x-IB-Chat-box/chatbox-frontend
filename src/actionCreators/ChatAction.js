@@ -2,6 +2,25 @@ import axios from "axios";
 import jwt from "jwt-decode";
 const url = `${process.env.REACT_APP_API_URL}`;
 
+export const fetchHistoryChat = () => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}/chat/getchat`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      dispatch({
+        type: "FETCH_HISTORY_CHAT",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const createNewChat = (data) => {
   return (dispatch) => {
     dispatch({
@@ -22,11 +41,10 @@ export const showDetailRecentChat = (data) => {
 // ...DATA DENGAN INI KITA BISA MASUKKAN 2 VALUE DARI HOME COMPONENT
 export const addMessage = (...data) => {
   // console.log(data[0]);
-  // console.log(data[1].message);
+  // console.log(data[1]);
 
   const token = localStorage.getItem("token");
   const decodeToken = jwt(localStorage.getItem("token"));
-  // console.log(decodeToken);
 
   return async (dispatch) => {
     try {

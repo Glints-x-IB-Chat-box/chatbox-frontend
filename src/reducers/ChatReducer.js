@@ -26,17 +26,21 @@ const ChatReducer = (state = initialState, action) => {
 
     case "SHOW_DETAIL_RECENT_CHAT":
       return { ...state, DetailChatRecentContact: action.payload };
+
+    case "FETCH_HISTORY_CHAT":
+      return { ...state, RecentChatContacts: action.payload };
+
     case "ADD_MESSAGE":
       console.log(state.dataMessage);
 
-      return { ...state, dataMessage: [...state.dataMessage, action.payload] };
+      return { ...state, dataMessage: [action.payload] };
     case "GET_DATA_MESSAGE":
       const found = state.dataMessage.find((item) => {
         return item._id === action.payload._id;
       });
 
       let newDataMessage = [];
-      console.log(state.dataMessage);
+      // console.log(state.dataMessage);
 
       if (!found) {
         newDataMessage = [...state.dataMessage, action.payload];
