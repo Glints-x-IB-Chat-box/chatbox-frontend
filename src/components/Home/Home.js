@@ -14,6 +14,7 @@ import {
   getDataMessage,
   fetchHistoryChat,
 } from "../../actionCreators/ChatAction";
+import { getDataContact } from "../../actionCreators/MainAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
@@ -51,6 +52,9 @@ const Home = (props) => {
   //   //   setMessagesApi(props.dataMessage, Message);
   //   // });
   // }, [sendMessage, changeFirstShow]);
+  useEffect(() => {
+    props.getDataContact();
+  }, []);
 
   useEffect(() => {
     // props.getDataMessage(id);
@@ -58,8 +62,6 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(props.dataMessage);
-    console.log(id);
     setTimeout(() => {
       props.getDataMessage(id);
     }, 1000);
@@ -113,6 +115,9 @@ const Home = (props) => {
 
         <div>
           {props.RecentChatContacts.map((item, index) => {
+            // console.log(item);
+            // console.log(props.dataContact);
+
             return (
               <RecentContact
                 item={item}
@@ -121,6 +126,9 @@ const Home = (props) => {
               />
             );
           })}
+        </div>
+        <div>
+          <h6 className="pt-3 pl-3">Unadded Contacts</h6>
         </div>
       </div>
 
@@ -148,8 +156,9 @@ const Home = (props) => {
 
             <div className="container pt-3 scrollable-div">
               {dataMessage.map((item) => {
-                console.log(dataMessage.item);
                 let newChatComponent = <></>;
+                // IF item.id == id - mengcover agar saat pindah ke user lain data messagenya adalah milik user itu
+                // item && item.usersId - mengcover error pada item._id, dmana error bisa terjadi saat si "item"._id ini ngga ada.
                 if (item && item.usersId.find((item) => item._id === id)) {
                   newChatComponent = item.messages.map((itemMessage, index) => {
                     // console.log(itemMessage);
@@ -220,11 +229,14 @@ const Home = (props) => {
 };
 const mapStateToProps = (state) => {
   console.log(state);
-  console.log(state.chatReducer.dataMessage);
+  // const mappedDataContact = state.mainReducer.dataContact.map((item) => {
+  //   return item._id;
+  // });
 
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
+    // dataContact: mappedDataContact,
     dataMessage: state.chatReducer.dataMessage,
   };
 };
@@ -234,6 +246,7 @@ const mapDispatchToProps = {
   addMessage,
   getDataMessage,
   fetchHistoryChat,
+  getDataContact,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

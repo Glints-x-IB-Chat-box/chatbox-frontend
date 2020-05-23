@@ -40,7 +40,7 @@ const ChatReducer = (state = initialState, action) => {
       });
 
       let newDataMessage = [];
-      console.log(state.dataMessage);
+      // console.log(state.dataMessage);
 
       if (!found) {
         newDataMessage = [...state.dataMessage, action.payload];

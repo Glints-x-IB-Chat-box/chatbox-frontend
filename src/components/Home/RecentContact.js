@@ -31,7 +31,7 @@ const RecentContact = (props) => {
                 <h6 className="my-0 name-chat">{props.item.username}</h6>
                 <span className="dot bg-success" />
               </div>
-              <p className="preview-chat my-0">(Recent Chat)</p>
+              <p className="preview-chat my-0">{props.item.about}</p>
             </div>
             <p className="ml-auto d-flex align-items-center time-text">12.50</p>
           </div>
