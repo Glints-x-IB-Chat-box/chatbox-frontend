@@ -2,6 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RecentContact = (props) => {
+  const contactPic = (picture) => {
+    const url = process.env.REACT_APP_API_URL;
+    const image = `${url}/${picture}`;
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
+    return {
+      backgroundImage: `url(${image}), url(${imageNotFound})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    };
+  };
   return (
     <div>
       <Link to={`/app/chat/${props.item._id}`}>
@@ -11,8 +21,8 @@ const RecentContact = (props) => {
           className="list-group-item list-group-item-action active section-chat py-3"
         >
           <div className="d-flex d-row">
-            <img
-              src={props.item.image}
+            <div
+              style={contactPic(props.item.image)}
               className="chat-profile-pic rounded-circle"
               alt="..."
             />

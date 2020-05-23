@@ -79,6 +79,17 @@ const Home = (props) => {
 
   let chatDate = undefined;
 
+  const contactPic = (picture) => {
+    const url = process.env.REACT_APP_API_URL;
+    const image = `${url}/${picture}`;
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
+    return {
+      backgroundImage: `url(${image}), url(${imageNotFound})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    };
+  };
+
   return (
     <div className="row mx-0">
       <div className="col-md-4 vh-100 px-0 bg-mainchat border-right-3 border-white scrollable-div">
@@ -125,8 +136,8 @@ const Home = (props) => {
         <div className="col-md-8 px-0">
           <div className="bg-main support-scrollable-div">
             <div className="bg-light d-flex py-2">
-              <img
-                src={props.DetailChatRecentContact.image}
+              <div
+                style={contactPic(props.DetailChatRecentContact.image)}
                 alt="..."
                 className="rounded-circle img-chat ml-3"
               />

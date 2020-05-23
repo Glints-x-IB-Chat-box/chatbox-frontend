@@ -101,6 +101,7 @@ input.with-icon {
 }
 .img-chat {
   width: 3rem;
+  height: 3rem;
   margin: 0.5rem;
   border: solid #aaaaaa 1px;
 }
