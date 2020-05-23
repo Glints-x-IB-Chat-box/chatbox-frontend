@@ -199,6 +199,9 @@ input.with-icon {
     padding-left: 0.5rem;
     font-size: 1rem;
   }
+  .copyright-txt {
+    font-size: 0.8rem;
+  }
   .dot {
     height: 10px;
     width: 10px;

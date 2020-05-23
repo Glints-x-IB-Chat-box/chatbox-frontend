@@ -127,8 +127,9 @@ const Home = (props) => {
             );
           })}
         </div>
-        <div>
-          <h6 className="pt-3 pl-3">Unadded Contacts</h6>
+        <div className="pb-4">
+          <h5 className="pt-3 text-center">Unadded Contacts</h5>
+          <hr className="bg-light mt-0 w-50" />
         </div>
       </div>
 
