@@ -10,7 +10,7 @@ import "../style.css";
 export default function About() {
   const aboutPic = (picture) => {
     const url = process.env.REACT_APP_API_URL;
-    const image = `${url}/${picture}`;
+    const image = picture;
     const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
     return {
       backgroundImage: `url(${image}), url(${imageNotFound})`,
