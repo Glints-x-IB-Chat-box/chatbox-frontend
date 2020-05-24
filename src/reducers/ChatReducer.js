@@ -1,6 +1,7 @@
 const initialState = {
   dataMessage: [],
   RecentChatContacts: [],
+  RecentChatContacts2: [],
   DetailChatRecentContact: {},
 };
 
@@ -14,14 +15,14 @@ const ChatReducer = (state = initialState, action) => {
       let newRecentChatContacts = [];
 
       if (!find) {
-        newRecentChatContacts = [action.payload, ...state.RecentChatContacts];
+        newRecentChatContacts = [action.payload, ...state.RecentChatContacts2];
       } else {
-        newRecentChatContacts = state.RecentChatContacts;
+        newRecentChatContacts = state.RecentChatContacts2;
       }
 
       return {
         ...state,
-        RecentChatContacts: newRecentChatContacts,
+        RecentChatContacts2: newRecentChatContacts,
       };
 
     case "SHOW_DETAIL_RECENT_CHAT":
