@@ -9,8 +9,7 @@ import RecentContact from "./RecentContact";
 import axios from "axios";
 
 // import io from "socket.io-client";
-import { Planet } from "react-planet";
-
+import { Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import {
   showDetailRecentChat,
   addMessage,
@@ -25,7 +24,6 @@ const Home = (props) => {
   const [firstShow, setFirstShow] = useState(true);
   const [dataMessage, setDataMessage] = useState([]);
   let { id } = useParams();
-  // const [messagesApi, setMessagesApi] = useState([]);
   const sender = jwt(localStorage.getItem("token"));
 
   const [message, setMessage] = useState("");
@@ -135,7 +133,8 @@ const Home = (props) => {
   useEffect(() => {
     // props.getDataMessage(id);
     props.fetchHistoryChat();
-  }, []);
+  }, [props.login]);
+  console.log(props.login);
 
   useEffect(() => {
     setTimeout(() => {
@@ -288,48 +287,55 @@ const Home = (props) => {
                 <i className="far fa-grin-alt h3 px-3 chat-btn" />
               </p>
 
+              <div className="align-self-center mb-2">
+                {["up"].map((direction) => (
+                  <>
+                    <DropdownButton
+                      as={ButtonGroup}
+                      key={direction}
+                      id={`dropdown-button-drop-${direction}`}
+                      size="sm"
+                      drop={direction}
+                      variant="primary"
+                      title={<i className="fas fa-paperclip h4 px-2 my-0" />}
+                    >
+                      <h6 className="my-0 font-weight-bold">Document</h6>
+                      <input
+                        type="file"
+                        className="form-control-file"
+                        onChange={selectDocuments}
+                      />
+                      <h6 className="my-0 pt-2 font-weight-bold">Image</h6>
+                      <input
+                        type="file"
+                        // ref={inputRef}
+                        className="form-control-file"
+                        onChange={selectFile}
+                      />
+                      <Dropdown.Divider />
+                      <button
+                        className="bg-primary text-white btn-block py-1"
+                        onClick={sendImage}
+                      >
+                        Send Image
+                      </button>
+                      <button
+                        className="bg-warning btn-block py-1"
+                        onClick={sendDocument}
+                      >
+                        Send Document
+                      </button>
+                    </DropdownButton>{" "}
+                  </>
+                ))}
+              </div>
+
               {/* <input type="file"  ref={inputRef} className="form-control-file" onChange={selectFile}/>   */}
-              <Planet
-                className="align-self-center my-0 "
-                centerContent={
-                  <p
-                    className="align-self-center my-0 "
-                    style={{ cursor: "pointer" }}
-                  >
-                    <i className="fas fa-paperclip h3 chat-btn" />
-                  </p>
-                }
-                hideOrbit
-                autoClose
-                orbitRadius={60}
-                rotation={105}
-                // the bounce direction is minimal visible
-                // but on close it seems the button wobbling a bit to the bottom
-                bounceDirection="BOTTOM"
-              >
-                <button onClick={sendImage}>test</button>
-                <button onClick={sendDocument}>documents</button>
-                <input
-                  type="file"
-                  className="form-control-file"
-                  onChange={selectDocuments}
-                />
-                <input
-                  type="file"
-                  // ref={inputRef}
-                  className="form-control-file"
-                  onChange={selectFile}
-                />
-                <div />
-                <div />
-                <div />
-                <div />
-              </Planet>
 
               <p
                 style={{ cursor: "pointer" }}
                 onClick={() => sendMessage(props.DetailChatRecentContact._id)}
-                className="align-self-center ml-3 my-0"
+                className="align-self-center my-0"
               >
                 <i className="fas fa-arrow-circle-right h3 px-3 chat-btn" />
               </p>
@@ -342,15 +348,12 @@ const Home = (props) => {
 };
 const mapStateToProps = (state) => {
   console.log(state);
-  // const mappedDataContact = state.mainReducer.dataContact.map((item) => {
-  //   return item._id;
-  // });
 
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
-    // dataContact: mappedDataContact,
     dataMessage: state.chatReducer.dataMessage,
+    // login: state.login.token,
   };
 };
 

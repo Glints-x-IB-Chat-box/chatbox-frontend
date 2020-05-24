@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import jwt from "jwt-decode";
+import logopdf from "../../assets/pdflogo.png";
 
 const Chatcomponent = (props) => {
   console.log(props.item);
@@ -22,26 +23,53 @@ const Chatcomponent = (props) => {
               {props.item.images.length >= 1
                 ? props.item.images.map((image) => {
                     return (
-                      <img
-                        style={{ width: "100px" }}
-                        src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
-                        alt={image}
-                      />
+                      <div className="d-flex flex-row flex-wrap">
+                        <img
+                          style={{ width: "100px" }}
+                          src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                          alt={image}
+                        />
+                        <div className="pl-2">
+                          <h6 className="my-0">{image}</h6>
+                          <div className="d-flex d-row">
+                            <p
+                              className="btn-link my-0 text-light"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Download
+                            </p>
+                            <p
+                              className="pl-2 btn-link my-0 text-light"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Preview
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     );
                   })
                 : null}
+
               {props.item.documents.length >= 1
                 ? props.item.documents.map((document) => {
                     return (
-                      <div>
-                        <a
-                          href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
-                          width="100px"
-                          target="_blank"
-                        >
-                          {document}
-                        </a>
-                        {/* <button href={`http://localhost:8000/public/uploads/${document}`} download>test</button> */}
+                      <div className="d-flex flex-row">
+                        <img
+                          src={logopdf}
+                          alt={document}
+                          style={{ width: "100px" }}
+                        />
+                        <div className="pl-2">
+                          <h6 className="my-0">{document}</h6>
+                          <a
+                            href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
+                            target="blank"
+                            className="text-light my-0"
+                          >
+                            Download
+                          </a>
+                        </div>
                       </div>
                     );
                   })
@@ -63,26 +91,53 @@ const Chatcomponent = (props) => {
               {props.item.images.length >= 1
                 ? props.item.images.map((image) => {
                     return (
-                      <img
-                        style={{ width: "100px" }}
-                        src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
-                        alt="..."
-                      />
+                      <div className="d-flex flex-row flex-wrap">
+                        <img
+                          style={{ width: "100px" }}
+                          src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                          alt={image}
+                        />
+                        <div className="pl-2">
+                          <h6 className="my-0">{image}</h6>
+                          <div className="d-flex d-row">
+                            <p
+                              className="btn-link my-0"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Download
+                            </p>
+                            <p
+                              className="pl-2 btn-link my-0"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Preview
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     );
                   })
                 : null}
+
               {props.item.documents.length >= 1
                 ? props.item.documents.map((document) => {
                     return (
-                      <div>
-                        <a
-                          href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
-                          width="100px"
-                          target="_blank"
-                        >
-                          {document}
-                        </a>
-                        {/* <button href={`http://localhost:8000/public/uploads/${document}`} download>test</button> */}
+                      <div className="d-flex flex-row">
+                        <img
+                          src={logopdf}
+                          alt={document}
+                          style={{ width: "100px" }}
+                        />
+                        <div className="pl-2">
+                          <h6 className="my-0">{document}</h6>
+                          <a
+                            href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
+                            target="blank"
+                            className="my-0"
+                          >
+                            Download
+                          </a>
+                        </div>
                       </div>
                     );
                   })
