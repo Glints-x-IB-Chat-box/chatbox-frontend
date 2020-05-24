@@ -3,12 +3,15 @@ import moment from "moment";
 import jwt from "jwt-decode";
 import logopdf from "../../assets/pdflogo.png";
 
+
 const Chatcomponent = (props) => {
   console.log(props.item);
 
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);
   const fixTime = time.format("HH:mm");
+
+
   return (
     <div>
       {decodedToken.id === props.item.senderUserId ? (
@@ -32,18 +35,41 @@ const Chatcomponent = (props) => {
                         <div className="pl-2">
                           <h6 className="my-0">{image}</h6>
                           <div className="d-flex d-row">
-                            <p
+                            <a
+                              onClick={() => {
+                                fetch(
+                                  `https://api.ahmadfakhrozy.com/public/uploads/${image}`
+                                )
+                                  .then((resp) => resp.blob())
+                                  .then((blob) => {
+                                    const url = window.URL.createObjectURL(
+                                      blob
+                                    );
+                                    const a = document.createElement("a");
+                                    a.style.display = "none";
+                                    a.href = url;
+                                    // the filename you want
+                                    a.download = "file.jpg";
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    window.URL.revokeObjectURL(url);
+                                    alert("your file has downloaded!"); // or you know, something with better UX...
+                                  })
+                                  .catch(() => alert("oh no!"));
+                              }}
                               className="btn-link my-0 text-light"
                               style={{ cursor: "pointer" }}
                             >
                               Download
-                            </p>
-                            <p
+                            </a>
+                            <a
+                              href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                              target="_blank"
                               className="pl-2 btn-link my-0 text-light"
                               style={{ cursor: "pointer" }}
                             >
                               Preview
-                            </p>
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -63,8 +89,9 @@ const Chatcomponent = (props) => {
                         <div className="pl-2">
                           <h6 className="my-0">{document}</h6>
                           <a
-                            href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
-                            target="blank"
+                            href={`${process.env.REACT_APP_API_URL}/public/uploads/${document}`}
+                            target="_blank"
+                            style={{ cursor: "pointer" }}
                             className="text-light my-0"
                           >
                             Download
@@ -100,18 +127,28 @@ const Chatcomponent = (props) => {
                         <div className="pl-2">
                           <h6 className="my-0">{image}</h6>
                           <div className="d-flex d-row">
-                            <p
+                            <a
+                              href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
                               className="btn-link my-0"
                               style={{ cursor: "pointer" }}
+                              download
                             >
                               Download
-                            </p>
-                            <p
+                            </a>
+                            <a
+                              href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                              target="_blank"
                               className="pl-2 btn-link my-0"
                               style={{ cursor: "pointer" }}
                             >
                               Preview
-                            </p>
+                            </a>
+                            <script>
+                              {" "}
+                              document.location.href ={" "}
+                              {`${process.env.REACT_APP_API_URL}/public/uploads/${document}`}
+                              ;{" "}
+                            </script>
                           </div>
                         </div>
                       </div>
@@ -131,8 +168,9 @@ const Chatcomponent = (props) => {
                         <div className="pl-2">
                           <h6 className="my-0">{document}</h6>
                           <a
-                            href={`https://api.ahmadfakhrozy.com/public/uploads/${document}`}
-                            target="blank"
+                            href={`${document}`}
+                            target="_blank  "
+                            download
                             className="my-0"
                           >
                             Download
