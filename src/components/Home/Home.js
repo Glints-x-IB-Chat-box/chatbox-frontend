@@ -6,6 +6,7 @@ import jwt from "jwt-decode";
 import "../style.css";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
+import RecentContact2 from "./RecentContact2";
 import axios from "axios";
 
 // import io from "socket.io-client";
@@ -189,6 +190,21 @@ const Home = (props) => {
         </div>
 
         <div>
+          {props.RecentChatContacts2.map((item, index) => {
+            // console.log(item);
+            // console.log(props.dataContact);
+
+            return (
+              <RecentContact2
+                item={item}
+                key={index}
+                changeFirstShow={changeFirstShow}
+              />
+            );
+          })}
+        </div>
+
+        <div>
           {props.RecentChatContacts.map((item, index) => {
             // console.log(item);
             // console.log(props.dataContact);
@@ -202,10 +218,11 @@ const Home = (props) => {
             );
           })}
         </div>
-        <div className="pb-4">
+
+        {/* <div className="pb-4">
           <h5 className="pt-3 text-center">Unadded Contacts</h5>
           <hr className="bg-light mt-0 w-50" />
-        </div>
+        </div> */}
       </div>
 
       {firstShow ? (
@@ -292,11 +309,11 @@ const Home = (props) => {
                   <>
                     <DropdownButton
                       as={ButtonGroup}
+                      className="send-btn"
                       key={direction}
                       id={`dropdown-button-drop-${direction}`}
                       size="sm"
                       drop={direction}
-                      variant="primary"
                       title={<i className="fas fa-paperclip h4 px-2 my-0" />}
                     >
                       <h6 className="my-0 font-weight-bold">Document</h6>
@@ -314,13 +331,13 @@ const Home = (props) => {
                       />
                       <Dropdown.Divider />
                       <button
-                        className="bg-primary text-white btn-block py-1"
+                        className="text-white btn-block py-1 send-btn"
                         onClick={sendImage}
                       >
                         Send Image
                       </button>
                       <button
-                        className="bg-warning btn-block py-1"
+                        className="text-white btn-block py-1 send-btn"
                         onClick={sendDocument}
                       >
                         Send Document
@@ -353,7 +370,7 @@ const mapStateToProps = (state) => {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
     dataMessage: state.chatReducer.dataMessage,
-    // login: state.login.token,
+    RecentChatContacts2: state.chatReducer.RecentChatContacts2,
   };
 };
 
