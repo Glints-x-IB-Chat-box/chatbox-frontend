@@ -71,6 +71,10 @@ body {
   /* making element vertically center */
   align-self: center;
 }
+.dropdown-menu {
+  min-width: 15rem !important;
+  padding: 0.5rem 0.5rem !important;
+}
 .form {
   padding: 0 20% !important;
 }

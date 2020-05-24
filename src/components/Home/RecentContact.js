@@ -33,7 +33,7 @@ const RecentContact = (props) => {
               </div>
               <p className="preview-chat my-0">{props.item.about}</p>
             </div>
-            <p className="ml-auto d-flex align-items-center time-text">12.50</p>
+            {/* <p className="ml-auto d-flex align-items-center time-text">12.50</p> */}
           </div>
         </div>
       </Link>
