@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 import jwt from "jwt-decode";
 import logopdf from "../../assets/pdflogo.png";
+import logopdf2 from "../../assets/pdflogo2.png";
 
 const Chatcomponent = (props) => {
   console.log(props.item);
@@ -80,7 +81,7 @@ const Chatcomponent = (props) => {
                     return (
                       <div className="d-flex flex-row">
                         <img
-                          src={logopdf}
+                          src={logopdf2}
                           alt={document}
                           style={{ width: "100px" }}
                         />
