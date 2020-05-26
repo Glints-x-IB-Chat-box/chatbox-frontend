@@ -21,6 +21,25 @@ export const fetchHistoryChat = () => {
   };
 };
 
+export const fetchRecentChat = (data) => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}/chat/recentchat`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      dispatch({
+        type: "FETCH_RECENT_CHAT",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const createNewChat = (data) => {
   return (dispatch) => {
     dispatch({

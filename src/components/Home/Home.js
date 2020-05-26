@@ -16,6 +16,7 @@ import {
   addMessage,
   getDataMessage,
   fetchHistoryChat,
+  fetchRecentChat,
 } from "../../actionCreators/ChatAction";
 import { getDataContact } from "../../actionCreators/MainAction";
 import { connect } from "react-redux";
@@ -134,10 +135,11 @@ const Home = (props) => {
   useEffect(() => {
     // props.getDataMessage(id);
     props.fetchHistoryChat();
-  }, [props.login]);
-  console.log(props.login);
+    props.fetchRecentChat();
+  }, []);
 
   useEffect(() => {
+    props.fetchRecentChat();
     setTimeout(() => {
       props.getDataMessage(id);
     }, 1000);
@@ -214,6 +216,7 @@ const Home = (props) => {
                 item={item}
                 key={index}
                 changeFirstShow={changeFirstShow}
+                detailRecentMessages={props.detailRecentMessages}
               />
             );
           })}
@@ -371,6 +374,7 @@ const mapStateToProps = (state) => {
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
     dataMessage: state.chatReducer.dataMessage,
     RecentChatContacts2: state.chatReducer.RecentChatContacts2,
+    detailRecentMessages: state.chatReducer.detailRecentMessages,
   };
 };
 
@@ -379,6 +383,7 @@ const mapDispatchToProps = {
   addMessage,
   getDataMessage,
   fetchHistoryChat,
+  fetchRecentChat,
   getDataContact,
 };
 

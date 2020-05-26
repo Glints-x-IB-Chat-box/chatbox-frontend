@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const RecentContact = (props) => {
   const contactPic = (picture) => {
@@ -31,9 +32,44 @@ const RecentContact = (props) => {
                 <h6 className="my-0 name-chat">{props.item.username}</h6>
                 <span className="dot bg-success" />
               </div>
-              <p className="preview-chat my-0">{props.item.about}</p>
+              {props.detailRecentMessages.map((detail, index) => {
+                // console.log(props.item._id);
+                // console.log(detail.usersId[0]);
+                const found = detail.usersId.find((userId) => {
+                  return userId === props.item._id;
+                });
+
+                if (found) {
+                  return (
+                    <p className="preview-chat my-0" key={index}>
+                      {detail.lastMessage.message}
+                    </p>
+                  );
+                } else {
+                  return;
+                }
+              })}
             </div>
-            {/* <p className="ml-auto d-flex align-items-center time-text">12.50</p> */}
+            {props.detailRecentMessages.map((detail, index) => {
+              const found = detail.usersId.find((userId) => {
+                return userId === props.item._id;
+              });
+
+              if (found) {
+                const time = moment(`${detail.lastMessage.createdAt}`);
+                const fixTime = time.format("HH:mm");
+                return (
+                  <p
+                    className="ml-auto align-items-center time-text my-0"
+                    key={index}
+                  >
+                    {fixTime}
+                  </p>
+                );
+              } else {
+                return;
+              }
+            })}
           </div>
         </div>
       </Link>

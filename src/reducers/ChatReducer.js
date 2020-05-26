@@ -2,6 +2,7 @@ const initialState = {
   dataMessage: [],
   RecentChatContacts: [],
   RecentChatContacts2: [],
+  detailRecentMessages: [],
   DetailChatRecentContact: {},
 };
 
@@ -30,6 +31,9 @@ const ChatReducer = (state = initialState, action) => {
 
     case "FETCH_HISTORY_CHAT":
       return { ...state, RecentChatContacts: action.payload };
+
+    case "FETCH_RECENT_CHAT":
+      return { ...state, detailRecentMessages: action.payload };
 
     case "ADD_MESSAGE":
       console.log(state.dataMessage);

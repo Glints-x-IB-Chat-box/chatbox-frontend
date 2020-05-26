@@ -3,14 +3,12 @@ import moment from "moment";
 import jwt from "jwt-decode";
 import logopdf from "../../assets/pdflogo.png";
 
-
 const Chatcomponent = (props) => {
   console.log(props.item);
 
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);
   const fixTime = time.format("HH:mm");
-
 
   return (
     <div>
@@ -64,7 +62,7 @@ const Chatcomponent = (props) => {
                             </a>
                             <a
                               href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
-                              target="_blank"
+                              target="blank"
                               className="pl-2 btn-link my-0 text-light"
                               style={{ cursor: "pointer" }}
                             >
@@ -90,7 +88,7 @@ const Chatcomponent = (props) => {
                           <h6 className="my-0">{document}</h6>
                           <a
                             href={`${process.env.REACT_APP_API_URL}/public/uploads/${document}`}
-                            target="_blank"
+                            target="blank"
                             style={{ cursor: "pointer" }}
                             className="text-light my-0"
                           >
@@ -137,7 +135,7 @@ const Chatcomponent = (props) => {
                             </a>
                             <a
                               href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
-                              target="_blank"
+                              target="blank"
                               className="pl-2 btn-link my-0"
                               style={{ cursor: "pointer" }}
                             >
@@ -169,7 +167,7 @@ const Chatcomponent = (props) => {
                           <h6 className="my-0">{document}</h6>
                           <a
                             href={`${document}`}
-                            target="_blank  "
+                            target="blank  "
                             download
                             className="my-0"
                           >
