@@ -13,9 +13,12 @@ const ChatReducer = (state = initialState, action) => {
       const find = state.RecentChatContacts.find((item) => {
         return item._id === action.payload._id;
       });
+      const find2 = state.RecentChatContacts2.find((item) => {
+        return item._id === action.payload._id;
+      });
       let newRecentChatContacts = [];
 
-      if (!find) {
+      if (!find && !find2) {
         newRecentChatContacts = [action.payload, ...state.RecentChatContacts2];
       } else {
         newRecentChatContacts = state.RecentChatContacts2;
