@@ -2,6 +2,7 @@ const initialState = {
   dataMessage: [],
   RecentChatContacts: [],
   RecentChatContacts2: [],
+  detailRecentMessages: [],
   DetailChatRecentContact: {},
 };
 
@@ -12,9 +13,12 @@ const ChatReducer = (state = initialState, action) => {
       const find = state.RecentChatContacts.find((item) => {
         return item._id === action.payload._id;
       });
+      const find2 = state.RecentChatContacts2.find((item) => {
+        return item._id === action.payload._id;
+      });
       let newRecentChatContacts = [];
 
-      if (!find) {
+      if (!find && !find2) {
         newRecentChatContacts = [action.payload, ...state.RecentChatContacts2];
       } else {
         newRecentChatContacts = state.RecentChatContacts2;
@@ -30,6 +34,9 @@ const ChatReducer = (state = initialState, action) => {
 
     case "FETCH_HISTORY_CHAT":
       return { ...state, RecentChatContacts: action.payload };
+
+    case "FETCH_RECENT_CHAT":
+      return { ...state, detailRecentMessages: action.payload };
 
     case "ADD_MESSAGE":
       console.log(state.dataMessage);
