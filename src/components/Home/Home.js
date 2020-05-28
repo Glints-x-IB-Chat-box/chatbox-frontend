@@ -7,6 +7,7 @@ import "../style.css";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
 import RecentContact2 from "./RecentContact2";
+import UnaddedRecentChat from "./UnaddedContact";
 import axios from "axios";
 
 // import io from "socket.io-client";
@@ -209,7 +210,7 @@ const Home = (props) => {
         <div>
           {props.RecentChatContacts.map((item, index) => {
             // console.log(item);
-            // console.log(props.dataContact);
+            // console.log(props.RecentChatContacts);
 
             return (
               <RecentContact
@@ -222,10 +223,23 @@ const Home = (props) => {
           })}
         </div>
 
-        {/* <div className="pb-4">
+        <div className="pb-4">
           <h5 className="pt-3 text-center">Unadded Contacts</h5>
           <hr className="bg-light mt-0 w-50" />
-        </div> */}
+          {props.UnaddedRecentChat.map((item, index) => {
+            // console.log(item);
+            // console.log(props.RecentChatContacts);
+
+            return (
+              <UnaddedRecentChat
+                item={item}
+                key={index}
+                changeFirstShow={changeFirstShow}
+                detailRecentMessages={props.detailRecentMessages}
+              />
+            );
+          })}
+        </div>
       </div>
 
       {firstShow ? (
@@ -375,6 +389,7 @@ const mapStateToProps = (state) => {
     dataMessage: state.chatReducer.dataMessage,
     RecentChatContacts2: state.chatReducer.RecentChatContacts2,
     detailRecentMessages: state.chatReducer.detailRecentMessages,
+    UnaddedRecentChat: state.chatReducer.UnaddedRecentChat,
   };
 };
 

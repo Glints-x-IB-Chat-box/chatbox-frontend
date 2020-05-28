@@ -2,11 +2,12 @@ import axios from "axios";
 import jwt from "jwt-decode";
 const url = `${process.env.REACT_APP_API_URL}`;
 
+// FETCH HISTORY CHAT = TEXT/MESSAGE + TIME
 export const fetchHistoryChat = () => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${url}/chat/getchat`, {
+      const response = await axios.get(`${url}/chat/iscontact`, {
         headers: {
           "x-access-token": token,
         },
@@ -21,6 +22,7 @@ export const fetchHistoryChat = () => {
   };
 };
 
+// FETCH RECENT CHAT = DATA PROFILE ETC
 export const fetchRecentChat = (data) => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
