@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import ReactEmoji from "react-emoji";
 
 const UnaddedContact = (props) => {
   const contactPic = (picture) => {
@@ -45,7 +46,7 @@ const UnaddedContact = (props) => {
                 if (found) {
                   return (
                     <p className="preview-chat my-0" key={index}>
-                      {detail.lastMessage.message}
+                      {ReactEmoji.emojify(detail.lastMessage.message)}
                     </p>
                   );
                 } else {

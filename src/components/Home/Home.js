@@ -4,17 +4,17 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import jwt from "jwt-decode";
 import "../style.css";
+import ReactEmoji from "react-emoji";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
 import RecentContact2 from "./RecentContact2";
 import UnaddedRecentChat from "./UnaddedContact";
 import axios from "axios";
 
-// import io from "socket.io-client";
+import io from "socket.io-client";
 import { Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import {
   showDetailRecentChat,
-  addMessage,
   getDataMessage,
   fetchHistoryChat,
   fetchRecentChat,
@@ -23,12 +23,14 @@ import { getDataContact } from "../../actionCreators/MainAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
-  // const socket = io(`${process.env.REACT_APP_API_URL}`);
+  const socket = io("ws://34.87.159.36:8000/", {
+    transports: ["websocket"],
+  });
   const [firstShow, setFirstShow] = useState(true);
   const [dataMessage, setDataMessage] = useState([]);
   let { id } = useParams();
   const sender = jwt(localStorage.getItem("token"));
-
+  const senderId = sender.id;
   const [message, setMessage] = useState("");
 
   const [file, setFile] = useState(null);
@@ -118,15 +120,21 @@ const Home = (props) => {
     setMessage(value);
   };
 
-  const sendMessage = (dataTargetUserId) => {
-    // RESET INPUT TO "" VALUE
-    setMessage("");
-    props.addMessage(dataTargetUserId, message);
-
-    // setMessagesApi("");
-    // socket.emit("sendMessage", dataMessage, () => setMessagesApi(""));
+  const sendMessage = (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        `https://api.ahmadfakhrozy.com/chat/postchat`,
+        { senderUserId: senderId, targetUserId: id, message: message },
+        { headers: { "x-access-token": localStorage.getItem("token") } }
+      )
+      .then((value) => {
+        console.log(value.data.messages);
+        setMessage("");
+        socket.emit("sendMessage", message, () => setMessage(""));
+      })
+      .catch((err) => console.log(err));
   };
-
   // useEffect(() => {
   //   // console.log(targetUserId);
   //   // setMessagesApi(props.dataMessage);
@@ -147,22 +155,21 @@ const Home = (props) => {
 
   useEffect(() => {
     props.fetchRecentChat();
-    setTimeout(() => {
-      props.getDataMessage(id);
-    }, 1000);
+    axios
+      .get(`https://api.ahmadfakhrozy.com/chat/gettarget/${id}`, {
+        headers: { "x-access-token": localStorage.getItem("token") },
+      })
+      .then((response) => {
+        console.log(response.data);
+        // props.getDataMessage(response.data);
+        setDataMessage(response.data);
 
-    let newDataMessage = props.dataMessage.find((item) => {
-      if (!item) {
-        setDataMessage([]);
-      } else return item._id === id;
-    });
-    if (!newDataMessage) {
-      setDataMessage(props.dataMessage);
-    } else {
-      setDataMessage([]);
-    }
-    console.log(dataMessage);
-  }, [props.dataMessage]);
+        socket.on("sendMessage", (message) => {
+          props.getDataMessage(response.data);
+          setDataMessage(response.data);
+        });
+      });
+  }, [props.dataMessage, file]);
 
   let chatDate = undefined;
 
@@ -376,7 +383,7 @@ const Home = (props) => {
 
               <p
                 style={{ cursor: "pointer" }}
-                onClick={() => sendMessage(props.DetailChatRecentContact._id)}
+                onClick={(event) => sendMessage(event)}
                 className="align-self-center my-0"
               >
                 <i className="fas fa-arrow-circle-right h3 px-3 chat-btn" />
@@ -403,7 +410,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   showDetailRecentChat,
-  addMessage,
   getDataMessage,
   fetchHistoryChat,
   fetchRecentChat,

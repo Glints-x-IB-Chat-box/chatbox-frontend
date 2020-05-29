@@ -58,32 +58,32 @@ const ChatReducer = (state = initialState, action) => {
     //   return { ...state, detailRecentMessages2: action.payload };
     // }
 
-    case "ADD_MESSAGE":
-      console.log(state.dataMessage);
+    // case "ADD_MESSAGE":
+    //   console.log(state.dataMessage);
 
-      return { ...state, dataMessage: [action.payload] };
+    //   return { ...state, dataMessage: [action.payload] };
     case "GET_DATA_MESSAGE":
-      const found = state.dataMessage.find((item) => {
-        return item._id === action.payload._id;
-      });
+      // const found = state.dataMessage.find((item) => {
+      //   return item._id === action.payload._id;
+      // });
 
-      let newDataMessage = [];
-      // console.log(state.dataMessage);
+      // let newDataMessage = [];
+      // // console.log(state.dataMessage);
 
-      if (!found) {
-        newDataMessage = [...state.dataMessage, action.payload];
-      } else {
-        newDataMessage = state.dataMessage.map((item) => {
-          if (action.payload._id === item._id) {
-            return action.payload;
-          }
-          return item;
-        });
-      }
+      // if (!found) {
+      //   newDataMessage = [...state.dataMessage, action.payload];
+      // } else {
+      //   newDataMessage = state.dataMessage.map((item) => {
+      //     if (action.payload._id === item._id) {
+      //       return action.payload;
+      //     }
+      //     return item;
+      //   });
+      // }
 
       // console.log(newDataMessage);
 
-      return { ...state, dataMessage: newDataMessage };
+      return { ...state, dataMessage: action.payload };
     default:
       return state;
   }

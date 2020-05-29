@@ -3,13 +3,15 @@ import moment from "moment";
 import jwt from "jwt-decode";
 import logopdf from "../../assets/pdflogo.png";
 import logopdf2 from "../../assets/pdflogo2.png";
+import ReactEmoji from "react-emoji";
 
 const Chatcomponent = (props) => {
-  console.log(props.item);
+  // console.log(props.item);
 
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);
   const fixTime = time.format("HH:mm");
+  console.log(props.item.images);
 
   return (
     <div>
@@ -100,7 +102,7 @@ const Chatcomponent = (props) => {
                     );
                   })
                 : null}
-              <h6 className="my-0">{props.item.message}</h6>
+              <h6 className="my-0">{ReactEmoji.emojify(props.item.message)}</h6>
             </div>
           </div>
         </div>
@@ -179,7 +181,7 @@ const Chatcomponent = (props) => {
                     );
                   })
                 : null}
-              <h6 className="my-0">{props.item.message}</h6>
+              <h6 className="my-0">{ReactEmoji.emojify(props.item.message)}</h6>
             </div>
           </div>
         </div>
