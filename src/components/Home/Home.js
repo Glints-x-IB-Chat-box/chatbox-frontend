@@ -45,6 +45,8 @@ const Home = (props) => {
   };
   const sendDocument = (e) => {
     e.preventDefault();
+    setFile(null);
+    setFileName("");
     const fd = new FormData();
     fd.append("documents", file);
     fd.append("senderUserId", sender.id);
@@ -74,7 +76,8 @@ const Home = (props) => {
   };
   const sendImage = (e) => {
     e.preventDefault();
-
+    setFile(null);
+    setFileName("");
     const fd = new FormData();
     fd.append("images", file);
     fd.append("senderUserId", sender.id);
@@ -116,7 +119,10 @@ const Home = (props) => {
   };
 
   const sendMessage = (dataTargetUserId) => {
+    // RESET INPUT TO "" VALUE
+    setMessage("");
     props.addMessage(dataTargetUserId, message);
+
     // setMessagesApi("");
     // socket.emit("sendMessage", dataMessage, () => setMessagesApi(""));
   };
@@ -129,12 +135,12 @@ const Home = (props) => {
   //   //   setMessagesApi(props.dataMessage, Message);
   //   // });
   // }, [sendMessage, changeFirstShow]);
-  useEffect(() => {
-    props.getDataContact();
-  }, []);
+  // useEffect(() => {
+  // }, []);
 
   useEffect(() => {
     // props.getDataMessage(id);
+    props.getDataContact();
     props.fetchHistoryChat();
     props.fetchRecentChat();
   }, []);
@@ -308,6 +314,7 @@ const Home = (props) => {
             </div>
             <div className="d-flex pt-2 px-2 bg-white justify-content-center">
               <textarea
+                id="inputform"
                 name="message"
                 rows="2"
                 type="text"
@@ -339,25 +346,26 @@ const Home = (props) => {
                         className="form-control-file"
                         onChange={selectDocuments}
                       />
-                      <h6 className="my-0 pt-2 font-weight-bold">Image</h6>
+                      <button
+                        className="text-white btn-block mt-2 send-btn"
+                        onClick={sendDocument}
+                      >
+                        Send Document
+                      </button>
+
+                      <Dropdown.Divider />
+                      <h6 className="my-0 font-weight-bold">Image</h6>
                       <input
                         type="file"
                         // ref={inputRef}
                         className="form-control-file"
                         onChange={selectFile}
                       />
-                      <Dropdown.Divider />
                       <button
-                        className="text-white btn-block py-1 send-btn"
+                        className="text-white btn-block mt-2 send-btn"
                         onClick={sendImage}
                       >
                         Send Image
-                      </button>
-                      <button
-                        className="text-white btn-block py-1 send-btn"
-                        onClick={sendDocument}
-                      >
-                        Send Document
                       </button>
                     </DropdownButton>{" "}
                   </>
