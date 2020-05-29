@@ -34,7 +34,7 @@ const UnaddedContact = (props) => {
                 <h6 className="my-0 name-chat">
                   {props.item.targetUserId.username}
                 </h6>
-                <span className="dot bg-success" />
+                {/* <span className="dot bg-success" /> */}
               </div>
               {props.detailRecentMessages.map((detail, index) => {
                 // console.log(props.item._id);

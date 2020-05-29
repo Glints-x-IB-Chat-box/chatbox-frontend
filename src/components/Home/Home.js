@@ -326,14 +326,14 @@ const Home = (props) => {
                 rows="2"
                 type="text"
                 placeholder="Input your message here..."
-                className="input-chat"
+                className="input-chat mr-3"
                 value={message}
                 onChange={handleChangeMessage}
                 required
               />
-              <p className="align-self-center my-0 ">
+              {/* <p className="align-self-center my-0 ">
                 <i className="far fa-grin-alt h3 px-3 chat-btn" />
-              </p>
+              </p> */}
 
               <div className="align-self-center mb-2">
                 {["up"].map((direction) => (

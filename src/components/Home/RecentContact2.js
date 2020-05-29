@@ -29,7 +29,7 @@ const RecentContact = (props) => {
             <div className="section-chat-div align-self-center">
               <div className="d-flex d-row">
                 <h6 className="my-0 name-chat">{props.item.username}</h6>
-                <span className="dot bg-success" />
+                {/* <span className="dot bg-success" /> */}
               </div>
               <p className="preview-chat my-0">{props.item.about}</p>
             </div>
