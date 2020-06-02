@@ -84,6 +84,7 @@ const Register = (props) => {
                   isInvalid={!!error.username}
                 />
                 {/* IF isInvalid has a value then will proceed to form control feedback, check documentation. */}
+                {/* ERROR.USERNAME COMES FROM REDUCER */}
                 <Form.Control.Feedback type="invalid" className="text-left">
                   {error.username}
                 </Form.Control.Feedback>
