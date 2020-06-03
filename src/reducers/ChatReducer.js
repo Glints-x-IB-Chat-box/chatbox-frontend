@@ -13,14 +13,22 @@ const ChatReducer = (state = initialState, action) => {
     case "CREATE_NEW_CHAT_CONTACT":
       console.log(action.payload);
       const find = state.RecentChatContacts.find((item) => {
+        // console.log(item.usersId[0]);
+        // console.log(action.payload._id);
+        return item.usersId[1] === action.payload._id;
+      });
+
+      const find2 = state.RecentChatContacts.find((item) => {
+        return item.usersId[0] === action.payload._id;
+      });
+
+      const find3 = state.RecentChatContacts2.find((item) => {
         return item._id === action.payload._id;
       });
-      const find2 = state.RecentChatContacts2.find((item) => {
-        return item._id === action.payload._id;
-      });
+
       let newRecentChatContacts = [];
 
-      if (!find && !find2) {
+      if (!find && !find2 && !find3) {
         newRecentChatContacts = [action.payload, ...state.RecentChatContacts2];
       } else {
         newRecentChatContacts = state.RecentChatContacts2;

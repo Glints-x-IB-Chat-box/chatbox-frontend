@@ -63,11 +63,9 @@ export const getDataContact = (inputSearch) => {
           "x-access-token": token,
         },
       });
-      console.log(response.data);
       const filteredContact = response.data.filter((item) => {
         return item.username.includes(inputSearch);
       });
-
       dispatch({
         type: "GET_DATA_CONTACT",
         payload: filteredContact,

@@ -11,7 +11,7 @@ const Chatcomponent = (props) => {
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);
   const fixTime = time.format("HH:mm");
-  console.log(props.item.images);
+  // console.log(props.item.images);
 
   return (
     <div>
