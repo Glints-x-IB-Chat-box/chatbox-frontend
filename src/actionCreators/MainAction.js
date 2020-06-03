@@ -53,7 +53,7 @@ export const AddContacts = (data) => {
   };
 };
 
-export const getDataContact = () => {
+export const getDataContact = (inputSearch) => {
   const token = localStorage.getItem("token");
 
   return async (dispatch) => {
@@ -63,9 +63,14 @@ export const getDataContact = () => {
           "x-access-token": token,
         },
       });
+      console.log(response.data);
+      const filteredContact = response.data.filter((item) => {
+        return item.username.includes(inputSearch);
+      });
+
       dispatch({
         type: "GET_DATA_CONTACT",
-        payload: response.data,
+        payload: filteredContact,
       });
     } catch (error) {
       window.alert(error);

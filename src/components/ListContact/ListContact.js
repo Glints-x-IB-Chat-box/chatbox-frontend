@@ -14,14 +14,13 @@ import DeleteContact from "../ListContact/DeleteContact";
 import "../style.css";
 
 const ListContact = (props) => {
-  const [input, setInput] = useState("");
-
-  const SearchContact = () => {
-    console.log(input);
+  const SearchContact = (event) => {
+    let { value } = event.currentTarget;
+    props.getDataContact(value);
   };
 
   useEffect(() => {
-    props.getDataContact();
+    props.getDataContact("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -48,7 +47,7 @@ const ListContact = (props) => {
                 type="text"
                 className="form-control with-icon h6 my-0"
                 placeholder="Search Contacts..."
-                onChange={(event) => setInput(event.target.value)}
+                onChange={SearchContact}
               />
             </div>
           </div>
