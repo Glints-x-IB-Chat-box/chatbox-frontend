@@ -98,6 +98,8 @@ export const deleteContacts = (data) => {
     }
   };
 
+  // SYNCRONOUS VERSION
+
   // return (dispatch) => {
   //   axios
   //     .delete(`${url}/contacts/delete/${description._id}`, description, {
@@ -118,6 +120,24 @@ export const deleteContacts = (data) => {
   //       );
   //     });
   // };
+};
+
+export const showLogoutConfirm = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "SHOW_LOGOUT_FORM",
+    });
+  };
+};
+
+export const hideLogoutConfirm = () => {
+  console.log("masuk");
+
+  return (dispatch) => {
+    dispatch({
+      type: "HIDE_LOGOUT_FORM",
+    });
+  };
 };
 
 export const showEditForm = () => {

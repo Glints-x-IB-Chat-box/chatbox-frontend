@@ -1,5 +1,4 @@
 const initialState = {
-  login: false,
   token: localStorage.getItem("token"),
   alert: {
     show: false,
@@ -22,7 +21,6 @@ const login = (state = initialState, action) => {
       return {
         ...state,
         token: "",
-        login: false,
       };
 
     case "AUTH_LOGIN":
@@ -30,7 +28,6 @@ const login = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload,
-        login: true,
       };
 
     case "AUTH_LOGIN_FAIL":
