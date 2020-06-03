@@ -1,8 +1,11 @@
 import React from "react";
 import { NavLink, useRouteMatch } from "react-router-dom";
 import "../style.css";
+import { connect } from "react-redux";
+import { showLogoutConfirm } from "../../actionCreators/MainAction";
+import LogoutForm from "./LogoutConfirm";
 
-export default function Sidebar() {
+const Sidebar = (props) => {
   let match = useRouteMatch();
   return (
     <div style={{ width: "75px", height: "100vh", backgroundColor: "#1f2d3c" }}>
@@ -36,13 +39,19 @@ export default function Sidebar() {
         >
           <i className="fas fa-info-circle fa-lg" />
         </NavLink>
-        <NavLink
-          to="/logout"
+
+        <button
+          onClick={props.showLogoutConfirm}
           className="list-group-item list-group-item-action logout-sidebar"
         >
           <i className="fas fa-sign-out-alt fa-lg" />
-        </NavLink>
+          <LogoutForm />
+        </button>
       </div>
     </div>
   );
-}
+};
+const mapDispatchToProps = {
+  showLogoutConfirm,
+};
+export default connect(null, mapDispatchToProps)(Sidebar);

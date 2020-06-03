@@ -1,28 +1,25 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {} from "../../actionCreators/MainAction";
+import { hideLogoutConfirm } from "../../actionCreators/MainAction";
 
 const LogoutConfirmation = (props) => {
-  const handleDelete = () => {
-    console.log(props.dataDelete);
-    props.deleteContacts(props.dataDelete);
+  const history = useHistory();
+  const handleLogout = () => {
+    history.push("/logout");
   };
   return (
-    <Modal show={props.show} onHide={props.hideDeleteContactForm}>
+    <Modal show={props.show} onHide={props.hideLogoutConfirm}>
       <Modal.Header closeButton>
-        <Modal.Title className="h5">
-          Are You Sure Want to Delete Your Friend, "{props.dataDelete.username}
-          "?
-        </Modal.Title>
+        <Modal.Title className="h5">Are You Sure Want to Logout?</Modal.Title>
       </Modal.Header>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.hideDeleteContactForm}>
-          No
+        <Button variant="secondary" onClick={props.hideLogoutConfirm}>
+          Cancel
         </Button>
-        <Button variant="danger" onClick={handleDelete}>
+        <Button variant="danger" onClick={handleLogout}>
           Yes
         </Button>
       </Modal.Footer>
@@ -31,16 +28,13 @@ const LogoutConfirmation = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log(state.mainReducer.dataDelete);
   return {
-    show: state.mainReducer.isShowDelete,
-    dataDelete: state.mainReducer.dataDelete,
+    show: state.mainReducer.isShowLogoutForm,
   };
 };
 
 const mapDispatchToProps = {
-  hideDeleteContactForm,
-  deleteContacts,
+  hideLogoutConfirm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogoutConfirmation);
