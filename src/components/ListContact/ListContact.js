@@ -15,9 +15,8 @@ import "../style.css";
 
 const ListContact = (props) => {
   const [input, setInput] = useState("");
-  const SearchContact = (event) => {
-    let { value } = event.currentTarget;
-    setInput(value);
+
+  const SearchContact = () => {
     console.log(input);
   };
 
@@ -49,8 +48,7 @@ const ListContact = (props) => {
                 type="text"
                 className="form-control with-icon h6 my-0"
                 placeholder="Search Contacts..."
-                value={input}
-                onChange={SearchContact}
+                onChange={(event) => setInput(event.target.value)}
               />
             </div>
           </div>
