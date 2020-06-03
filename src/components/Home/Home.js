@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import jwt from "jwt-decode";
 import "../style.css";
-import ReactEmoji from "react-emoji";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
 import RecentContact2 from "./RecentContact2";

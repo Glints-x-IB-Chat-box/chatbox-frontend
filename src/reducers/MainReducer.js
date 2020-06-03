@@ -25,10 +25,6 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, dataContact: action.payload };
     case "ADD_DATA_CONTACT":
       return { ...state, dataContact: [...state.dataContact, action.payload] };
-    case "SHOW_LOGOUT_FORM":
-      return { ...state, isShowLogoutForm: true };
-    case "HIDE_LOGOUT_FORM":
-      return { ...state, isShowLogoutForm: false };
     case "SHOW_EDIT_FORM":
       return { ...state, isShowEdit: true };
     case "HIDE_EDIT_FORM":

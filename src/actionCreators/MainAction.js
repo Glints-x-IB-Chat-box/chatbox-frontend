@@ -122,24 +122,6 @@ export const deleteContacts = (data) => {
   // };
 };
 
-export const showLogoutConfirm = () => {
-  return (dispatch) => {
-    dispatch({
-      type: "SHOW_LOGOUT_FORM",
-    });
-  };
-};
-
-export const hideLogoutConfirm = () => {
-  console.log("masuk");
-
-  return (dispatch) => {
-    dispatch({
-      type: "HIDE_LOGOUT_FORM",
-    });
-  };
-};
-
 export const showEditForm = () => {
   // DISPATCH DIPAKAI DENGAN SYARAT
   return (dispatch) => {

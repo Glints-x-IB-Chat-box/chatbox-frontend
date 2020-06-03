@@ -1,5 +1,4 @@
 import axios from "axios";
-import jwt from "jwt-decode";
 const url = `${process.env.REACT_APP_API_URL}`;
 
 // FETCH HISTORY CHAT = TEXT/MESSAGE + TIME

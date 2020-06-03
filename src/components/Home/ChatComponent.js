@@ -36,7 +36,8 @@ const Chatcomponent = (props) => {
                         <div className="pl-2">
                           <h6 className="my-0">{image}</h6>
                           <div className="d-flex d-row">
-                            <a
+                            <p
+                              className="my-0"
                               onClick={() => {
                                 fetch(
                                   `https://api.ahmadfakhrozy.com/public/uploads/${image}`
@@ -56,13 +57,17 @@ const Chatcomponent = (props) => {
                                     window.URL.revokeObjectURL(url);
                                     alert("your file has downloaded!"); // or you know, something with better UX...
                                   })
-                                  .catch(() => alert("oh no!"));
+                                  .catch((error) =>
+                                    alert(
+                                      "a problem occurred, try again later."
+                                    )
+                                  );
                               }}
                               className="btn-link my-0 text-light"
                               style={{ cursor: "pointer" }}
                             >
                               Download
-                            </a>
+                            </p>
                             <a
                               href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
                               target="blank"
