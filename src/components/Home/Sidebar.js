@@ -9,6 +9,7 @@ export default function Sidebar() {
       <div className="list-group">
         <NavLink
           to={match.url}
+          exact={true}
           className="list-group-item list-group-item-action"
         >
           <i className="fas fa-comment-dots fa-lg" />
@@ -37,7 +38,7 @@ export default function Sidebar() {
         </NavLink>
         <NavLink
           to="/logout"
-          className="list-group-item list-group-item-action mt-auto"
+          className="list-group-item list-group-item-action logout-sidebar"
         >
           <i className="fas fa-sign-out-alt fa-lg" />
         </NavLink>

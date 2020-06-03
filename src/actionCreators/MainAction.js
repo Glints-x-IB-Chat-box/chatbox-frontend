@@ -98,6 +98,8 @@ export const deleteContacts = (data) => {
     }
   };
 
+  // SYNCRONOUS VERSION
+
   // return (dispatch) => {
   //   axios
   //     .delete(`${url}/contacts/delete/${description._id}`, description, {
