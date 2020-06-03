@@ -1,9 +1,8 @@
 import axios from "axios";
-import jwt from "jwt-decode";
 const url = `${process.env.REACT_APP_API_URL}`;
 
 // FETCH HISTORY CHAT = TEXT/MESSAGE + TIME
-export const fetchHistoryChat = () => {
+export const fetchHistoryChat = (inputSearch) => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
     try {
@@ -12,9 +11,12 @@ export const fetchHistoryChat = () => {
           "x-access-token": token,
         },
       });
+      const filteredContact = response.data.filter((item) => {
+        return item.targetUserId.username.includes(inputSearch);
+      });
       dispatch({
         type: "FETCH_HISTORY_CHAT",
-        payload: response.data,
+        payload: filteredContact,
       });
     } catch (error) {
       console.log(error);

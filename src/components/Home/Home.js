@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import jwt from "jwt-decode";
 import "../style.css";
-import ReactEmoji from "react-emoji";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
 import RecentContact2 from "./RecentContact2";
@@ -146,10 +145,15 @@ const Home = (props) => {
   // useEffect(() => {
   // }, []);
 
+  const SearchContact = (event) => {
+    let { value } = event.currentTarget;
+    props.fetchHistoryChat(value);
+  };
+
   useEffect(() => {
     // props.getDataMessage(id);
     props.getDataContact();
-    props.fetchHistoryChat();
+    props.fetchHistoryChat("");
     props.fetchRecentChat();
   }, []);
 
@@ -200,6 +204,7 @@ const Home = (props) => {
                 type="text"
                 className="form-control with-icon h6 my-0"
                 placeholder="Search Chat..."
+                onChange={SearchContact}
               />
             </div>
           </div>
@@ -400,11 +405,11 @@ const mapStateToProps = (state) => {
 
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
+    RecentChatContacts2: state.chatReducer.RecentChatContacts2,
+    UnaddedRecentChat: state.chatReducer.UnaddedRecentChat,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
     dataMessage: state.chatReducer.dataMessage,
-    RecentChatContacts2: state.chatReducer.RecentChatContacts2,
     detailRecentMessages: state.chatReducer.detailRecentMessages,
-    UnaddedRecentChat: state.chatReducer.UnaddedRecentChat,
   };
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 import homePicture from "../../assets/text.png";
@@ -14,10 +14,13 @@ import DeleteContact from "../ListContact/DeleteContact";
 import "../style.css";
 
 const ListContact = (props) => {
-  // const history = useHistory();
+  const SearchContact = (event) => {
+    let { value } = event.currentTarget;
+    props.getDataContact(value);
+  };
 
   useEffect(() => {
-    props.getDataContact();
+    props.getDataContact("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,6 +47,7 @@ const ListContact = (props) => {
                 type="text"
                 className="form-control with-icon h6 my-0"
                 placeholder="Search Contacts..."
+                onChange={SearchContact}
               />
             </div>
           </div>

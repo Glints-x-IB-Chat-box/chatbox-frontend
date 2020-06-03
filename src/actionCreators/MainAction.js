@@ -53,7 +53,7 @@ export const AddContacts = (data) => {
   };
 };
 
-export const getDataContact = () => {
+export const getDataContact = (inputSearch) => {
   const token = localStorage.getItem("token");
 
   return async (dispatch) => {
@@ -63,9 +63,12 @@ export const getDataContact = () => {
           "x-access-token": token,
         },
       });
+      const filteredContact = response.data.filter((item) => {
+        return item.username.includes(inputSearch);
+      });
       dispatch({
         type: "GET_DATA_CONTACT",
-        payload: response.data,
+        payload: filteredContact,
       });
     } catch (error) {
       window.alert(error);
@@ -120,24 +123,6 @@ export const deleteContacts = (data) => {
   //       );
   //     });
   // };
-};
-
-export const showLogoutConfirm = () => {
-  return (dispatch) => {
-    dispatch({
-      type: "SHOW_LOGOUT_FORM",
-    });
-  };
-};
-
-export const hideLogoutConfirm = () => {
-  console.log("masuk");
-
-  return (dispatch) => {
-    dispatch({
-      type: "HIDE_LOGOUT_FORM",
-    });
-  };
 };
 
 export const showEditForm = () => {
