@@ -199,7 +199,7 @@ const Home = (props) => {
               <input
                 type="text"
                 className="form-control with-icon h6 my-0"
-                placeholder="Search Contacts..."
+                placeholder="Search Chat..."
               />
             </div>
           </div>
