@@ -28,6 +28,7 @@ const LogoutConfirmation = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state.mainReducer.isShowLogoutForm);
   return {
     show: state.mainReducer.isShowLogoutForm,
   };

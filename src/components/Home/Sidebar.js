@@ -7,6 +7,9 @@ import LogoutForm from "./LogoutConfirm";
 
 const Sidebar = (props) => {
   let match = useRouteMatch();
+  const showLogoutConfirmation = () => {
+    props.showLogoutConfirm();
+  };
   return (
     <div style={{ width: "75px", height: "100vh", backgroundColor: "#1f2d3c" }}>
       <div className="list-group">
@@ -41,7 +44,7 @@ const Sidebar = (props) => {
         </NavLink>
 
         <button
-          onClick={props.showLogoutConfirm}
+          onClick={showLogoutConfirmation}
           className="list-group-item list-group-item-action logout-sidebar"
         >
           <i className="fas fa-sign-out-alt fa-lg" />
