@@ -1,7 +1,7 @@
 import axios from "axios";
 const url = `${process.env.REACT_APP_API_URL}`;
 
-// FETCH HISTORY CHAT = TEXT/MESSAGE + TIME
+// FETCH HISTORY CHAT = RECENT TEXT/MESSAGE + TIME
 export const fetchHistoryChat = (inputSearch) => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
@@ -11,6 +11,9 @@ export const fetchHistoryChat = (inputSearch) => {
           "x-access-token": token,
         },
       });
+      // After Get the INPUT WORDS from user, we use Filter & Include function.
+      // The Result of filter would lead to exclude/delete it
+      // Include will do the search function and return with expected result.
       const filteredContact = response.data.filter((item) => {
         return item.targetUserId.username.includes(inputSearch);
       });
@@ -24,7 +27,7 @@ export const fetchHistoryChat = (inputSearch) => {
   };
 };
 
-// FETCH RECENT CHAT = DATA PROFILE ETC
+// FETCH RECENT CHAT = RECENT DATA PROFILE ETC
 export const fetchRecentChat = (data) => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
@@ -44,6 +47,7 @@ export const fetchRecentChat = (data) => {
   };
 };
 
+// THE FUNCTION OF CHAT FEATURE IN LISTCONTACT
 export const createNewChat = (data) => {
   return (dispatch) => {
     dispatch({
@@ -53,6 +57,7 @@ export const createNewChat = (data) => {
   };
 };
 
+// THE FUNCTION TO GET THE DATA OF 1 RECENT CHAT CONTACT THAT USER CLICK (USERNAME & IMAGE)
 export const showDetailRecentChat = (data) => {
   return (dispatch) => {
     dispatch({
@@ -94,6 +99,9 @@ export const showDetailRecentChat = (data) => {
 //   };
 // };
 
+// Was once used to get dataMessage (CHATS) from route "/CHAT/GETTARGET/TARGET ID",
+// IN HOME.JS component, there are axios.get there that used to get data Message.
+// The Result (Response.data) will be pass to here and will be fetch in the CHATCOMPONENT.JS
 export const getDataMessage = (data) => {
   return (dispatch) => {
     dispatch({
