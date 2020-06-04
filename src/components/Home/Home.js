@@ -252,6 +252,7 @@ const Home = (props) => {
                 item={item}
                 key={index}
                 changeFirstShow={changeFirstShow}
+                // detailRecentMessages = Pass the username that is fetched in action Creator.
                 detailRecentMessages={props.detailRecentMessages}
               />
             );
@@ -270,6 +271,7 @@ const Home = (props) => {
                 item={item}
                 key={index}
                 changeFirstShow={changeFirstShow}
+                // detailRecentMessages = Pass the username that is fetched in action Creator.
                 detailRecentMessages={props.detailRecentMessages}
               />
             );
@@ -277,6 +279,7 @@ const Home = (props) => {
         </div>
       </div>
 
+      {/* FirstShow Determines "Welcome Page" / "Chat Page" */}
       {firstShow ? (
         <div className="col-md-8 bg-light vh-100">
           <div className="text-center center-div">
@@ -290,6 +293,7 @@ const Home = (props) => {
           <div className="bg-main support-scrollable-div">
             <div className="bg-light d-flex py-2">
               <div
+                // The Usage to Read Image that is updated with Real Files (.png, .jpg)
                 style={contactPic(props.DetailChatRecentContact.image)}
                 alt="..."
                 className="rounded-circle img-chat ml-3"
@@ -300,6 +304,7 @@ const Home = (props) => {
             </div>
 
             <div className="container pt-3 scrollable-div">
+              {/* DataMessage = CHATS */}
               {dataMessage.map((item) => {
                 let newChatComponent = <></>;
                 // IF item.id == id - mengcover agar saat pindah ke user lain data messagenya adalah milik user itu
@@ -308,11 +313,13 @@ const Home = (props) => {
                   newChatComponent = item.messages.map((itemMessage, index) => {
                     // console.log(itemMessage);
 
+                    // USING MOMENT.JS to fetch time from ("2020-05-23T17:15:57.021Z96737066")
                     const time = moment(`${itemMessage.createdAt}`);
 
                     const fixDate = time.format("dddd,D MMMM YYYY");
 
-                    // PERBANDINGAN STRING DI TIME
+                    // CONDITION if the Chat Date is same with Today's Date, then DON'T ADD/SHOW
+                    // If DIFFERENT between the Chat Date and Today's Date, then ADD/SHOW.
                     let showTanggal = <></>;
                     if (chatDate !== fixDate) {
                       showTanggal = (
