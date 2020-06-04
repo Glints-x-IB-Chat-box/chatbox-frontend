@@ -145,16 +145,6 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
   };
-  // useEffect(() => {
-  //   // console.log(targetUserId);
-  //   // setMessagesApi(props.dataMessage);
-  //   props.getDataMessage(targetUserId);
-  //   // socket.on("sendMessage", (Message) => {
-  //   //   setMessagesApi(props.dataMessage, Message);
-  //   // });
-  // }, [sendMessage, changeFirstShow]);
-  // useEffect(() => {
-  // }, []);
 
   // The Search Chat Function (Navbar)
   const SearchContact = (event) => {
@@ -164,7 +154,6 @@ const Home = (props) => {
 
   // In the beginning user open, there will be RecentChats and The Data Contact.
   useEffect(() => {
-    // props.getDataMessage(id);
     props.getDataContact();
     props.fetchHistoryChat("");
     props.fetchRecentChat();
@@ -179,7 +168,6 @@ const Home = (props) => {
       })
       .then((response) => {
         console.log(response.data);
-        // props.getDataMessage(response.data);
         setDataMessage(response.data);
 
         socket.on("sendMessage", (message) => {
@@ -228,9 +216,6 @@ const Home = (props) => {
         <div>
           {/* RecentChatContacts2 = new chat that added by user */}
           {props.RecentChatContacts2.map((item, index) => {
-            // console.log(item);
-            // console.log(props.dataContact);
-
             return (
               <RecentContact2
                 item={item}
@@ -244,9 +229,6 @@ const Home = (props) => {
         <div>
           {/* RecentChatContacts = the chats/recent chats that HAS BEEN CHATTED by User. */}
           {props.RecentChatContacts.map((item, index) => {
-            // console.log(item);
-            // console.log(props.RecentChatContacts);
-
             return (
               <RecentContact
                 item={item}
@@ -263,9 +245,6 @@ const Home = (props) => {
           <h5 className="pt-3 text-center">Unadded Contacts</h5>
           <hr className="bg-light mt-0 w-50" />
           {props.UnaddedRecentChat.map((item, index) => {
-            // console.log(item);
-            // console.log(props.RecentChatContacts);
-
             return (
               <UnaddedRecentChat
                 item={item}
@@ -332,8 +311,10 @@ const Home = (props) => {
 
                     return (
                       <div key={index}>
+                        {/* The Date */}
                         {showTanggal}
 
+                        {/* The CHATS */}
                         <Chatcomponent
                           item={itemMessage}
                           DetailChatRecentContact={
@@ -360,10 +341,14 @@ const Home = (props) => {
                 onChange={handleChangeMessage}
                 required
               />
+
+              {/* EMOJI BUTTON */}
+
               {/* <p className="align-self-center my-0 ">
                 <i className="far fa-grin-alt h3 px-3 chat-btn" />
               </p> */}
 
+              {/* ATTACH BUTTON */}
               <div className="align-self-center mb-2">
                 {["up"].map((direction) => (
                   <>
@@ -408,8 +393,10 @@ const Home = (props) => {
                 ))}
               </div>
 
+              {/* Usage of Ref */}
               {/* <input type="file"  ref={inputRef} className="form-control-file" onChange={selectFile}/>   */}
 
+              {/* SEND CHAT/MESSAGE BUTTON */}
               <p
                 style={{ cursor: "pointer" }}
                 onClick={(event) => sendMessage(event)}
