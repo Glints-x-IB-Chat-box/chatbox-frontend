@@ -26,7 +26,7 @@ export const getDataUser = (data) => {
 export const AddContacts = (data) => {
   const token = localStorage.getItem("token");
   // const tokenObj = JSON.parse(tokenString);
-  console.log(token);
+  // console.log(token);
 
   return async (dispatch) => {
     try {
@@ -48,7 +48,7 @@ export const AddContacts = (data) => {
       dispatch({
         type: "HIDE_ADDCONTACT_FORM",
       });
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       window.alert("Can't add a same user");
     }
@@ -82,7 +82,7 @@ export const getDataContact = (inputSearch) => {
 // Delete the Contacts we have added.
 export const deleteContacts = (data) => {
   const token = localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
 
   return async (dispatch) => {
     try {

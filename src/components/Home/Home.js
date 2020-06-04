@@ -44,7 +44,7 @@ const Home = (props) => {
   const [fileName, setFileName] = useState("");
   // console.log(id);
   const selectFile = (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
@@ -77,7 +77,7 @@ const Home = (props) => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setFile("");
         setFileName("");
       })
@@ -108,7 +108,7 @@ const Home = (props) => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setFile("");
         setFileName("");
       })
@@ -117,7 +117,7 @@ const Home = (props) => {
 
   // Set the welcome page turn into chat page, and get the data of the recent chat that is clicked.
   const changeFirstShow = (data) => {
-    console.log(data);
+    // console.log(data);
     props.showDetailRecentChat(data);
     props.getDataMessage(data._id);
     setFirstShow(false);
@@ -139,7 +139,7 @@ const Home = (props) => {
         { headers: { "x-access-token": localStorage.getItem("token") } }
       )
       .then((value) => {
-        console.log(value.data.messages);
+        // console.log(value.data.messages);
         setMessage("");
         socket.emit("sendMessage", message, () => setMessage(""));
       })
@@ -167,7 +167,7 @@ const Home = (props) => {
         headers: { "x-access-token": localStorage.getItem("token") },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setDataMessage(response.data);
 
         socket.on("sendMessage", (message) => {
@@ -412,7 +412,7 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
 
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,

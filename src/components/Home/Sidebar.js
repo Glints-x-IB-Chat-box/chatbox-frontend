@@ -15,7 +15,6 @@ const Sidebar = () => {
   const handleLogout = () => {
     history.push("/logout");
   };
-  console.log(show);
 
   return (
     <div style={{ width: "75px", height: "100vh", backgroundColor: "#1f2d3c" }}>
