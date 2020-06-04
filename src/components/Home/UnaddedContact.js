@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import ReactEmoji from "react-emoji";
 
-const RecentContact = (props) => {
+const UnaddedContact = (props) => {
   const contactPic = (picture) => {
     const url = process.env.REACT_APP_API_URL;
     const image = `${url}/${picture}`;
@@ -80,4 +80,4 @@ const RecentContact = (props) => {
     </div>
   );
 };
-export default RecentContact;
+export default UnaddedContact;

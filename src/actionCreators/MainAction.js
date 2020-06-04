@@ -53,7 +53,7 @@ export const AddContacts = (data) => {
   };
 };
 
-export const getDataContact = () => {
+export const getDataContact = (inputSearch) => {
   const token = localStorage.getItem("token");
 
   return async (dispatch) => {
@@ -63,9 +63,12 @@ export const getDataContact = () => {
           "x-access-token": token,
         },
       });
+      const filteredContact = response.data.filter((item) => {
+        return item.username.includes(inputSearch);
+      });
       dispatch({
         type: "GET_DATA_CONTACT",
-        payload: response.data,
+        payload: filteredContact,
       });
     } catch (error) {
       window.alert(error);
@@ -97,6 +100,8 @@ export const deleteContacts = (data) => {
       );
     }
   };
+
+  // SYNCRONOUS VERSION
 
   // return (dispatch) => {
   //   axios
@@ -207,7 +212,7 @@ export const getDataProfile = () => {
       const response = await axios.get(`${url}/usersSecure/getProfile`, {
         headers: {
           "x-access-token": token,
-        }
+        },
       });
       dispatch({
         type: "GET_DATA_PROFILE",
@@ -223,20 +228,24 @@ export const updateProfile = (data) => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
     try {
-      const response = await axios.put(`${url}/usersSecure/edit`, {
-        ...data
-      },{
-        headers: {
-          "x-access-token": token
+      const response = await axios.put(
+        `${url}/usersSecure/edit`,
+        {
+          ...data,
+        },
+        {
+          headers: {
+            "x-access-token": token,
+          },
         }
-      });
+      );
       dispatch({
         type: "UPDATE_DATA_PROFILE",
         payload: response.data,
       });
     } catch (error) {
       const output = error.response.data;
-      console.log(output)
+      console.log(output);
     }
   };
 };
@@ -248,8 +257,8 @@ export const updateProfPic = (data) => {
       const response = await axios.put(`${url}/usersSecure/edit`, data, {
         headers: {
           "x-access-token": token,
-          "content-type": `multipart/form-data`
-        }
+          "content-type": `multipart/form-data`,
+        },
       });
       dispatch({
         type: "UPDATE_DATA_PROFILE",
@@ -257,7 +266,7 @@ export const updateProfPic = (data) => {
       });
     } catch (error) {
       const output = error.response.data;
-      console.log(output)
+      console.log(output);
     }
   };
 };

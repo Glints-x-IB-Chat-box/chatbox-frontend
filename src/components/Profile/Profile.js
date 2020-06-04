@@ -34,7 +34,7 @@ const Profile = (props) => {
     props.getDataProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const image = `${url}/${
     data.image || "public/usersImage/default-user-icon.jpg"
   }`;
@@ -45,19 +45,22 @@ const Profile = (props) => {
     backgroundSize: "cover",
     backgroundPosition: "center",
     paddingTop: "50%",
-    width: "50%"
+    width: "50%",
   };
   return (
     <div className="row mx-0">
       <div className="col-md-4 main-chat-2 vh-100 px-0">
         <div className="text-center">
           <div>
-            <div className="mt-4 mx-auto rounded-circle" style={myProfile}></div>
+            <div
+              className="mt-4 mx-auto rounded-circle"
+              style={myProfile}
+            ></div>
           </div>
 
           <button
             onClick={showChangeImageForm}
-            className="w-100 text-white section-profile mb-2"
+            className="w-100 text-white section-profile mb-2 mt-3"
           >
             <div className="d-flex d-row justify-content-center">
               <p className="contact-icon my-0">

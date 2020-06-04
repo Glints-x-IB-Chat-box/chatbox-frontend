@@ -2,33 +2,115 @@ import React, { useEffect, useState } from "react";
 import homePicture from "../../assets/text2.png";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import jwt from "jwt-decode";
 import "../style.css";
 import Chatcomponent from "./ChatComponent";
 import RecentContact from "./RecentContact";
+import RecentContact2 from "./RecentContact2";
+import UnaddedRecentChat from "./UnaddedContact";
+import axios from "axios";
 
-// import io from "socket.io-client";
-
+import io from "socket.io-client";
+import { Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import {
   showDetailRecentChat,
-  addMessage,
   getDataMessage,
+  fetchHistoryChat,
+  fetchRecentChat,
 } from "../../actionCreators/ChatAction";
+import { getDataContact } from "../../actionCreators/MainAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
-  // const socket = io(`${process.env.REACT_APP_API_URL}`);
+  const socket = io("ws://34.87.159.36:8000/", {
+    transports: ["websocket"],
+  });
   const [firstShow, setFirstShow] = useState(true);
   const [dataMessage, setDataMessage] = useState([]);
   let { id } = useParams();
-
-  // const [messagesApi, setMessagesApi] = useState([]);
-
+  const sender = jwt(localStorage.getItem("token"));
+  const senderId = sender.id;
   const [message, setMessage] = useState("");
-  // console.log(message);
+
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("");
+  // console.log(id);
+  const selectFile = (e) => {
+    console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+  const selectDocuments = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+  const sendDocument = (e) => {
+    e.preventDefault();
+    setFile(null);
+    setFileName("");
+    const fd = new FormData();
+    fd.append("documents", file);
+    fd.append("senderUserId", sender.id);
+    fd.append("targetUserId", id);
+    axios
+      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          console.log(
+            `Upload Progress: ${
+              (progressEvent.loaded, progressEvent.total)
+            } ${Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            )} %`
+          );
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setFile("");
+        setFileName("");
+      })
+      .catch((err) => console.log(err));
+  };
+  const sendImage = (e) => {
+    e.preventDefault();
+    setFile(null);
+    setFileName("");
+    const fd = new FormData();
+    fd.append("images", file);
+    fd.append("senderUserId", sender.id);
+    fd.append("targetUserId", id);
+    axios
+      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        onUploadProgress: (progressEvent) => {
+          console.log(
+            `Upload Progress: ${
+              (progressEvent.loaded, progressEvent.total)
+            } ${Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            )} %`
+          );
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setFile("");
+        setFileName("");
+      })
+      .catch((err) => console.log(err));
+  };
 
   const changeFirstShow = (data) => {
     console.log(data);
     props.showDetailRecentChat(data);
+    props.getDataMessage(data._id);
     setFirstShow(false);
   };
 
@@ -37,12 +119,21 @@ const Home = (props) => {
     setMessage(value);
   };
 
-  const sendMessage = (dataTargetUserId) => {
-    props.addMessage(dataTargetUserId, message);
-    // setMessagesApi("");
-    // socket.emit("sendMessage", dataMessage, () => setMessagesApi(""));
+  const sendMessage = (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        `https://api.ahmadfakhrozy.com/chat/postchat`,
+        { senderUserId: senderId, targetUserId: id, message: message },
+        { headers: { "x-access-token": localStorage.getItem("token") } }
+      )
+      .then((value) => {
+        console.log(value.data.messages);
+        setMessage("");
+        socket.emit("sendMessage", message, () => setMessage(""));
+      })
+      .catch((err) => console.log(err));
   };
-
   // useEffect(() => {
   //   // console.log(targetUserId);
   //   // setMessagesApi(props.dataMessage);
@@ -51,32 +142,51 @@ const Home = (props) => {
   //   //   setMessagesApi(props.dataMessage, Message);
   //   // });
   // }, [sendMessage, changeFirstShow]);
+  // useEffect(() => {
+  // }, []);
+
+  const SearchContact = (event) => {
+    let { value } = event.currentTarget;
+    props.fetchHistoryChat(value);
+  };
 
   useEffect(() => {
-    props.getDataMessage(id);
+    // props.getDataMessage(id);
+    props.getDataContact();
+    props.fetchHistoryChat("");
+    props.fetchRecentChat();
   }, []);
 
   useEffect(() => {
-    console.log(props.dataMessage);
-    console.log(id);
-    setTimeout(() => {
-      props.getDataMessage(id);
-    }, 1000);
+    props.fetchRecentChat();
+    axios
+      .get(`https://api.ahmadfakhrozy.com/chat/gettarget/${id}`, {
+        headers: { "x-access-token": localStorage.getItem("token") },
+      })
+      .then((response) => {
+        console.log(response.data);
+        // props.getDataMessage(response.data);
+        setDataMessage(response.data);
 
-    let newDataMessage = props.dataMessage.find((item) => {
-      if (!item) {
-        setDataMessage([]);
-      } else return item._id === id;
-    });
-    if (!newDataMessage) {
-      setDataMessage(props.dataMessage);
-    } else {
-      setDataMessage([]);
-    }
-    console.log(dataMessage);
-  }, [props.dataMessage]);
+        socket.on("sendMessage", (message) => {
+          props.getDataMessage(response.data);
+          setDataMessage(response.data);
+        });
+      });
+  }, [props.dataMessage, file]);
 
   let chatDate = undefined;
+
+  const contactPic = (picture) => {
+    const url = process.env.REACT_APP_API_URL;
+    const image = `${url}/${picture}`;
+    const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
+    return {
+      backgroundImage: `url(${image}), url(${imageNotFound})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    };
+  };
 
   return (
     <div className="row mx-0">
@@ -93,19 +203,57 @@ const Home = (props) => {
               <input
                 type="text"
                 className="form-control with-icon h6 my-0"
-                placeholder="Search Contacts..."
+                placeholder="Search Chat..."
+                onChange={SearchContact}
               />
             </div>
           </div>
         </div>
 
         <div>
+          {props.RecentChatContacts2.map((item, index) => {
+            // console.log(item);
+            // console.log(props.dataContact);
+
+            return (
+              <RecentContact2
+                item={item}
+                key={index}
+                changeFirstShow={changeFirstShow}
+              />
+            );
+          })}
+        </div>
+
+        <div>
           {props.RecentChatContacts.map((item, index) => {
+            // console.log(item);
+            // console.log(props.RecentChatContacts);
+
             return (
               <RecentContact
                 item={item}
                 key={index}
                 changeFirstShow={changeFirstShow}
+                detailRecentMessages={props.detailRecentMessages}
+              />
+            );
+          })}
+        </div>
+
+        <div className="pb-4">
+          <h5 className="pt-3 text-center">Unadded Contacts</h5>
+          <hr className="bg-light mt-0 w-50" />
+          {props.UnaddedRecentChat.map((item, index) => {
+            // console.log(item);
+            // console.log(props.RecentChatContacts);
+
+            return (
+              <UnaddedRecentChat
+                item={item}
+                key={index}
+                changeFirstShow={changeFirstShow}
+                detailRecentMessages={props.detailRecentMessages}
               />
             );
           })}
@@ -124,8 +272,8 @@ const Home = (props) => {
         <div className="col-md-8 px-0">
           <div className="bg-main support-scrollable-div">
             <div className="bg-light d-flex py-2">
-              <img
-                src={props.DetailChatRecentContact.image}
+              <div
+                style={contactPic(props.DetailChatRecentContact.image)}
                 alt="..."
                 className="rounded-circle img-chat ml-3"
               />
@@ -136,8 +284,9 @@ const Home = (props) => {
 
             <div className="container pt-3 scrollable-div">
               {dataMessage.map((item) => {
-                console.log(dataMessage.item);
                 let newChatComponent = <></>;
+                // IF item.id == id - mengcover agar saat pindah ke user lain data messagenya adalah milik user itu
+                // item && item.usersId - mengcover error pada item._id, dmana error bisa terjadi saat si "item"._id ini ngga ada.
                 if (item && item.usersId.find((item) => item._id === id)) {
                   newChatComponent = item.messages.map((itemMessage, index) => {
                     // console.log(itemMessage);
@@ -163,7 +312,6 @@ const Home = (props) => {
 
                         <Chatcomponent
                           item={itemMessage}
-                          // dataMessageApi={messagesApi}
                           DetailChatRecentContact={
                             props.DetailChatRecentContact
                           }
@@ -173,29 +321,74 @@ const Home = (props) => {
                   });
                   return newChatComponent;
                 }
-                return;
+                return <></>;
               })}
             </div>
-            <div className="d-flex pt-2 px-2 bg-white ">
+            <div className="d-flex pt-2 px-2 bg-white justify-content-center">
               <textarea
+                id="inputform"
                 name="message"
                 rows="2"
                 type="text"
                 placeholder="Input your message here..."
-                className="input-chat"
+                className="input-chat mr-3"
                 value={message}
                 onChange={handleChangeMessage}
                 required
               />
-              <p className="align-self-center my-0 ">
+              {/* <p className="align-self-center my-0 ">
                 <i className="far fa-grin-alt h3 px-3 chat-btn" />
-              </p>
-              <p className="align-self-center my-0 ">
-                <i className="fas fa-paperclip h3 chat-btn" />
-              </p>
+              </p> */}
+
+              <div className="align-self-center mb-2">
+                {["up"].map((direction) => (
+                  <>
+                    <DropdownButton
+                      as={ButtonGroup}
+                      className="send-btn"
+                      key={direction}
+                      id={`dropdown-button-drop-${direction}`}
+                      size="sm"
+                      drop={direction}
+                      title={<i className="fas fa-paperclip h4 px-2 my-0" />}
+                    >
+                      <h6 className="my-0 font-weight-bold">Document</h6>
+                      <input
+                        type="file"
+                        className="form-control-file"
+                        onChange={selectDocuments}
+                      />
+                      <button
+                        className="text-white btn-block mt-2 send-btn"
+                        onClick={sendDocument}
+                      >
+                        Send Document
+                      </button>
+
+                      <Dropdown.Divider />
+                      <h6 className="my-0 font-weight-bold">Image</h6>
+                      <input
+                        type="file"
+                        // ref={inputRef}
+                        className="form-control-file"
+                        onChange={selectFile}
+                      />
+                      <button
+                        className="text-white btn-block mt-2 send-btn"
+                        onClick={sendImage}
+                      >
+                        Send Image
+                      </button>
+                    </DropdownButton>{" "}
+                  </>
+                ))}
+              </div>
+
+              {/* <input type="file"  ref={inputRef} className="form-control-file" onChange={selectFile}/>   */}
+
               <p
                 style={{ cursor: "pointer" }}
-                onClick={() => sendMessage(props.DetailChatRecentContact._id)}
+                onClick={(event) => sendMessage(event)}
                 className="align-self-center my-0"
               >
                 <i className="fas fa-arrow-circle-right h3 px-3 chat-btn" />
@@ -208,26 +401,24 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  console.log(state.chatReducer.dataMessage);
-
-  // const newDataMessage = state.chatReducer.dataMessage.find((item) => {
-  //   if (id == item.usersId) {
-  //     return true;
-  //   }
-  //   return false;
-  // });
+  console.log(state);
 
   return {
     RecentChatContacts: state.chatReducer.RecentChatContacts,
+    RecentChatContacts2: state.chatReducer.RecentChatContacts2,
+    UnaddedRecentChat: state.chatReducer.UnaddedRecentChat,
     DetailChatRecentContact: state.chatReducer.DetailChatRecentContact,
     dataMessage: state.chatReducer.dataMessage,
+    detailRecentMessages: state.chatReducer.detailRecentMessages,
   };
 };
 
 const mapDispatchToProps = {
   showDetailRecentChat,
-  addMessage,
   getDataMessage,
+  fetchHistoryChat,
+  fetchRecentChat,
+  getDataContact,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

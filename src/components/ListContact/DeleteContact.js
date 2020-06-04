@@ -34,7 +34,7 @@ const DeleteContact = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log(state.mainReducer.dataDelete);
+  // console.log(state.mainReducer.isShowDelete  );
   return {
     show: state.mainReducer.isShowDelete,
     dataDelete: state.mainReducer.dataDelete,

@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 import { NavLink, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../style.css";
 
-export default function Sidebar() {
+const Sidebar = () => {
   let match = useRouteMatch();
+  const history = useHistory();
+  const [show, setShow] = useState(false);
+
+  const LogoutConfirmation = () => {
+    setShow(!show);
+  };
+  const handleLogout = () => {
+    history.push("/logout");
+  };
+  console.log(show);
+
   return (
     <div style={{ width: "75px", height: "100vh", backgroundColor: "#1f2d3c" }}>
       <div className="list-group">
         <NavLink
           to={match.url}
+          exact={true}
           className="list-group-item list-group-item-action"
         >
           <i className="fas fa-comment-dots fa-lg" />
@@ -35,13 +49,30 @@ export default function Sidebar() {
         >
           <i className="fas fa-info-circle fa-lg" />
         </NavLink>
-        <NavLink
-          to="/logout"
-          className="list-group-item list-group-item-action mt-auto"
+
+        <button
+          onClick={LogoutConfirmation}
+          className="list-group-item list-group-item-action logout-sidebar"
         >
           <i className="fas fa-sign-out-alt fa-lg" />
-        </NavLink>
+          <Modal show={show} onHide={LogoutConfirmation}>
+            <Modal.Header closeButton>
+              <Modal.Title className="h5">
+                Are You Sure Want to Logout?
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={LogoutConfirmation}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={handleLogout}>
+                Yes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </button>
       </div>
     </div>
   );
-}
+};
+export default Sidebar;

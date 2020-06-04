@@ -54,13 +54,13 @@ const AddContact = (props) => {
     return {
       backgroundImage: `url(${image}), url(${imageNotFound})`,
       backgroundSize: "cover",
-      backgroundPosition: "center"
+      backgroundPosition: "center",
     };
   };
   return (
     <Modal show={props.show} onHide={props.hideAddContactForm}>
       <Modal.Header closeButton>
-        <Modal.Title>Search Your Friend</Modal.Title>
+        <Modal.Title>Search your friend</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <AlertDismissible />
@@ -80,7 +80,7 @@ const AddContact = (props) => {
           <thead className="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Friends</th>
+              <th scope="col">Username</th>
               <th scope="col">Photo</th>
               <th scope="col"></th>
             </tr>
@@ -93,7 +93,10 @@ const AddContact = (props) => {
                   <th scope="row">{1 + index}</th>
                   <td>{item.username}</td>
                   <td>
-                    <div className="img-search rounded-circle" style={contactPic(item.image)}></div>
+                    <div
+                      className="img-search rounded-circle"
+                      style={contactPic(item.image)}
+                    ></div>
                   </td>
                   <td>
                     <p
