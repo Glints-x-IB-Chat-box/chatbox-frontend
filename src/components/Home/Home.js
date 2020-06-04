@@ -25,11 +25,19 @@ const Home = (props) => {
   const socket = io("ws://34.87.159.36:8000/", {
     transports: ["websocket"],
   });
+
+  // Set the welcome page turn into chat page.
   const [firstShow, setFirstShow] = useState(true);
+
+  // After fetch DataMessage from Message Database, it will be pass to here.
   const [dataMessage, setDataMessage] = useState([]);
+
+  // Use params is used to get id from the URL.
   let { id } = useParams();
   const sender = jwt(localStorage.getItem("token"));
   const senderId = sender.id;
+
+  // Set the message that user input in Textarea Box
   const [message, setMessage] = useState("");
 
   const [file, setFile] = useState(null);
@@ -107,6 +115,7 @@ const Home = (props) => {
       .catch((err) => console.log(err));
   };
 
+  // Set the welcome page turn into chat page, and get the data of the recent chat that is clicked.
   const changeFirstShow = (data) => {
     console.log(data);
     props.showDetailRecentChat(data);
@@ -114,11 +123,13 @@ const Home = (props) => {
     setFirstShow(false);
   };
 
+  // Get the message that user Input.
   const handleChangeMessage = (event) => {
     let { value } = event.currentTarget;
     setMessage(value);
   };
 
+  // User send message to other user.
   const sendMessage = (event) => {
     event.preventDefault();
     axios
@@ -134,29 +145,21 @@ const Home = (props) => {
       })
       .catch((err) => console.log(err));
   };
-  // useEffect(() => {
-  //   // console.log(targetUserId);
-  //   // setMessagesApi(props.dataMessage);
-  //   props.getDataMessage(targetUserId);
-  //   // socket.on("sendMessage", (Message) => {
-  //   //   setMessagesApi(props.dataMessage, Message);
-  //   // });
-  // }, [sendMessage, changeFirstShow]);
-  // useEffect(() => {
-  // }, []);
 
+  // The Search Chat Function (Navbar)
   const SearchContact = (event) => {
     let { value } = event.currentTarget;
     props.fetchHistoryChat(value);
   };
 
+  // In the beginning user open, there will be RecentChats and The Data Contact.
   useEffect(() => {
-    // props.getDataMessage(id);
     props.getDataContact();
     props.fetchHistoryChat("");
     props.fetchRecentChat();
   }, []);
 
+  // When User send Message there will be update/changes.
   useEffect(() => {
     props.fetchRecentChat();
     axios
@@ -165,7 +168,6 @@ const Home = (props) => {
       })
       .then((response) => {
         console.log(response.data);
-        // props.getDataMessage(response.data);
         setDataMessage(response.data);
 
         socket.on("sendMessage", (message) => {
@@ -177,6 +179,7 @@ const Home = (props) => {
 
   let chatDate = undefined;
 
+  // Contact Picture Function
   const contactPic = (picture) => {
     const url = process.env.REACT_APP_API_URL;
     const image = `${url}/${picture}`;
@@ -211,10 +214,8 @@ const Home = (props) => {
         </div>
 
         <div>
+          {/* RecentChatContacts2 = new chat that added by user */}
           {props.RecentChatContacts2.map((item, index) => {
-            // console.log(item);
-            // console.log(props.dataContact);
-
             return (
               <RecentContact2
                 item={item}
@@ -226,15 +227,14 @@ const Home = (props) => {
         </div>
 
         <div>
+          {/* RecentChatContacts = the chats/recent chats that HAS BEEN CHATTED by User. */}
           {props.RecentChatContacts.map((item, index) => {
-            // console.log(item);
-            // console.log(props.RecentChatContacts);
-
             return (
               <RecentContact
                 item={item}
                 key={index}
                 changeFirstShow={changeFirstShow}
+                // detailRecentMessages = Pass the username that is fetched in action Creator.
                 detailRecentMessages={props.detailRecentMessages}
               />
             );
@@ -245,14 +245,12 @@ const Home = (props) => {
           <h5 className="pt-3 text-center">Unadded Contacts</h5>
           <hr className="bg-light mt-0 w-50" />
           {props.UnaddedRecentChat.map((item, index) => {
-            // console.log(item);
-            // console.log(props.RecentChatContacts);
-
             return (
               <UnaddedRecentChat
                 item={item}
                 key={index}
                 changeFirstShow={changeFirstShow}
+                // detailRecentMessages = Pass the username that is fetched in action Creator.
                 detailRecentMessages={props.detailRecentMessages}
               />
             );
@@ -260,6 +258,7 @@ const Home = (props) => {
         </div>
       </div>
 
+      {/* FirstShow Determines "Welcome Page" / "Chat Page" */}
       {firstShow ? (
         <div className="col-md-8 bg-light vh-100">
           <div className="text-center center-div">
@@ -273,6 +272,7 @@ const Home = (props) => {
           <div className="bg-main support-scrollable-div">
             <div className="bg-light d-flex py-2">
               <div
+                // The Usage to Read Image that is updated with Real Files (.png, .jpg)
                 style={contactPic(props.DetailChatRecentContact.image)}
                 alt="..."
                 className="rounded-circle img-chat ml-3"
@@ -283,6 +283,7 @@ const Home = (props) => {
             </div>
 
             <div className="container pt-3 scrollable-div">
+              {/* DataMessage = CHATS */}
               {dataMessage.map((item) => {
                 let newChatComponent = <></>;
                 // IF item.id == id - mengcover agar saat pindah ke user lain data messagenya adalah milik user itu
@@ -291,11 +292,13 @@ const Home = (props) => {
                   newChatComponent = item.messages.map((itemMessage, index) => {
                     // console.log(itemMessage);
 
+                    // USING MOMENT.JS to fetch time from ("2020-05-23T17:15:57.021Z96737066")
                     const time = moment(`${itemMessage.createdAt}`);
 
                     const fixDate = time.format("dddd,D MMMM YYYY");
 
-                    // PERBANDINGAN STRING DI TIME
+                    // CONDITION if the Chat Date is same with Today's Date, then DON'T ADD/SHOW
+                    // If DIFFERENT between the Chat Date and Today's Date, then ADD/SHOW.
                     let showTanggal = <></>;
                     if (chatDate !== fixDate) {
                       showTanggal = (
@@ -308,8 +311,10 @@ const Home = (props) => {
 
                     return (
                       <div key={index}>
+                        {/* The Date */}
                         {showTanggal}
 
+                        {/* The CHATS */}
                         <Chatcomponent
                           item={itemMessage}
                           DetailChatRecentContact={
@@ -336,10 +341,14 @@ const Home = (props) => {
                 onChange={handleChangeMessage}
                 required
               />
+
+              {/* EMOJI BUTTON */}
+
               {/* <p className="align-self-center my-0 ">
                 <i className="far fa-grin-alt h3 px-3 chat-btn" />
               </p> */}
 
+              {/* ATTACH BUTTON */}
               <div className="align-self-center mb-2">
                 {["up"].map((direction) => (
                   <>
@@ -384,8 +393,10 @@ const Home = (props) => {
                 ))}
               </div>
 
+              {/* Usage of Ref */}
               {/* <input type="file"  ref={inputRef} className="form-control-file" onChange={selectFile}/>   */}
 
+              {/* SEND CHAT/MESSAGE BUTTON */}
               <p
                 style={{ cursor: "pointer" }}
                 onClick={(event) => sendMessage(event)}

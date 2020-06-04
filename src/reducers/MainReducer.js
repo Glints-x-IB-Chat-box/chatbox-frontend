@@ -11,10 +11,15 @@ const initialState = {
   isShowLogoutForm: false,
 };
 
+// DETAILS OF THESE COULD BE FIND IN THE ACTION CREATOR OF MAIN.
 const MainReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_DATA_USER":
       return { ...state, dataUser: action.payload };
+
+    // AFTER DELETED THE FILE, we need to update to user that he already deleted it, and to make it we use Filter
+    // We Filter whether the dataId is same with current Contact Data, if same then we will exclude it.
+    // Inside new variable it will contain new data that filtered.
     case "DELETE_DATA_CONTACT":
       const dataFiltered = state.dataContact.filter((item) => {
         if (item._id === action.payload) return false;

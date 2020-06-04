@@ -3,6 +3,7 @@ import axios from "axios";
 const url = process.env.REACT_APP_API_URL;
 // const url = process.env.URL_HOSTING_APP;
 
+// Get Data User in Search User Bar.
 export const getDataUser = (data) => {
   return async (dispatch) => {
     try {
@@ -21,6 +22,7 @@ export const getDataUser = (data) => {
   };
 };
 
+// Add Users in UserDatabase to Our Contact Function
 export const AddContacts = (data) => {
   const token = localStorage.getItem("token");
   // const tokenObj = JSON.parse(tokenString);
@@ -53,6 +55,7 @@ export const AddContacts = (data) => {
   };
 };
 
+// Get The contacts that we have added
 export const getDataContact = (inputSearch) => {
   const token = localStorage.getItem("token");
 
@@ -76,6 +79,7 @@ export const getDataContact = (inputSearch) => {
   };
 };
 
+// Delete the Contacts we have added.
 export const deleteContacts = (data) => {
   const token = localStorage.getItem("token");
   console.log(token);
@@ -125,6 +129,7 @@ export const deleteContacts = (data) => {
   // };
 };
 
+// Edit Name Profile Form
 export const showEditForm = () => {
   // DISPATCH DIPAKAI DENGAN SYARAT
   return (dispatch) => {
@@ -141,6 +146,7 @@ export const hideEditForm = () => {
   };
 };
 
+// Edit About Profile Form
 export const showAboutForm = () => {
   // DISPATCH DIPAKAI DENGAN SYARAT
   return (dispatch) => {
@@ -157,6 +163,7 @@ export const hideAboutForm = () => {
   };
 };
 
+// Show Add Contact & Search User Form
 export const showAddContactForm = () => {
   // DISPATCH DIPAKAI DENGAN SYARAT
   return (dispatch) => {
@@ -173,6 +180,7 @@ export const hideAddContactForm = () => {
   };
 };
 
+// Show Delete Contact Form
 export const showDeleteContactForm = (description) => {
   // DISPATCH DIPAKAI DENGAN SYARAT
   return (dispatch) => {
@@ -189,6 +197,7 @@ export const hideDeleteContactForm = () => {
   };
 };
 
+// Show Change Image Form
 export const showChangeImageForm = () => {
   // DISPATCH DIPAKAI DENGAN SYARAT
   return (dispatch) => {
@@ -205,6 +214,7 @@ export const hideChangeImageForm = () => {
   };
 };
 
+// Get Data Profile of Users that Logged In
 export const getDataProfile = () => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
