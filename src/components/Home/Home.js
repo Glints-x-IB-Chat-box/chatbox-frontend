@@ -123,11 +123,13 @@ const Home = (props) => {
     setFirstShow(false);
   };
 
+  // Get the message that user Input.
   const handleChangeMessage = (event) => {
     let { value } = event.currentTarget;
     setMessage(value);
   };
 
+  // User send message to other user.
   const sendMessage = (event) => {
     event.preventDefault();
     axios
@@ -154,6 +156,7 @@ const Home = (props) => {
   // useEffect(() => {
   // }, []);
 
+  // The Search Chat Function (Navbar)
   const SearchContact = (event) => {
     let { value } = event.currentTarget;
     props.fetchHistoryChat(value);
@@ -188,6 +191,7 @@ const Home = (props) => {
 
   let chatDate = undefined;
 
+  // Contact Picture Function
   const contactPic = (picture) => {
     const url = process.env.REACT_APP_API_URL;
     const image = `${url}/${picture}`;
@@ -222,6 +226,7 @@ const Home = (props) => {
         </div>
 
         <div>
+          {/* RecentChatContacts2 = new chat that added by user */}
           {props.RecentChatContacts2.map((item, index) => {
             // console.log(item);
             // console.log(props.dataContact);
@@ -237,6 +242,7 @@ const Home = (props) => {
         </div>
 
         <div>
+          {/* RecentChatContacts = the chats/recent chats that HAS BEEN CHATTED by User. */}
           {props.RecentChatContacts.map((item, index) => {
             // console.log(item);
             // console.log(props.RecentChatContacts);
