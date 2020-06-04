@@ -26,18 +26,11 @@ const ListContact = (props) => {
 
   return (
     <div className="row mx-0">
-      <div className="col-md-4 main-chat-2 vh-100 px-0 scrollable-div">
+      <div className="col-md-4 main-chat-2 vh-100 px-0">
         <div className="list-group">
           <div className="list-group-item list-group-item-action py-0">
             <div className="d-flex d-row justify-content-center mt-2">
               <h4 className="text-white py-2">YOUR CONTACTS</h4>
-              <p
-                style={{ cursor: "pointer" }}
-                onClick={props.showAddContactForm}
-                className="contact-icon my-0"
-              >
-                <i className="fas fa-user-plus" />
-              </p>
             </div>
             <div className="form-group h-100  mb-4">
               <span className="input-icon">
@@ -53,7 +46,7 @@ const ListContact = (props) => {
           </div>
         </div>
 
-        <div>
+        <div className="scrollable-div contact-list">
           {props.dataContact.map((item, index) => {
             // console.log(props.dataContact);
             return (
@@ -64,6 +57,15 @@ const ListContact = (props) => {
               />
             );
           })}
+        </div>
+
+        <div className="add-contact py-3 px-2">
+          <button
+            onClick={props.showAddContactForm}
+            className="btn btn-primary btn-block"
+          >
+            Add Contact
+          </button>
         </div>
       </div>
 
