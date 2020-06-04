@@ -25,11 +25,19 @@ const Home = (props) => {
   const socket = io("ws://34.87.159.36:8000/", {
     transports: ["websocket"],
   });
+
+  // Set the welcome page turn into chat page.
   const [firstShow, setFirstShow] = useState(true);
+
+  // After fetch DataMessage from Message Database, it will be pass to here.
   const [dataMessage, setDataMessage] = useState([]);
+
+  // Use params is used to get id from the URL.
   let { id } = useParams();
   const sender = jwt(localStorage.getItem("token"));
   const senderId = sender.id;
+
+  // Set the message that user input in Textarea Box
   const [message, setMessage] = useState("");
 
   const [file, setFile] = useState(null);
@@ -107,6 +115,7 @@ const Home = (props) => {
       .catch((err) => console.log(err));
   };
 
+  // Set the welcome page turn into chat page, and get the data of the recent chat that is clicked.
   const changeFirstShow = (data) => {
     console.log(data);
     props.showDetailRecentChat(data);
@@ -150,6 +159,7 @@ const Home = (props) => {
     props.fetchHistoryChat(value);
   };
 
+  // In the beginning user open, there will be RecentChats and The Data Contact.
   useEffect(() => {
     // props.getDataMessage(id);
     props.getDataContact();
@@ -157,6 +167,7 @@ const Home = (props) => {
     props.fetchRecentChat();
   }, []);
 
+  // When User send Message there will be update/changes.
   useEffect(() => {
     props.fetchRecentChat();
     axios
