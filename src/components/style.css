@@ -131,8 +131,8 @@ input.with-icon {
   padding-bottom: 1rem !important;
 }
 .list-group-item.py-2 {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
 .list-group-item.active {
   background-color: #2c3e50 !important;
