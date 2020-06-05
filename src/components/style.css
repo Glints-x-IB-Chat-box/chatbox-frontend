@@ -221,6 +221,12 @@ input.with-icon {
 .section-chat-div {
   padding-left: 0.5rem;
 }
+.add-contact {
+  background-color: #1f2d3c;
+}
+.contact-list {
+  height: calc(100vh - 192.33px);
+}
 
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);

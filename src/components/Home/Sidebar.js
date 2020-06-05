@@ -22,38 +22,43 @@ const Sidebar = () => {
         <NavLink
           to={match.url}
           exact={true}
-          className="list-group-item list-group-item-action"
+          className="list-group-item list-group-item-action px-0"
         >
           <i className="fas fa-comment-dots fa-lg" />
+          <div><small>Chat</small></div>
         </NavLink>
 
         <NavLink
           to={`${match.url}/profile`}
-          className="list-group-item list-group-item-action"
+          className="list-group-item list-group-item-action px-0"
         >
           <i className="fas fa-user-circle fa-lg" />
+          <div><small>Profile</small></div>
         </NavLink>
         {/* <Link to={`${match.url}/group`} className="list-group-item list-group-item-action">
           Group
         </Link> */}
         <NavLink
           to={`${match.url}/listContact`}
-          className="list-group-item list-group-item-action"
+          className="list-group-item list-group-item-action px-0"
         >
           <i className="fas fa-address-book fa-lg" />
+          <div><small>Contacts</small></div>
         </NavLink>
         <NavLink
           to={`${match.url}/about`}
-          className="list-group-item list-group-item-action"
+          className="list-group-item list-group-item-action px-0"
         >
           <i className="fas fa-info-circle fa-lg" />
+          <div><small>About</small></div>
         </NavLink>
 
         <button
           onClick={LogoutConfirmation}
-          className="list-group-item list-group-item-action logout-sidebar"
+          className="list-group-item list-group-item-action logout-sidebar px-0"
         >
-          <i className="fas fa-sign-out-alt fa-lg" />
+          <i className="fas fa-sign-out-alt fa-lg text-danger" />
+          <div><small className="text-danger">Logout</small></div>
           <Modal show={show} onHide={LogoutConfirmation}>
             <Modal.Header closeButton>
               <Modal.Title className="h5">
