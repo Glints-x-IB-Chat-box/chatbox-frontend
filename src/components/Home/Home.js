@@ -36,7 +36,7 @@ const Home = (props) => {
 
   // console.log(mainUrlString);
 
-  const socket = io("https://api.ahmadfakhrozy.com/", {
+  const socket = io("https://34.87.159.36:8000", {
     transports: ["websocket"],
   });
 
