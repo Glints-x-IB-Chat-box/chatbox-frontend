@@ -32,7 +32,7 @@ const Home = (props) => {
 
   // if you want to launch in circlemessenger.com use :
   const socket = io(
-    mainURL,
+    "https://api.ahmadfakhrozy.com/",
 
     {
       transports: ["websocket"],
