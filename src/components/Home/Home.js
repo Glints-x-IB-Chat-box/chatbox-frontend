@@ -32,11 +32,9 @@ const Home = (props) => {
 
   // if you want to launch in circlemessenger.com use :
   // const mainUrlString = JSON.stringify(mainURL);
-  // console.log(mainURL);
+  console.log(mainURL);
 
-  // console.log(mainUrlString);
-
-  const socket = io("https://34.87.159.36:8000", {
+  const socket = io(mainURL, {
     transports: ["websocket"],
   });
 
