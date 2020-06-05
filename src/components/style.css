@@ -167,6 +167,10 @@ input.with-icon {
   font-size: 0.8rem;
   float: left;
   color: #aaaaaa;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .profile-chat h6 {
   font-size: 1.15rem !important;
@@ -220,6 +224,7 @@ input.with-icon {
 }
 .section-chat-div {
   padding-left: 0.5rem;
+  display: grid;
 }
 .add-contact {
   background-color: #1f2d3c;
