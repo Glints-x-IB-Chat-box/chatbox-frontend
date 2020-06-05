@@ -23,7 +23,7 @@ import { connect } from "react-redux";
 
 const Home = (props) => {
   // when making env, we need to add "REACT_APP" in the first place. it is the rule of react.
-  // const mainURL = process.env.REACT_APP_API_URL;
+  const mainURL = process.env.REACT_APP_API_URL;
   // const localhostURL = process.env.REACT_APP_LOCALHOST_URL_SOCKET;
 
   // if you want to launch in localhost use :
