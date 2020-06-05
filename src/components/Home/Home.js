@@ -28,11 +28,13 @@ const Home = (props) => {
 
   // if you want to launch in localhost use :
   // const socket = io(
-  //   localhostURL,
+  // localhostURL,
 
   // if you want to launch in circlemessenger.com use :
+  // console.log(mainURL);
+
   const socket = io(
-    "https://api.ahmadfakhrozy.com/",
+    mainURL,
 
     {
       transports: ["websocket"],
