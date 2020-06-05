@@ -22,7 +22,7 @@ import { getDataContact } from "../../actionCreators/MainAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
-  const socket = io("ws://34.87.159.36:8000/", {
+  const socket = io("https://34.87.159.36:8000/", {
     transports: ["websocket"],
   });
 
