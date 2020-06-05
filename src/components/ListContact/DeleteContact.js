@@ -9,8 +9,9 @@ import {
 } from "../../actionCreators/MainAction";
 
 const DeleteContact = (props) => {
+  // console.log(props.dataDelete);
+
   const handleDelete = () => {
-    console.log(props.dataDelete);
     props.deleteContacts(props.dataDelete);
   };
   return (
