@@ -31,9 +31,12 @@ const Home = (props) => {
   // localhostURL,
 
   // if you want to launch in circlemessenger.com use :
-  const mainUrlString = JSON.stringify(mainURL);
+  // const mainUrlString = JSON.stringify(mainURL);
+  // console.log(mainURL);
 
-  const socket = io(mainUrlString, {
+  // console.log(mainUrlString);
+
+  const socket = io("https://api.ahmadfakhrozy.com/", {
     transports: ["websocket"],
   });
 
