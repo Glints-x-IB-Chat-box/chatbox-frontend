@@ -24,6 +24,10 @@ const EditName = (props) => {
     });
   };
 
+  const toInputLowercase = event => {
+    event.target.value = event.target.value.toLowerCase();
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     props.hideEditForm();
@@ -46,6 +50,7 @@ const EditName = (props) => {
               placeholder="change your username here"
               value={data.username}
               onChange={handleChange}
+              onInput={toInputLowercase}
             />
           </div>
         </Modal.Body>
