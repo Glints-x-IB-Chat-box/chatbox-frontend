@@ -22,9 +22,22 @@ import { getDataContact } from "../../actionCreators/MainAction";
 import { connect } from "react-redux";
 
 const Home = (props) => {
-  const socket = io("https://api.ahmadfakhrozy.com/", {
-    transports: ["websocket"],
-  });
+  // when making env, we need to add "REACT_APP" in the first place. it is the rule of react.
+  const mainURL = process.env.REACT_APP_API_URL;
+  // const localhostURL = process.env.REACT_APP_LOCALHOST_URL_SOCKET;
+
+  // if you want to launch in localhost use :
+  // const socket = io(
+  //   localhostURL,
+
+  // if you want to launch in circlemessenger.com use :
+  const socket = io(
+    mainURL,
+
+    {
+      transports: ["websocket"],
+    }
+  );
 
   // Set the welcome page turn into chat page.
   const [firstShow, setFirstShow] = useState(true);
@@ -61,7 +74,7 @@ const Home = (props) => {
     fd.append("senderUserId", sender.id);
     fd.append("targetUserId", id);
     axios
-      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+      .post(`${mainURL}/chat/postchat`, fd, {
         headers: {
           "Content-Type": "multipart/form-data",
           "x-access-token": localStorage.getItem("token"),
@@ -92,7 +105,7 @@ const Home = (props) => {
     fd.append("senderUserId", sender.id);
     fd.append("targetUserId", id);
     axios
-      .post("https://api.ahmadfakhrozy.com/chat/postchat", fd, {
+      .post(`${mainURL}/chat/postchat`, fd, {
         headers: {
           "Content-Type": "multipart/form-data",
           "x-access-token": localStorage.getItem("token"),
@@ -134,7 +147,7 @@ const Home = (props) => {
     event.preventDefault();
     axios
       .post(
-        `https://api.ahmadfakhrozy.com/chat/postchat`,
+        `${mainURL}/chat/postchat`,
         { senderUserId: senderId, targetUserId: id, message: message },
         { headers: { "x-access-token": localStorage.getItem("token") } }
       )
@@ -163,7 +176,7 @@ const Home = (props) => {
   useEffect(() => {
     props.fetchRecentChat();
     axios
-      .get(`https://api.ahmadfakhrozy.com/chat/gettarget/${id}`, {
+      .get(`${mainURL}/chat/gettarget/${id}`, {
         headers: { "x-access-token": localStorage.getItem("token") },
       })
       .then((response) => {
@@ -338,6 +351,9 @@ const Home = (props) => {
                 placeholder="Input your message here..."
                 className="input-chat mr-3"
                 value={message}
+                onKeyPress={(event) =>
+                  event.key === "Enter" ? sendMessage(event) : null
+                }
                 onChange={handleChangeMessage}
                 required
               />

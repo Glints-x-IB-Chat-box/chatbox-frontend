@@ -7,6 +7,7 @@ import ReactEmoji from "react-emoji";
 
 const Chatcomponent = (props) => {
   // console.log(props.item);
+  const mainURL = process.env.REACT_APP_API_URL;
 
   const decodedToken = jwt(localStorage.getItem("token"));
   const time = moment(`${props.item.createdAt}`);
@@ -25,12 +26,12 @@ const Chatcomponent = (props) => {
               </div>
 
               {props.item.images.length >= 1
-                ? props.item.images.map((image) => {
+                ? props.item.images.map((image, index) => {
                     return (
-                      <div className="d-flex flex-row flex-wrap">
+                      <div className="d-flex flex-row flex-wrap" key={index}>
                         <img
                           style={{ width: "100px" }}
-                          src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                          src={`${mainURL}/public/uploads/${image}`}
                           alt={image}
                         />
                         <div className="pl-2">
@@ -39,9 +40,7 @@ const Chatcomponent = (props) => {
                             <p
                               className="my-0"
                               onClick={() => {
-                                fetch(
-                                  `https://api.ahmadfakhrozy.com/public/uploads/${image}`
-                                )
+                                fetch(`${mainURL}/public/uploads/${image}`)
                                   .then((resp) => resp.blob())
                                   .then((blob) => {
                                     const url = window.URL.createObjectURL(
@@ -69,7 +68,7 @@ const Chatcomponent = (props) => {
                               Download
                             </p>
                             <a
-                              href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                              href={`${mainURL}/public/uploads/${image}`}
                               target="blank"
                               className="pl-2 btn-link my-0 text-light"
                               style={{ cursor: "pointer" }}
@@ -84,9 +83,9 @@ const Chatcomponent = (props) => {
                 : null}
 
               {props.item.documents.length >= 1
-                ? props.item.documents.map((document) => {
+                ? props.item.documents.map((document, index) => {
                     return (
-                      <div className="d-flex flex-row">
+                      <div className="d-flex flex-row" key={index}>
                         <img
                           src={logopdf2}
                           alt={document}
@@ -95,7 +94,7 @@ const Chatcomponent = (props) => {
                         <div className="pl-2">
                           <h6 className="my-0">{document}</h6>
                           <a
-                            href={`${process.env.REACT_APP_API_URL}/public/uploads/${document}`}
+                            href={`${mainURL}/public/uploads/${document}`}
                             target="blank"
                             style={{ cursor: "pointer" }}
                             className="text-light my-0"
@@ -122,19 +121,19 @@ const Chatcomponent = (props) => {
                 <p className="my-0 ml-auto time-text">{fixTime}</p>
               </div>
               {props.item.images.length >= 1
-                ? props.item.images.map((image) => {
+                ? props.item.images.map((image, index) => {
                     return (
-                      <div className="d-flex flex-row flex-wrap">
+                      <div className="d-flex flex-row flex-wrap" key={index}>
                         <img
                           style={{ width: "100px" }}
-                          src={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                          src={`${mainURL}/public/uploads/${image}`}
                           alt={image}
                         />
                         <div className="pl-2">
                           <h6 className="my-0">{image}</h6>
                           <div className="d-flex d-row">
                             <a
-                              href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                              href={`${mainURL}/public/uploads/${image}`}
                               className="btn-link my-0"
                               style={{ cursor: "pointer" }}
                               download
@@ -142,7 +141,7 @@ const Chatcomponent = (props) => {
                               Download
                             </a>
                             <a
-                              href={`https://api.ahmadfakhrozy.com/public/uploads/${image}`}
+                              href={`${mainURL}/public/uploads/${image}`}
                               target="blank"
                               className="pl-2 btn-link my-0"
                               style={{ cursor: "pointer" }}
@@ -152,8 +151,7 @@ const Chatcomponent = (props) => {
                             <script>
                               {" "}
                               document.location.href ={" "}
-                              {`${process.env.REACT_APP_API_URL}/public/uploads/${document}`}
-                              ;{" "}
+                              {`${mainURL}/public/uploads/${document}`};{" "}
                             </script>
                           </div>
                         </div>
@@ -163,9 +161,9 @@ const Chatcomponent = (props) => {
                 : null}
 
               {props.item.documents.length >= 1
-                ? props.item.documents.map((document) => {
+                ? props.item.documents.map((document, index) => {
                     return (
-                      <div className="d-flex flex-row">
+                      <div className="d-flex flex-row" key={index}>
                         <img
                           src={logopdf}
                           alt={document}
