@@ -31,15 +31,11 @@ const Home = (props) => {
   // localhostURL,
 
   // if you want to launch in circlemessenger.com use :
-  // console.log(mainURL);
+  const mainUrlString = JSON.stringify(mainURL);
 
-  const socket = io(
-    mainURL,
-
-    {
-      transports: ["websocket"],
-    }
-  );
+  const socket = io(mainUrlString, {
+    transports: ["websocket"],
+  });
 
   // Set the welcome page turn into chat page.
   const [firstShow, setFirstShow] = useState(true);
