@@ -8,7 +8,7 @@ export const login = (data) => {
     try {
       const response = await axios.post(`${url}/login`, data);
       const output = response.data;
-      console.log(output);
+      // console.log(output);
       if (output.status === "success") {
         dispatch({
           type: "AUTH_LOGIN",
@@ -31,7 +31,7 @@ export const register = (data) => {
     try {
       const response = await axios.post(`${url}/register`, data);
       const output = response.data;
-      console.log(output);
+      // console.log(output);
       if (output.status === "success") {
         dispatch({
           type: "AUTH_REGISTER",
@@ -40,7 +40,7 @@ export const register = (data) => {
       }
     } catch (error) {
       const output = error.response.data;
-      console.log(output);
+      // console.log(output);
       if (output.message) {
         dispatch({
           type: "AUTH_REGISTER_FAIL",

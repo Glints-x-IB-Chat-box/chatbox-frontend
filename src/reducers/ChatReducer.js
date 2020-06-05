@@ -47,7 +47,7 @@ const ChatReducer = (state = initialState, action) => {
       return { ...state, DetailChatRecentContact: action.payload };
 
     case "FETCH_HISTORY_CHAT":
-      console.log(action.payload);
+      // console.log(action.payload);
 
       // The result of action.payload is data with the indicator on "isContact", in "isContact"
       // it determines whether the recent chat is our contact or not by true & false,
@@ -55,7 +55,7 @@ const ChatReducer = (state = initialState, action) => {
       // IF TRUE go to addedContact, IF FALSE go to unadded contact.
       const addedContact = action.payload.filter((item) => item.isContact);
       const unaddedContact = action.payload.filter((item) => !item.isContact);
-      console.log(unaddedContact);
+      // console.log(unaddedContact);
 
       return {
         ...state,
