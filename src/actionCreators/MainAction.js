@@ -181,12 +181,13 @@ export const hideAddContactForm = () => {
 };
 
 // Show Delete Contact Form
-export const showDeleteContactForm = (description) => {
+export const showDeleteContactForm = (data) => {
   // DISPATCH DIPAKAI DENGAN SYARAT
+
   return (dispatch) => {
     dispatch({
       type: "SHOW_DELETECONTACT_FORM",
-      payload: description,
+      payload: data,
     });
   };
 };

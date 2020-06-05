@@ -28,7 +28,7 @@ export const fetchHistoryChat = (inputSearch) => {
 };
 
 // FETCH RECENT CHAT = RECENT DATA PROFILE ETC
-export const fetchRecentChat = (data) => {
+export const fetchRecentChat = () => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
     try {
