@@ -55,7 +55,6 @@ const Home = (props) => {
   const [message, setMessage] = useState("");
 
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("");
   // console.log(id);
   const selectFile = (e) => {
     // console.log(e.target.files[0]);
@@ -69,7 +68,6 @@ const Home = (props) => {
   const sendDocument = (e) => {
     e.preventDefault();
     setFile(null);
-    setFileName("");
     const fd = new FormData();
     fd.append("documents", file);
     fd.append("senderUserId", sender.id);
