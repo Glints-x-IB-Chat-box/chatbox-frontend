@@ -11,6 +11,7 @@ import UnaddedRecentChat from "./UnaddedContact";
 import axios from "axios";
 
 import io from "socket.io-client";
+
 import { Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
 import {
   showDetailRecentChat,
@@ -24,6 +25,7 @@ import { connect } from "react-redux";
 const Home = (props) => {
   // when making env, we need to add "REACT_APP" in the first place. it is the rule of react.
   const mainURL = process.env.REACT_APP_API_URL;
+  const socketURL = process.env.REACT_APP_API_URL_SOCKET;
   // const localhostURL = process.env.REACT_APP_LOCALHOST_URL_SOCKET;
 
   // if you want to launch in localhost use :
@@ -34,9 +36,7 @@ const Home = (props) => {
   // const mainUrlString = JSON.stringify(mainURL);
   // console.log(mainURL);
 
-  // console.log(mainUrlString);
-
-  const socket = io("https://34.87.159.36:8000", {
+  const socket = io(socketURL, {
     transports: ["websocket"],
   });
 
@@ -139,6 +139,7 @@ const Home = (props) => {
 
   // Get the message that user Input.
   const handleChangeMessage = (event) => {
+    event.preventDefault();
     let { value } = event.currentTarget;
     setMessage(value);
   };
