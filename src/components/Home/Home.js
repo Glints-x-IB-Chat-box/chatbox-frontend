@@ -189,6 +189,8 @@ const Home = (props) => {
 
   // Contact Picture Function
   const contactPic = (picture) => {
+    // console.log(picture);
+
     const url = process.env.REACT_APP_API_URL;
     const image = `${url}/${picture}`;
     const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
