@@ -59,11 +59,9 @@ const Home = (props) => {
   const selectFile = (e) => {
     // console.log(e.target.files[0]);
     setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
   };
   const selectDocuments = (e) => {
     setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
   };
   const sendDocument = (e) => {
     e.preventDefault();
@@ -91,14 +89,12 @@ const Home = (props) => {
       .then((res) => {
         // console.log(res);
         setFile("");
-        setFileName("");
       })
       .catch((err) => console.log(err));
   };
   const sendImage = (e) => {
     e.preventDefault();
     setFile(null);
-    setFileName("");
     const fd = new FormData();
     fd.append("images", file);
     fd.append("senderUserId", sender.id);
@@ -122,7 +118,6 @@ const Home = (props) => {
       .then((res) => {
         // console.log(res);
         setFile("");
-        setFileName("");
       })
       .catch((err) => console.log(err));
   };
