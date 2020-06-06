@@ -189,6 +189,7 @@ const Home = (props) => {
 
   // Contact Picture Function
   const contactPic = (picture) => {
+    // when you console log you will find out how is the schema of this function
     // console.log(picture);
 
     const url = process.env.REACT_APP_API_URL;
