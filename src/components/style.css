@@ -119,7 +119,7 @@ input.with-icon {
   color: #aaaaaa !important;
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
-  text-align: center !important;
+  /* text-align: center !important; */
   border-bottom: 1px solid rgba(255, 255, 255, 0.125) !important;
 }
 .list-group-item.py-0 {
@@ -225,6 +225,7 @@ input.with-icon {
 .section-chat-div {
   padding-left: 0.5rem;
   display: grid;
+  width: 85%;
 }
 .add-contact {
   background-color: #1f2d3c;
