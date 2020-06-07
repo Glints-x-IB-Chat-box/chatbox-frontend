@@ -80,10 +80,10 @@ const Register = (props) => {
                   name="username"
                   onChange={handleChange}
                   value={data.username}
-                  // !! syntax is to check whether there is value or not.
+                  // !! syntax will return true if there is value or not.
                   isInvalid={!!error.username}
                 />
-                {/* IF isInvalid has a value then will proceed to form control feedback, check documentation. */}
+                {/* IF isInvalid is true then will proceed to form control feedback, check documentation. */}
                 {/* ERROR.USERNAME COMES FROM REDUCER */}
                 <Form.Control.Feedback type="invalid" className="text-left">
                   {error.username}
