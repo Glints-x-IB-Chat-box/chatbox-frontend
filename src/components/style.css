@@ -227,8 +227,16 @@ input.with-icon {
   display: grid;
   width: 85%;
 }
-.add-contact {
-  background-color: #1f2d3c;
+/* update by Intan */
+.add-contact-btn {
+  background-color: #1f2d3c !important;
+  color: #f8f9fa !important;
+  justify-content: center;
+}
+.add-contact-btn:hover {
+  background-color: #f8f9fa !important;
+  color: #1f2d3c !important;
+  transition: 0.35s ease-in-out;
 }
 .contact-list {
   height: calc(100vh - 192.33px);

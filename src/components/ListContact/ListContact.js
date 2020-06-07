@@ -59,12 +59,13 @@ const ListContact = (props) => {
           })}
         </div>
 
-        <div className="add-contact py-3 px-2">
+        <div className="py-3 px-4">
           <button
             onClick={props.showAddContactForm}
-            className="btn btn-primary btn-block"
+            className="btn add-contact-btn btn-block d-flex d-row"
           >
-            Add Contact
+            <p className="my-0 mr-2">Add Contact</p>
+            <i className="fas fa-user-plus align-self-center" />
           </button>
         </div>
       </div>
