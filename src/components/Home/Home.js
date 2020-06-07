@@ -186,8 +186,7 @@ const Home = (props) => {
     // why set parameter:
     // props.dataMessage & file(from setFile) = every time user send message gonna update the recentChat
     // firstShow = cover problem every time user go profile and back chat couldn't see the chat.
-  }, [props.dataMessage, file]);
-  // firstshow
+  }, [props.dataMessage, file, firstShow]);
 
   let chatDate = undefined;
 
