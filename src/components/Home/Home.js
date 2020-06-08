@@ -391,6 +391,7 @@ const Home = (props) => {
                       <h6 className="my-0 font-weight-bold">Document</h6>
                       <input
                         type="file"
+                        // accept is the validator for file extensions
                         accept=".pdf,.docx,.zip"
                         className="form-control-file"
                         onChange={selectDocuments}

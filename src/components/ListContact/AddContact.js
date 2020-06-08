@@ -71,6 +71,8 @@ const AddContact = (props) => {
             className="form-control"
             id="username"
             name="username"
+            // autocomplete to stop suggestion comes out
+            autoComplete="off"
             placeholder="Enter your Friend's Username"
             value={data.username}
             onChange={handleChange}
