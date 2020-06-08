@@ -22,7 +22,7 @@ const Sidebar = () => {
         <NavLink
           to={match.url}
           exact={true}
-          className="list-group-item list-group-item-action px-0"
+          className="list-group-item list-group-item-action px-0 text-center"
         >
           <i className="fas fa-comment-dots fa-lg" />
           <div>
@@ -32,7 +32,7 @@ const Sidebar = () => {
 
         <NavLink
           to={`${match.url}/profile`}
-          className="list-group-item list-group-item-action px-0"
+          className="list-group-item list-group-item-action px-0 text-center"
         >
           <i className="fas fa-user-circle fa-lg" />
           <div>
@@ -44,7 +44,7 @@ const Sidebar = () => {
         </Link> */}
         <NavLink
           to={`${match.url}/listContact`}
-          className="list-group-item list-group-item-action px-0"
+          className="list-group-item list-group-item-action px-0 text-center"
         >
           <i className="fas fa-address-book fa-lg" />
           <div>
@@ -53,7 +53,7 @@ const Sidebar = () => {
         </NavLink>
         <NavLink
           to={`${match.url}/about`}
-          className="list-group-item list-group-item-action px-0"
+          className="list-group-item list-group-item-action px-0 text-center"
         >
           <i className="fas fa-info-circle fa-lg" />
           <div>
@@ -63,7 +63,7 @@ const Sidebar = () => {
 
         <button
           onClick={LogoutConfirmation}
-          className="list-group-item list-group-item-action logout-sidebar px-0"
+          className="list-group-item list-group-item-action logout-sidebar px-0 text-center"
         >
           <i className="fas fa-sign-out-alt fa-lg text-danger" />
           <div>

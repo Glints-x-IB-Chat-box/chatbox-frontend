@@ -55,21 +55,17 @@ const Home = (props) => {
   const [message, setMessage] = useState("");
 
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState("");
   // console.log(id);
   const selectFile = (e) => {
     // console.log(e.target.files[0]);
     setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
   };
   const selectDocuments = (e) => {
     setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
   };
   const sendDocument = (e) => {
     e.preventDefault();
     setFile(null);
-    setFileName("");
     const fd = new FormData();
     fd.append("documents", file);
     fd.append("senderUserId", sender.id);
@@ -93,14 +89,12 @@ const Home = (props) => {
       .then((res) => {
         // console.log(res);
         setFile("");
-        setFileName("");
       })
       .catch((err) => console.log(err));
   };
   const sendImage = (e) => {
     e.preventDefault();
     setFile(null);
-    setFileName("");
     const fd = new FormData();
     fd.append("images", file);
     fd.append("senderUserId", sender.id);
@@ -124,7 +118,6 @@ const Home = (props) => {
       .then((res) => {
         // console.log(res);
         setFile("");
-        setFileName("");
       })
       .catch((err) => console.log(err));
   };
@@ -147,20 +140,30 @@ const Home = (props) => {
   // User send message to other user.
   const sendMessage = (event) => {
     event.preventDefault();
-    axios
-      .post(
-        `${mainURL}/chat/postchat`,
-        { senderUserId: senderId, targetUserId: id, message: message },
-        { headers: { "x-access-token": localStorage.getItem("token") } }
-      )
-      .then((value) => {
-        // console.log(value.data.messages);
-        setMessage("");
-        socket.emit("sendMessage", message, () => setMessage(""));
-      })
-      .catch((err) => console.log(err));
-  };
+    // to trim & validate null value with only space
+    const messageValidaton = message.trim();
+    console.log(messageValidaton);
 
+    // VALIDATOR if there are value in message that will be sent
+    if (messageValidaton) {
+      axios
+        .post(
+          `${mainURL}/chat/postchat`,
+          { senderUserId: senderId, targetUserId: id, message: message },
+          { headers: { "x-access-token": localStorage.getItem("token") } }
+        )
+        .then((value) => {
+          console.log(value);
+
+          // console.log(value.data.messages);
+          setMessage("");
+          socket.emit("sendMessage", message, () => setMessage(""));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return <> </>;
+    }
+  };
   // The Search Chat Function (Navbar)
   const SearchContact = (event) => {
     let { value } = event.currentTarget;
@@ -190,12 +193,18 @@ const Home = (props) => {
           setDataMessage(response.data);
         });
       });
-  }, [props.dataMessage, file]);
+    // why set parameter:
+    // props.dataMessage & file(from setFile) = every time user send message gonna update the recentChat
+    // firstShow = cover problem every time user go profile and back chat couldn't see the chat.
+  }, [props.dataMessage, file, firstShow]);
 
   let chatDate = undefined;
 
   // Contact Picture Function
   const contactPic = (picture) => {
+    // when you console log you will find out how is the schema of this function
+    // console.log(picture);
+
     const url = process.env.REACT_APP_API_URL;
     const image = `${url}/${picture}`;
     const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
@@ -382,6 +391,7 @@ const Home = (props) => {
                       <h6 className="my-0 font-weight-bold">Document</h6>
                       <input
                         type="file"
+                        accept=".pdf,.docx,.zip"
                         className="form-control-file"
                         onChange={selectDocuments}
                       />
@@ -396,6 +406,7 @@ const Home = (props) => {
                       <h6 className="my-0 font-weight-bold">Image</h6>
                       <input
                         type="file"
+                        accept="image/*"
                         // ref={inputRef}
                         className="form-control-file"
                         onChange={selectFile}

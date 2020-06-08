@@ -37,8 +37,6 @@ const RecentContact = (props) => {
                 {/* <span className="dot bg-success" /> */}
               </div>
               {props.detailRecentMessages.map((detail, index) => {
-                // console.log(props.item._id);
-                // console.log(detail);
                 const found = detail.usersId.find((userId) => {
                   return userId === props.item.targetUserId._id;
                 });

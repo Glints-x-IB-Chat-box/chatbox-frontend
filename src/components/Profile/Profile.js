@@ -23,6 +23,7 @@ const Profile = (props) => {
   const url = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
+    // from props.profile (mapstatetoprops)
     setData({
       username: profile.username,
       about: profile.about,
@@ -32,14 +33,15 @@ const Profile = (props) => {
 
   useEffect(() => {
     props.getDataProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // this is how we call image
   const image = `${url}/${
     data.image || "public/usersImage/default-user-icon.jpg"
   }`;
   const imageNotFound = `${url}/public/usersImage/default-user-icon.jpg`;
 
+  // this is css, so why background image and not src is because it could fit any image size.
   const myProfile = {
     backgroundImage: `url(${image}), url(${imageNotFound})`,
     backgroundSize: "cover",
