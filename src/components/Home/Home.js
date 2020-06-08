@@ -140,20 +140,30 @@ const Home = (props) => {
   // User send message to other user.
   const sendMessage = (event) => {
     event.preventDefault();
-    axios
-      .post(
-        `${mainURL}/chat/postchat`,
-        { senderUserId: senderId, targetUserId: id, message: message },
-        { headers: { "x-access-token": localStorage.getItem("token") } }
-      )
-      .then((value) => {
-        // console.log(value.data.messages);
-        setMessage("");
-        socket.emit("sendMessage", message, () => setMessage(""));
-      })
-      .catch((err) => console.log(err));
-  };
+    // to trim & validate null value with only space
+    const messageValidaton = message.trim();
+    console.log(messageValidaton);
 
+    // VALIDATOR if there are value in message that will be sent
+    if (messageValidaton) {
+      axios
+        .post(
+          `${mainURL}/chat/postchat`,
+          { senderUserId: senderId, targetUserId: id, message: message },
+          { headers: { "x-access-token": localStorage.getItem("token") } }
+        )
+        .then((value) => {
+          console.log(value);
+
+          // console.log(value.data.messages);
+          setMessage("");
+          socket.emit("sendMessage", message, () => setMessage(""));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return <> </>;
+    }
+  };
   // The Search Chat Function (Navbar)
   const SearchContact = (event) => {
     let { value } = event.currentTarget;
