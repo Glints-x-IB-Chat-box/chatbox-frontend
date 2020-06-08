@@ -391,6 +391,7 @@ const Home = (props) => {
                       <h6 className="my-0 font-weight-bold">Document</h6>
                       <input
                         type="file"
+                        accept=".pdf,.docx,.zip"
                         className="form-control-file"
                         onChange={selectDocuments}
                       />
@@ -405,6 +406,7 @@ const Home = (props) => {
                       <h6 className="my-0 font-weight-bold">Image</h6>
                       <input
                         type="file"
+                        accept="image/*"
                         // ref={inputRef}
                         className="form-control-file"
                         onChange={selectFile}
