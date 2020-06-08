@@ -142,7 +142,6 @@ const Home = (props) => {
     event.preventDefault();
     // to trim & validate null value with only space
     const messageValidaton = message.trim();
-    console.log(messageValidaton);
 
     // VALIDATOR if there are value in message that will be sent
     if (messageValidaton) {
@@ -153,8 +152,6 @@ const Home = (props) => {
           { headers: { "x-access-token": localStorage.getItem("token") } }
         )
         .then((value) => {
-          console.log(value);
-
           // console.log(value.data.messages);
           setMessage("");
           socket.emit("sendMessage", message, () => setMessage(""));
