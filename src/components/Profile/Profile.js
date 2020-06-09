@@ -18,6 +18,7 @@ const Profile = (props) => {
     username: "",
     about: "",
     image: "",
+    status: ""
   });
   const { profile, showEditForm, showAboutForm, showChangeImageForm } = props;
   const url = process.env.REACT_APP_API_URL;
@@ -28,6 +29,7 @@ const Profile = (props) => {
       username: profile.username,
       about: profile.about,
       image: profile.image,
+      status: profile.status
     });
   }, [profile]);
 
@@ -83,7 +85,9 @@ const Profile = (props) => {
                 <h6 className="text-black font-weight-bold py-2 pl-4 my-0">
                   <u>Username</u>
                 </h6>
-                <h6 className="my-0 pl-4">{data.username}</h6>
+                <h6 className="my-0 pl-4">
+                  {data.username}
+                </h6>
               </div>
               <p className="profile-icon ml-auto mr-3 my-0">
                 <i className="fas fa-pen-square" />
