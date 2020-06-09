@@ -1,15 +1,27 @@
 import axios from "axios";
 
-const url = `${process.env.REACT_APP_API_URL}/users`;
-// const url = `${process.env.URL_HOSTING_APP}/users`;
+const url = `${process.env.REACT_APP_API_URL}`;
+// const url = `${process.env.URL_HOSTING_APP}`;
 
 export const login = (data) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${url}/login`, data);
+      const response = await axios.post(`${url}/users/login`, data);
       const output = response.data;
       // console.log(output);
       if (output.status === "success") {
+
+        //set status to online if user login
+        const dataLogin = {
+          status: "online"
+        }
+        const dataToken = {
+          headers: {
+            "x-access-token": output.data.token,
+          },
+        };
+        await axios.put(`${url}/usersSecure/edit`, dataLogin, dataToken);
+
         dispatch({
           type: "AUTH_LOGIN",
           payload: output.data.token,
@@ -29,7 +41,7 @@ export const login = (data) => {
 export const register = (data) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${url}/register`, data);
+      const response = await axios.post(`${url}/users/register`, data);
       const output = response.data;
       // console.log(output);
       if (output.status === "success") {
@@ -57,7 +69,27 @@ export const register = (data) => {
 };
 
 export const logout = () => {
-  return {
-    type: "AUTH_LOGOUT",
+  return async (dispatch) => {
+    try {
+
+      //set status to offline if user logout
+      const token = localStorage.getItem("token");
+      const dataLogout = {
+        status: "offline"
+      }
+      const dataToken = {
+        headers: {
+          "x-access-token": token,
+        },
+      };
+      await axios.put(`${url}/usersSecure/edit`, dataLogout, dataToken);
+
+      dispatch({
+        type: "AUTH_LOGOUT",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
 };

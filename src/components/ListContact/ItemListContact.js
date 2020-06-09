@@ -39,7 +39,7 @@ const itemListContact = (props) => {
           <div className="section-chat-div">
             <div className="d-flex d-row">
               <h6 className="my-0 name-chat">{props.dataContacts.username}</h6>
-              <span className="dot bg-success" />
+              <span className={`dot bg-${props.dataContacts.status === 'online' ? 'success' : 'danger'}`} />
             </div>
             <p className="preview-chat my-0 text-left">
               {props.dataContacts.about}
