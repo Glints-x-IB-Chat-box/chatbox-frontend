@@ -261,6 +261,7 @@ export const updateProfile = (data) => {
   };
 };
 
+// why different function? because when send image, its a different form which is form-data.
 export const updateProfPic = (data) => {
   const token = localStorage.getItem("token");
   return async (dispatch) => {
