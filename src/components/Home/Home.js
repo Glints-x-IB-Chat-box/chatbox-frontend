@@ -12,7 +12,7 @@ import axios from "axios";
 
 import io from "socket.io-client";
 
-import { Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
+import { Dropdown, DropdownButton, ButtonGroup, Alert } from "react-bootstrap";
 import {
   showDetailRecentChat,
   getDataMessage,
@@ -26,15 +26,9 @@ const Home = (props) => {
   // when making env, we need to add "REACT_APP" in the first place. it is the rule of react.
   const mainURL = process.env.REACT_APP_API_URL;
   const socketURL = process.env.REACT_APP_API_URL_SOCKET;
+
+  // localhostURL = past url first time socket, for http that is the ip we use (works only on http)
   // const localhostURL = process.env.REACT_APP_LOCALHOST_URL_SOCKET;
-
-  // if you want to launch in localhost use :
-  // const socket = io(
-  // localhostURL,
-
-  // if you want to launch in circlemessenger.com use :
-  // const mainUrlString = JSON.stringify(mainURL);
-  // console.log(mainURL);
 
   const socket = io(socketURL, {
     transports: ["websocket"],
@@ -55,71 +49,119 @@ const Home = (props) => {
   const [message, setMessage] = useState("");
 
   const [file, setFile] = useState(null);
-  // console.log(id);
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  const AlertDismissible = () => {
+    if (showAlert) {
+      return (
+        <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+          Please fill the image/document with the right type.
+        </Alert>
+      );
+    }
+    return <></>;
+  };
+
   const selectFile = (e) => {
-    // console.log(e.target.files[0]);
-    setFile(e.target.files[0]);
+    const imageValidator =
+      e.target.files[0].type === "image/gif" ||
+      e.target.files[0].type === "image/jpg" ||
+      e.target.files[0].type === "image/png" ||
+      e.target.files[0].type === "image/jpeg" ||
+      e.target.files[0].type === "image/svg" ||
+      e.target.files[0].type === "image/webp";
+
+    if (imageValidator) {
+      setFile(e.target.files[0]);
+    } else {
+      return setShowAlert(true);
+    }
   };
   const selectDocuments = (e) => {
-    setFile(e.target.files[0]);
+    const documentValidator =
+      // word & excel file
+      e.target.files[0].type ===
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+      e.target.files[0].type ===
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+      e.target.files[0].type === "application/pdf" ||
+      e.target.files[0].type === "application/zip" ||
+      e.target.files[0].type === "application/rar";
+
+    if (documentValidator) {
+      setFile(e.target.files[0]);
+    } else {
+      return setShowAlert(true);
+    }
   };
   const sendDocument = (e) => {
-    e.preventDefault();
-    setFile(null);
-    const fd = new FormData();
-    fd.append("documents", file);
-    fd.append("senderUserId", sender.id);
-    fd.append("targetUserId", id);
-    axios
-      .post(`${mainURL}/chat/postchat`, fd, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "x-access-token": localStorage.getItem("token"),
-        },
-        onUploadProgress: (progressEvent) => {
-          console.log(
-            `Upload Progress: ${
-              (progressEvent.loaded, progressEvent.total)
-            } ${Math.round(
-              (progressEvent.loaded / progressEvent.total) * 100
-            )} %`
-          );
-        },
-      })
-      .then((res) => {
-        // console.log(res);
-        setFile("");
-      })
-      .catch((err) => console.log(err));
+    // check if there is a file or not
+    if (file) {
+      e.preventDefault();
+      setFile(null);
+      const fd = new FormData();
+      fd.append("documents", file);
+      fd.append("senderUserId", sender.id);
+      fd.append("targetUserId", id);
+      axios
+        .post(`${mainURL}/chat/postchat`, fd, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "x-access-token": localStorage.getItem("token"),
+          },
+          onUploadProgress: (progressEvent) => {
+            console.log(
+              `Upload Progress: ${
+                (progressEvent.loaded, progressEvent.total)
+              } ${Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              )} %`
+            );
+          },
+        })
+        .then((res) => {
+          // console.log(res);
+          setFile("");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return setShowAlert(true);
+    }
   };
   const sendImage = (e) => {
-    e.preventDefault();
-    setFile(null);
-    const fd = new FormData();
-    fd.append("images", file);
-    fd.append("senderUserId", sender.id);
-    fd.append("targetUserId", id);
-    axios
-      .post(`${mainURL}/chat/postchat`, fd, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "x-access-token": localStorage.getItem("token"),
-        },
-        onUploadProgress: (progressEvent) => {
-          console.log(
-            `Upload Progress: ${
-              (progressEvent.loaded, progressEvent.total)
-            } ${Math.round(
-              (progressEvent.loaded / progressEvent.total) * 100
-            )} %`
-          );
-        },
-      })
-      .then((res) => {
-        // console.log(res);
-        setFile("");
-      })
-      .catch((err) => console.log(err));
+    // check if there is a file or not
+    if (file) {
+      e.preventDefault();
+      setFile(null);
+      const fd = new FormData();
+      fd.append("images", file);
+      fd.append("senderUserId", sender.id);
+      fd.append("targetUserId", id);
+      axios
+        .post(`${mainURL}/chat/postchat`, fd, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "x-access-token": localStorage.getItem("token"),
+          },
+          onUploadProgress: (progressEvent) => {
+            console.log(
+              `Upload Progress: ${
+                (progressEvent.loaded, progressEvent.total)
+              } ${Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              )} %`
+            );
+          },
+        })
+        .then((res) => {
+          // console.log(res);
+          setFile("");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setShowAlert(true);
+    }
   };
 
   // Set the welcome page turn into chat page, and get the data of the recent chat that is clicked.
@@ -350,6 +392,9 @@ const Home = (props) => {
                 return <></>;
               })}
             </div>
+
+            <AlertDismissible />
+
             <div className="d-flex pt-2 px-2 bg-white justify-content-center">
               <textarea
                 id="inputform"
@@ -389,7 +434,7 @@ const Home = (props) => {
                       <input
                         type="file"
                         // accept is the validator for file extensions
-                        accept=".pdf,.docx,.zip"
+                        accept=".pdf,.docx,.zip,.rar,.xlsx"
                         className="form-control-file"
                         onChange={selectDocuments}
                       />
