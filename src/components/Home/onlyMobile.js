@@ -11,14 +11,17 @@ export default function onlyMobile() {
     };
   };
   return (
-    <div className="container bg-light" style={{ height: "100vh" }}>
-      <div className="text-center">
+    <div
+      className="container bg-light align-self-center"
+      style={{ height: "100vh" }}
+    >
+      <div className="d-flex justify-content-center">
         <div
-          className="rounded-circle w-75 mb-4 align-self-center"
+          className="rounded-circle w-75 mb-4"
           style={picture(imageMobile)}
         ></div>
       </div>
-      <h5 className="text-center text-justify align-self-center">
+      <h5 className="text-center text-justify">
         Hello! You can check "circlemessenger.com" via website! Sorry for this
         inconvenience, we will comeback soon in the Phone!
       </h5>
