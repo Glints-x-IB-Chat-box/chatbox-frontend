@@ -1,5 +1,4 @@
 import React from "react";
-
 import { connect } from "react-redux";
 import { BrowserView, MobileView } from "react-device-detect";
 import {
@@ -13,6 +12,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Home from "./components/Home/Index";
 import Logout from "./components/Auth/Logout";
+import MobilePage from "./components/Home/onlyMobile";
 
 function App(props) {
   return (
@@ -46,7 +46,9 @@ function App(props) {
           </Switch>
         </Router>
       </BrowserView>
-      <MobileView>TES</MobileView>
+      <MobileView>
+        <MobilePage />
+      </MobileView>
     </div>
   );
 }
