@@ -7,6 +7,7 @@ export default function onlyMobile() {
       backgroundImage: `url(${image})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
+      height: "20rem",
     };
   };
   return (
@@ -15,7 +16,7 @@ export default function onlyMobile() {
         style="rounded-circle w-100 mt-4 mb-3"
         style={picture(imageMobile)}
       ></div>
-      <h5>
+      <h5 className="text-center text-justify">
         Hello! You can check "circlemessenger.com" via website! Sorry for this
         inconvenience, we will comeback soon in the Phone!
       </h5>
