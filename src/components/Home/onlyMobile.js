@@ -12,16 +12,16 @@ export default function onlyMobile() {
   };
   return (
     <div className="container bg-light" style={{ height: "100vh" }}>
-      <div className="align-self-center">
+      <div className="text-center">
         <div
-          className="rounded-circle w-75 mt-4 mb-3"
+          className="rounded-circle w-75 mb-4 align-self-center"
           style={picture(imageMobile)}
         ></div>
-        <h5 className="text-center text-justify">
-          Hello! You can check "circlemessenger.com" via website! Sorry for this
-          inconvenience, we will comeback soon in the Phone!
-        </h5>
       </div>
+      <h5 className="text-center text-justify align-self-center">
+        Hello! You can check "circlemessenger.com" via website! Sorry for this
+        inconvenience, we will comeback soon in the Phone!
+      </h5>
     </div>
   );
 }
