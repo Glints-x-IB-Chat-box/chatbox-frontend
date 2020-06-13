@@ -1,6 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import { BrowserView, MobileView } from "react-device-detect";
 import {
   Redirect,
   BrowserRouter as Router,
@@ -15,29 +16,38 @@ import Logout from "./components/Auth/Logout";
 
 function App(props) {
   return (
-    <Router>
-      <Switch>
-        <Route path="/register">
-          {props.token ? <Redirect push to="/" /> : <Register />}
-        </Route>
+    <div>
+      <BrowserView>
+        <Router>
+          <Switch>
+            <Route path="/register">
+              {props.token ? <Redirect push to="/" /> : <Register />}
+            </Route>
 
-        <Route path="/login">
-          {props.token ? <Redirect push to="/" /> : <Login />}
-        </Route>
+            <Route path="/login">
+              {props.token ? <Redirect push to="/" /> : <Login />}
+            </Route>
 
-        <Route path="/logout">
-          <Logout />
-        </Route>
+            <Route path="/logout">
+              <Logout />
+            </Route>
 
-        <Route exact path="/">
-          {props.token ? <Redirect push to="/app" /> : <Redirect push to="/login" />}
-        </Route>
+            <Route exact path="/">
+              {props.token ? (
+                <Redirect push to="/app" />
+              ) : (
+                <Redirect push to="/login" />
+              )}
+            </Route>
 
-        <Route path="/app">
-          {props.token ? <Home /> : <Redirect push to="/login" />}
-        </Route>
-      </Switch>
-    </Router>
+            <Route path="/app">
+              {props.token ? <Home /> : <Redirect push to="/login" />}
+            </Route>
+          </Switch>
+        </Router>
+      </BrowserView>
+      <MobileView>TES</MobileView>
+    </div>
   );
 }
 

@@ -16,6 +16,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-burger-menu": "^2.6.13",
+    "react-device-detect": "^1.12.1",
     "react-dom": "^16.13.1",
     "react-emoji": "^0.5.0",
     "react-planet": "^1.0.0",
