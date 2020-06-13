@@ -282,3 +282,58 @@ export const updateProfPic = (data) => {
     }
   };
 };
+
+// BlockContact in UserDatabase to Our Block Function
+export const blockContacts = (data) => {
+  const token = localStorage.getItem("token");
+  // const tokenObj = JSON.parse(tokenString);
+  // console.log(token);
+
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `${url}/usersSecure/blocked`,
+        {
+          userBlockedId: data._id,
+        },
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      dispatch({
+        type: "DELETE_DATA_CONTACT",
+        payload: data._id,
+      });
+      dispatch({
+        type: "ADD_DATA_BLOCKED",
+        payload: response.data,
+      });
+      dispatch({
+        type: "HIDE_BLOCKED_FORM",
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      window.alert("Can't Block a same user");
+    }
+  };
+};
+// Show Block Contact Form
+export const showBlockedForm = (data) => {
+  // DISPATCH DIPAKAI DENGAN SYARAT
+
+  return (dispatch) => {
+    dispatch({
+      type: "SHOW_BLOCKED_FORM",
+      payload: data,
+    });
+  };
+};
+
+export const hideBlockContactForm = () => {
+  return {
+    type: "HIDE_BLOCKED_FORM",
+  };
+};

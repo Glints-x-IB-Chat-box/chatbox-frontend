@@ -11,6 +11,7 @@ import {
 
 import AddContact from "../ListContact/AddContact";
 import DeleteContact from "../ListContact/DeleteContact";
+import BlockContact from "../ListContact/BlockContact";
 import "../style.css";
 
 const ListContact = (props) => {
@@ -79,6 +80,7 @@ const ListContact = (props) => {
       </div>
       <AddContact />
       <DeleteContact />
+      <BlockContact />
     </div>
   );
 };

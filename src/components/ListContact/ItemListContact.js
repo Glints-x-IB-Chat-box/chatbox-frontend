@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { createNewChat } from "../../actionCreators/ChatAction";
-import { showDeleteContactForm } from "../../actionCreators/MainAction";
+import {
+  showDeleteContactForm,
+  showBlockedForm,
+} from "../../actionCreators/MainAction";
 
 const itemListContact = (props) => {
   const addNewChat = (data) => {
@@ -16,6 +19,9 @@ const itemListContact = (props) => {
   };
   const showFormDelete = () => {
     props.showDeleteContactForm(props.dataContacts);
+  };
+  const showFormBLock = () => {
+    props.showBlockedForm(props.dataContacts);
   };
 
   const contactPic = (picture) => {
@@ -39,7 +45,11 @@ const itemListContact = (props) => {
           <div className="section-chat-div">
             <div className="d-flex d-row">
               <h6 className="my-0 name-chat">{props.dataContacts.username}</h6>
-              <span className={`dot bg-${props.dataContacts.status === 'online' ? 'success' : 'danger'}`} />
+              <span
+                className={`dot bg-${
+                  props.dataContacts.status === "online" ? "success" : "danger"
+                }`}
+              />
             </div>
             <p className="preview-chat my-0 text-left">
               {props.dataContacts.about}
@@ -60,6 +70,9 @@ const itemListContact = (props) => {
             <p onClick={showFormDelete} className="contact-icon2 my-0">
               <i className="fas fa-user-times" />
             </p>
+            <p onClick={showFormBLock} className="contact-icon2 my-0">
+              <i className="fas fa-ban" />
+            </p>
           </div>
         </div>
       </button>
@@ -69,6 +82,7 @@ const itemListContact = (props) => {
 
 const mapDispatchToProps = {
   showDeleteContactForm,
+  showBlockedForm,
   createNewChat,
 };
 

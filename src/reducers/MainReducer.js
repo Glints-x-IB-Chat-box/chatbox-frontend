@@ -3,6 +3,9 @@ const initialState = {
   dataContact: [],
   dataDelete: [],
   dataProfile: [],
+  dataBlocked: [],
+  showBlockData: {},
+  isShowBlock: false,
   isShowEdit: false,
   isShowAbout: false,
   isShowAdd: false,
@@ -54,6 +57,12 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, dataProfile: action.payload };
     case "UPDATE_DATA_PROFILE":
       return { ...state, dataProfile: action.payload };
+    case "ADD_DATA_BLOCKED":
+      return { ...state, datablocked: [...state.dataBlocked, action.payload] };
+    case "SHOW_BLOCKED_FORM":
+      return { ...state, isShowBlock: true, showBlockData: action.payload };
+    case "HIDE_BLOCKED_FORM":
+      return { ...state, isShowBlock: false };
     default:
       return state;
   }
