@@ -4,3 +4,6 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+.bg-mobile {
+  background-color: #2c3e50;
+}

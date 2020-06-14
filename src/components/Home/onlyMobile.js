@@ -12,7 +12,7 @@ export default function onlyMobile() {
     };
   };
   return (
-    <div className="container bg-light" style={{ height: "100vh" }}>
+    <div className="container bg-mobile" style={{ height: "100vh" }}>
       <div className="vertical-center">
         <div className="d-flex justify-content-center">
           <div
@@ -20,10 +20,12 @@ export default function onlyMobile() {
             style={picture(imageMobile)}
           ></div>
         </div>
-        <h5 className="text-center text-justify">
-          Hello! You can check "circlemessenger.com" via website! Sorry for this
-          inconvenience, we will comeback soon in the Phone!
-        </h5>
+        <div className="container">
+          <h5 className="text-center text-white text-justify">
+            Hello! You can check "circlemessenger.com" via website! Sorry for
+            this inconvenience, we will comeback soon in the Phone!
+          </h5>
+        </div>
       </div>
     </div>
   );
