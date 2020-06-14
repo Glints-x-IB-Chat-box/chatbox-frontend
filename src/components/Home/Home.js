@@ -38,7 +38,7 @@ const Home = (props) => {
   const [firstShow, setFirstShow] = useState(true);
 
   // After fetch DataMessage from Message Database, it will be pass to here.
-  const [dataMessage, setDataMessage] = useState([]);
+  const [dataMessage, setDataMessage] = useState({});
 
   // Use params is used to get id from the URL.
   let { id } = useParams();
@@ -167,6 +167,7 @@ const Home = (props) => {
   // Set the welcome page turn into chat page, and get the data of the recent chat that is clicked.
   const changeFirstShow = (data) => {
     // console.log(data);
+    setDataMessage({});
     props.showDetailRecentChat(data);
     props.getDataMessage(data._id);
     setFirstShow(false);
@@ -219,6 +220,7 @@ const Home = (props) => {
   // When User send Message there will be update/changes.
   useEffect(() => {
     props.fetchRecentChat();
+    setDataMessage({});
     axios
       .get(`${mainURL}/chat/gettarget/${id}`, {
         headers: { "x-access-token": localStorage.getItem("token") },
@@ -347,14 +349,11 @@ const Home = (props) => {
 
             <div className="container pt-3 scrollable-div">
               {/* DataMessage = CHATS */}
-              {dataMessage.map((item) => {
+              {[dataMessage].map((item) => {
                 let newChatComponent = <></>;
-                // IF item.id == id - mengcover agar saat pindah ke user lain data messagenya adalah milik user itu
-                // item && item.usersId - mengcover error pada item._id, dmana error bisa terjadi saat si "item"._id ini ngga ada.
-                if (item && item.usersId.find((item) => item._id === id)) {
-                  newChatComponent = item.messages.map((itemMessage, index) => {
-                    // console.log(itemMessage);
-
+                newChatComponent =
+                  item.messages &&
+                  item.messages.map((itemMessage) => {
                     // USING MOMENT.JS to fetch time from ("2020-05-23T17:15:57.021Z96737066")
                     const time = moment(`${itemMessage.createdAt}`);
 
@@ -373,7 +372,7 @@ const Home = (props) => {
                     }
 
                     return (
-                      <div key={index}>
+                      <div key={itemMessage._id}>
                         {/* The Date */}
                         {showTanggal}
 
@@ -387,9 +386,7 @@ const Home = (props) => {
                       </div>
                     );
                   });
-                  return newChatComponent;
-                }
-                return <></>;
+                return newChatComponent;
               })}
             </div>
 
