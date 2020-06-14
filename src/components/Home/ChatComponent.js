@@ -22,7 +22,11 @@ const Chatcomponent = (props) => {
             <div className="bg-mainchat p-3">
               <div className="d-flex">
                 <h6 className="font-weight-bold">Me</h6>
-                <p className="my-0 ml-auto time-text">{fixTime}</p>
+                <p className="my-0 ml-auto time-text">
+                  {fixTime}
+                  <br/>
+                  {props.item.status}
+                  </p>
               </div>
 
               {props.item.images.length >= 1
@@ -118,7 +122,11 @@ const Chatcomponent = (props) => {
                 <h6 className="font-weight-bold">
                   {props.DetailChatRecentContact.username}
                 </h6>
-                <p className="my-0 ml-auto time-text">{fixTime}</p>
+                <p className="my-0 ml-auto time-text">
+                  {fixTime}
+                  <br/>
+                  {props.item.status}
+                </p>
               </div>
               {props.item.images.length >= 1
                 ? props.item.images.map((image, index) => {
