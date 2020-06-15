@@ -131,3 +131,22 @@ export const getDataMessage = (data) => {
 //     } catch (error) {}
 //   };
 // };
+
+export const fetchBlockedUser = () => {
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${url}/usersSecure/getBlocked`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      dispatch({
+        type: "FETCH_BLOCKED_USER",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

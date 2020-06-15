@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 import homePicture from "../../assets/text.png";
@@ -12,9 +12,20 @@ import {
 import AddContact from "../ListContact/AddContact";
 import DeleteContact from "../ListContact/DeleteContact";
 import BlockContact from "../ListContact/BlockContact";
+import ListBlockedUser from "../ListContact/ListBlockedUser";
 import "../style.css";
 
 const ListContact = (props) => {
+  const [showBlockedUser, setShowBlockedUser] = useState(false);
+
+  const openListBlockedUser = () => {
+    setShowBlockedUser(true);
+  };
+
+  const closeListBlockedUser = (data) => {
+    setShowBlockedUser(data);
+  };
+
   const SearchContact = (event) => {
     let { value } = event.currentTarget;
     props.getDataContact(value);
@@ -59,15 +70,27 @@ const ListContact = (props) => {
             );
           })}
         </div>
-
-        <div className="mt-3 px-4">
-          <button
-            onClick={props.showAddContactForm}
-            className="btn add-contact-btn btn-block d-flex d-row"
-          >
-            <p className="my-0 mr-2">Add Contact</p>
-            <i className="fas fa-user-plus align-self-center" />
-          </button>
+        <div className="container">
+          <div className="row">
+            <div className="col-6 mt-3">
+              <button
+                onClick={props.showAddContactForm}
+                className="btn add-contact-btn btn-block d-flex d-row"
+              >
+                <p className="my-0 mr-2">Add Contact</p>
+                <i className="fas fa-user-plus align-self-center" />
+              </button>
+            </div>
+            <div className="col-6 mt-3 pl-0">
+              <button
+                onClick={openListBlockedUser}
+                className="btn add-contact-btn btn-block d-flex d-row"
+              >
+                <p className="my-0 mr-2">Blocked Contact</p>
+                <i className="fas fa-ban align-self-center" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -79,6 +102,10 @@ const ListContact = (props) => {
         </div>
       </div>
       <AddContact />
+      <ListBlockedUser
+        showBlockedUser={showBlockedUser}
+        closeListBlockedUser={closeListBlockedUser}
+      />
       <DeleteContact />
       <BlockContact />
     </div>

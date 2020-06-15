@@ -1,5 +1,6 @@
 const initialState = {
   dataMessage: [],
+  dataBlockedUser: [],
   RecentChatContacts: [],
   RecentChatContacts2: [],
   UnaddedRecentChat: [],
@@ -61,6 +62,12 @@ const ChatReducer = (state = initialState, action) => {
         ...state,
         RecentChatContacts: addedContact,
         UnaddedRecentChat: unaddedContact,
+      };
+
+    case "FETCH_BLOCKED_USER":
+      return {
+        ...state,
+        dataBlockedUser: action.payload,
       };
 
     case "FETCH_RECENT_CHAT":
