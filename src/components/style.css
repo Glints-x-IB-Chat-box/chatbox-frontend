@@ -52,8 +52,8 @@ body {
 .contact-icon2 {
   color: rgb(214, 214, 214);
   align-self: center;
-  padding-left: 1rem;
-  font-size: 1.5rem;
+  padding-left: 0.75rem;
+  font-size: 1.25rem;
 }
 .contact-icon2:hover {
   color: white;
@@ -225,7 +225,7 @@ input.with-icon {
 .section-chat-div {
   padding-left: 0.5rem;
   display: grid;
-  width: 85%;
+  width: 70%;
 }
 /* update by Intan */
 .add-contact-btn {
