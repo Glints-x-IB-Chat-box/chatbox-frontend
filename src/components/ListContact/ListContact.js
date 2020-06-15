@@ -22,8 +22,8 @@ const ListContact = (props) => {
     setShowBlockedUser(true);
   };
 
-  const closeListBlockedUser = (data) => {
-    setShowBlockedUser(data);
+  const closeListBlockedUser = (boolean) => {
+    setShowBlockedUser(boolean);
   };
 
   const SearchContact = (event) => {
